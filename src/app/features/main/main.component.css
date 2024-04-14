@@ -1,0 +1,7 @@
+.header {
+    background-image: url(../../../assets/backgrounds/luka_space.png);
+    background-size: cover;
+    background-position: top;
+    height: 70vh;
+    clip-path: polygon(0 1vh, 100% 8vh, 100% 50vh, 0 50vh);
+}

@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+
+// Fonts
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons+Round';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+// Themes
+$theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette(mat.$cyan-palette, 700),
+    accent: mat.define-palette(mat.$cyan-palette, 700),
+  )
+));
+
+$darkTheme: mat.define-dark-theme((
+  color: (
+    primary: mat.define-palette(mat.$cyan-palette, 700),
+    accent: mat.define-palette(mat.$cyan-palette, 700),
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+:root[theme='light'] {
+@include mat.all-component-themes($theme);
+}
+
+:root[theme='dark'] {
+  @include mat.all-component-themes($darkTheme);
+}

@@ -1,3 +1,25 @@
-Kocham Cie mysia <br>
-od pysia
-<router-outlet></router-outlet>
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="toolbar">
+    <div style="width:50px;">
+      <button mat-icon-button @openClose (click)="sidenav.toggle()" *ngIf="subLinksExist"><mat-icon>menu</mat-icon></button>
+    </div>
+    <div *ngFor="let navigationLink of mainNavigationLinks; index as i">
+      <button mat-button (click)="changeMainLink(i)">{{navigationLink.name}}</button>
+    </div>
+    <mat-slide-toggle class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()">Dark Mode</mat-slide-toggle>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0" [hasBackdrop]="true">
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
