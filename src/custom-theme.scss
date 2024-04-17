@@ -7,15 +7,17 @@
 // Themes
 $theme: mat.define-light-theme((
   color: (
-    primary: mat.define-palette(mat.$cyan-palette, 700),
-    accent: mat.define-palette(mat.$cyan-palette, 700),
-  )
+    primary: mat.define-palette(mat.$light-blue-palette, 800),
+    accent: mat.define-palette(mat.$light-blue-palette, 800),
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
 ));
 
 $darkTheme: mat.define-dark-theme((
   color: (
-    primary: mat.define-palette(mat.$cyan-palette, 700),
-    accent: mat.define-palette(mat.$cyan-palette, 700),
+    primary: mat.define-palette(mat.$light-blue-palette, 800),
+    accent: mat.define-palette(mat.$light-blue-palette, 800),
   ),
   typography: mat.define-typography-config(),
   density: 0,

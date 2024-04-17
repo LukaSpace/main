@@ -1,7 +1,86 @@
 .header {
-    background-image: url(../../../assets/backgrounds/luka_space.png);
+    background-image: linear-gradient(
+        to bottom,
+        rgba(2, 119, 189,0.75),
+        rgba(2, 119, 189, 0.25)),
+        url(../../../assets/backgrounds/background.png);
     background-size: cover;
-    background-position: top;
-    height: 70vh;
-    clip-path: polygon(0 1vh, 100% 8vh, 100% 50vh, 0 50vh);
+    background-position: center;
+    position: relative;
+    height: 57vh;
+}
+
+@media (max-width: 600px) {
+    .header {
+        height: 20vh;
+    }
+}
+
+.text-box {
+    margin-top: 10px;
+    position: absolute;
+    width: 100%;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    text-align: center;
+    backface-visibility: hidden;
+}
+
+.title {
+    display: inline-block;
+    font-size: 8vw;
+    font-weight: 500;
+    letter-spacing: 3vw;
+    text-shadow: 3px 3px 9px rgb(156, 149, 149);
+
+    animation: moveInLeft 1s ease-out 0.25s forwards;
+    opacity: 0;
+}
+
+.sub-title {
+    display: inline-block;
+    font-size: 2vw;
+    font-weight: 400;
+    letter-spacing: 1.5vw;
+
+    animation: moveInRight 1s ease-out 0.25s forwards;
+    opacity: 0;
+}
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translate(-100px);
+    }
+
+    80% {
+        transform: translate(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translate(100px);
+    }
+
+    80% {
+        transform: translate(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+.introduction {
+    margin: 20px;
 }

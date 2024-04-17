@@ -1,8 +1,8 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, ViewChild, } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { ActivatedRoute, NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
+import { NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
 import { filter } from 'rxjs';
 
 export interface Link {
