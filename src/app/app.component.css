@@ -8,18 +8,22 @@
     right: 0;
   }
 
+  .sub-links-container {
+    width:50px;
+  }
+
   .slideTheme {
     position: absolute;
     right: 10px;
+  }
+
+  .toolbar {
+    background-image: radial-gradient(circle, rgb(28, 150, 211) 0%, rgb(2, 119, 189) 56%);
   }
   
   .is-mobile .toolbar {
     position: fixed;
     z-index: 2;
-  }
-  
-  h1.app-name {
-    margin-left: 8px;
   }
   
   .sidenav-container {

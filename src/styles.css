@@ -1,15 +1,6 @@
 body { 
-  font-family: Roboto, Arial, sans-serif;
-  margin: 0;
-}
-
-.basic-container {
-  padding: 30px;
-}
-
-.version-info {
-  font-size: 8pt;
-  float: right;
+  font-family: Roboto, Arial;
+  min-width: 400px;
 }
 
 .mat-raised-button, .mat-stroked-button, .mat-flat-button {
@@ -30,4 +21,8 @@ body {
   .mat-badge-content {
     font-family: 'Roboto';
   }
+}
+
+.text-white {
+  color: white;
 }

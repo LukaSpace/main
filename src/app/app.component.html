@@ -1,12 +1,14 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="toolbar">
-    <div style="width:50px;">
-      <button mat-icon-button @openClose (click)="sidenav.toggle()" *ngIf="subLinksExist"><mat-icon>menu</mat-icon></button>
+    <div class="sub-links-container">
+      <button mat-icon-button @openClose (click)="sidenav.toggle()" *ngIf="subLinksExist">
+        <mat-icon>menu</mat-icon>
+      </button>
     </div>
     <div *ngFor="let navigationLink of mainNavigationLinks; index as i">
       <button mat-button (click)="changeMainLink(i)">{{navigationLink.name}}</button>
     </div>
-    <mat-slide-toggle class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()">Dark Mode</mat-slide-toggle>
+    <mat-slide-toggle class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()"><span class="text-white">Mode</span></mat-slide-toggle>
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container"
