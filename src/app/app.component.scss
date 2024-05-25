@@ -1,4 +1,4 @@
-@import '../scss/colors.scss';
+@import '../scss/main.scss';
 
 .container {
     display: flex;
@@ -10,25 +10,25 @@
     right: 0;
   }
 
-  .sub-links-container {
-    width: 5rem;
-  }
+.sub-links-container {
+  width: 5rem;
+}
 
-  .slideTheme {
-    position: absolute;
-    right: 1rem;
-  }
-  
-  .is-mobile .toolbar {
-    position: fixed;
-    z-index: 2;
-  }
-  
-  .sidenav-container {
-    flex: 1;
-  }
-  
-  .is-mobile .sidenav-container {
-    flex: 1 0 auto;
-  }
+.slideTheme {
+  position: absolute;
+  right: 1rem;
+}
+
+.is-mobile .toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
   

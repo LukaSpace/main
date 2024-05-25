@@ -39,7 +39,7 @@ export class AppComponent {
 
   mainNavigationLinks: Link[] = [
     { name: 'Home', link: '' },
-    { name: 'Blog', link: '/blog', subLinks: this.blogSubLinks },
+    //{ name: 'Blog', link: '/blog', subLinks: this.blogSubLinks },
     { name: 'Portfolio', link: '/portfolio' },
     { name: 'Contact', link: '/contact' },
   ];
