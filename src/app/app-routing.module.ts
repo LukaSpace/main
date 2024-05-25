@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('./features/blog/blog.module').then(m => m.BlogModule),
     },
     {
+        path: 'portfolio',
+        loadChildren: () => import('./features/portfolio/portfolio.module').then(m => m.PortfolioModule),
+    },
+    {
         path: 'contact',
         component: ContactComponent 
     },

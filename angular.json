@@ -35,7 +35,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/custom-theme.scss",
+              "src/scss/main.scss",
               "src/styles.css"
             ],
             "scripts": [
@@ -96,6 +96,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/scss/main.scss",
               "src/styles.css"
             ],
             "scripts": []

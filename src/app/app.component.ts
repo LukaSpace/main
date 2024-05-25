@@ -1,25 +1,15 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, ViewChild, } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
 import { filter } from 'rxjs';
-
-export interface Link {
-  name: string,
-  link: string,
-  subLinks: SubLink[]
-}
-
-export interface SubLink {
-  name: string,
-  link: string
-}
+import { Link, SubLink } from './interfaces/app/model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
   animations: [
     trigger('openClose', [
       transition(':enter', [
@@ -35,6 +25,7 @@ export interface SubLink {
 export class AppComponent {
 
   @ViewChild('sidenav') sidenav: MatSidenav = null as any;
+
   public subLinksExist: boolean;
   lightTheme: boolean = true;
   mobileQuery: MediaQueryList;
@@ -47,9 +38,10 @@ export class AppComponent {
   ];
 
   mainNavigationLinks: Link[] = [
-    { name: 'Home', link: '', subLinks: []},
+    { name: 'Home', link: '' },
     { name: 'Blog', link: '/blog', subLinks: this.blogSubLinks },
-    { name: 'Contact', link: '/contact', subLinks: [] },
+    { name: 'Portfolio', link: '/portfolio' },
+    { name: 'Contact', link: '/contact' },
   ];
 
   currentMainLinkId: number = 0;
@@ -71,7 +63,7 @@ export class AppComponent {
         this.sidenav.close();
         let index = this.mainNavigationLinks.slice(1).findIndex(nl => event.url.includes(nl.link));
         this.currentMainLinkId = index + 1;
-        this.subLinksExist = this.mainNavigationLinks[this.currentMainLinkId].subLinks.length > 0;
+        this.subLinksExist = this.mainNavigationLinks[this.currentMainLinkId].subLinks != null;
     });
   }
 
@@ -81,7 +73,8 @@ export class AppComponent {
 
   changeSubLink(subLinkId: number) {
     let currentLink = this.mainNavigationLinks[this.currentMainLinkId];
-    let subLink = currentLink.subLinks[subLinkId].link;
+    let subLinks = currentLink.subLinks;
+    let subLink = subLinks ? subLinks[subLinkId].link : '';
     this.router.navigate([currentLink.link + subLink]);
   }
 
