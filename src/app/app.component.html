@@ -6,11 +6,11 @@
       </button>
     </div>
     <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
-      <button mat-button (click)="changeMainLink(i)">{{navigationLink.name}}</button>
+      <button mat-button (click)="changeMainLink(i)"><span class="navigation-name">{{navigationLink.name}}</span></button>
     </ng-container>
     <mat-slide-toggle #slideTheme class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()">
-      <span *ngIf="!lightTheme" class="material-symbols-outlined text-white">nights_stay</span>
-      <span *ngIf="lightTheme" class="material-symbols-outlined text-white">light_mode</span>
+      <mat-icon *ngIf="!lightTheme" class="material-symbols-outlined text-white">nights_stay</mat-icon>
+      <mat-icon *ngIf="lightTheme" class="material-symbols-outlined text-white">light_mode</mat-icon>
     </mat-slide-toggle>
   </mat-toolbar>
 
