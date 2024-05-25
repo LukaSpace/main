@@ -16,8 +16,8 @@
     font-size: 6vw;
     font-weight: 500;
     letter-spacing: 2.5vw;
-    text-shadow: 3px 3px 9px rgb(156, 149, 149);
-    color: white;
+    text-shadow: 3px 3px 7px $background;
+    color: $background;
     text-transform: uppercase;
 
     animation: moveInLeft 1s ease-out 0.25s forwards;

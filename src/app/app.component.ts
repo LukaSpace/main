@@ -55,7 +55,7 @@ export class AppComponent {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
 
-    this.toggleTheme();
+    document.documentElement.setAttribute('theme', 'light');
     this.subLinksExist = false;
     this.router.events.pipe(
       filter((event: Event | RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)

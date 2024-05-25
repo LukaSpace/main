@@ -16,9 +16,9 @@
     font-size: 6vw;
     font-weight: 500;
     letter-spacing: 2.5vw;
-    text-shadow: 3px 3px 9px rgb(156, 149, 149);
-    color: white;
+    text-shadow: 3px 3px 7px $background;
     text-transform: uppercase;
+    color: $background;
 
     animation: moveInLeft 1s ease-out 0.25s forwards;
     opacity: 0;
@@ -28,18 +28,18 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    padding: 2rem;
+    padding: 1.5rem;
     align-items: center;
     justify-content: center;
-    color: white;
 
     &-card {
-        height: 40rem;
+        height: 35rem;
         width: 25rem;
         background-color: $primary;
         margin: 3rem;
         border-radius: 1.5rem;
         box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 28px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        color: $background;
 
         &-title {
             height: 35%;
@@ -74,7 +74,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 2.5rem;
+            padding-top: 2.5rem;
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
 
             &-content {
                 width: 80%;
@@ -86,7 +88,7 @@
 
         &-footer {
             display: flex;
-            padding: 3rem;
+            padding: 2rem;
             width: 100%;
             flex-direction: row-reverse;
         }
