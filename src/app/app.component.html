@@ -8,7 +8,10 @@
     <div *ngFor="let navigationLink of mainNavigationLinks; index as i">
       <button mat-button (click)="changeMainLink(i)">{{navigationLink.name}}</button>
     </div>
-    <mat-slide-toggle class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()"><span class="text-white">Mode</span></mat-slide-toggle>
+    <mat-slide-toggle #slideTheme class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()">
+      <span *ngIf="!lightTheme" class="material-symbols-outlined text-white">nights_stay</span>
+      <span *ngIf="lightTheme" class="material-symbols-outlined text-white">light_mode</span>
+    </mat-slide-toggle>
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container"

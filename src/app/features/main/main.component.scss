@@ -1,0 +1,65 @@
+@import '../../../scss/colors.scss';
+
+.header {
+    background-image: linear-gradient(
+        to bottom,
+        $primary,
+        transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5rem;
+}
+
+.text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+}
+
+.title {
+    display: flex;
+    font-size: 6vw;
+    font-weight: 500;
+    letter-spacing: 2.5vw;
+    text-shadow: 3px 3px 9px rgb(156, 149, 149);
+    color: white;
+
+    animation: moveInLeft 1s ease-out 0.25s forwards;
+    opacity: 0;
+}
+
+.sub-title {
+    display: flex;
+    font-size: 2vw;
+    font-weight: 400;
+    letter-spacing: 1vw;
+    color: white;
+
+    animation: moveInRight 1s ease-out 0.25s forwards;
+    opacity: 0;
+}
+
+.introduction {
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+}
+
+.about-me {
+    font-size: 2.5vw;
+    font-weight: 600;
+    letter-spacing: 0.5vw;
+    background-image: linear-gradient(
+        to left,
+        $primary,
+        $accent,
+        $primary);
+    background-size: 200% auto;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-animation 5s linear infinite;
+}

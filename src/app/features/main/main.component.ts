@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'main',
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css',
+  styleUrl: './main.component.scss',
   animations: [
     trigger('openClose', [
       transition(':enter', [

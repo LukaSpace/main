@@ -1,0 +1,35 @@
+@use '@material/switch/switch' as mdc-switch;
+@use '@material/switch/switch-theme' as mdc-switch-theme;
+
+@import 'colors.scss';
+@import 'custom-theme.scss';
+@import 'mixins.scss';
+@import 'animations.scss';
+
+
+.text-white {
+    color: white;
+}
+
+.mat-mdc-slide-toggle {
+
+    .mdc-switch {
+  
+      @include  mdc-switch-theme.theme((
+        // handle colors
+        unselected-handle-color: white,
+        unselected-focus-handle-color: white,
+        unselected-hover-handle-color: white,
+        unselected-pressed-handle-color: white,
+  
+        // icon colors
+        disabled-unselected-icon-color: $primary,
+        unselected-icon-color: $primary,
+      ));
+  
+    }
+  }
+
+.material-symbols-outlined {
+  vertical-align: middle;
+}
