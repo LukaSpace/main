@@ -33,6 +33,7 @@
     justify-content: center;
 
     &-card {
+        position: relative;
         height: 35rem;
         width: 25rem;
         background-color: $primary;
@@ -81,14 +82,17 @@
             &-content {
                 width: 80%;
                 text-align: center;
-                margin-bottom: 2rem;
+                padding: 2px;
+                margin-bottom: 1.5rem;
                 border-bottom: 1px solid $accent;
             }
         }
 
         &-footer {
+            position: absolute;
+            bottom: 0;
             display: flex;
-            padding: 2rem;
+            padding: 1.5rem;
             width: 100%;
             flex-direction: row-reverse;
         }
