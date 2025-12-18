@@ -14,6 +14,10 @@ import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
 import { ContactComponent } from './features/contact/contact.component';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { LoadingInterceptor } from '../shared/services/loading/loading.interceptor';
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -32,9 +36,16 @@ import { ContactComponent } from './features/contact/contact.component';
     MatSlideToggleModule,
     MatListModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    SharedModule,
   ],
-  providers: [],
+  providers: [ 
+    provideHttpClient(
+      withInterceptorsFromDi(),
+    ),
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
