@@ -5,8 +5,7 @@
     <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
       <button mat-button (click)="changeMainLink(i)"><span class="navigation-name" [ngClass]="{'selectedNavigation': currentMainLinkId == i}">{{navigationLink.name}}</span></button>
     </ng-container>
-    <mat-slide-toggle #slideTheme class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()">
-    </mat-slide-toggle>
+    <!--<mat-slide-toggle #slideTheme class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()"></mat-slide-toggle>-->
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container"
