@@ -10,22 +10,22 @@
     right: 0;
 }
 
-.navigation-name {
-   color: $background;
+.selectedNavigation {
+  color: $accent;
+  border-bottom: 0.25rem solid $accent;
 }
 
 .sub-links-container {
   width: 5rem;
 }
 
-.slideTheme {
-  position: absolute;
-  right: 1rem;
-}
-
 .is-mobile .toolbar {
   position: fixed;
   z-index: 2;
+}
+
+.toolbar {
+  background: $background;
 }
 
 .sidenav-container {
@@ -37,6 +37,39 @@
 }
 
 .mat-icon {
-  color: $background;
+  color: $text-color;
 }
-  
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.name-shortcut {
+  font-size: 2rem;
+  font-weight: 600;
+  color: $white;
+  background: linear-gradient(135deg, $primary, $accent);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  box-shadow: rgba($accent, 0.6) 5px 3px 5px;
+}
+
+.name-shortcut:hover {
+  animation: rotate-scale-up 0.6s ease-in-out both;
+  cursor: pointer;
+}
+
+.footer-toolbar {
+  width: 100%;
+  justify-content: center;
+  box-shadow: none;
+  background: $background;
+}
+
+.footer-text {
+  color: $text-color;
+
+  @include respond-to('phone') {
+    font-size: 1.5rem;
+  }
+}

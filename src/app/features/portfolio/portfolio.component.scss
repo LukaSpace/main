@@ -1,10 +1,6 @@
 @import '../../../scss/main.scss';
 
 .header {
-    background-image: linear-gradient(
-        to bottom,
-        $primary,
-        transparent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,16 +8,25 @@
 }
 
 .title {
-    display: flex;
-    font-size: 6vw;
-    font-weight: 500;
-    letter-spacing: 2.5vw;
-    text-shadow: 3px 3px 7px $background;
-    text-transform: uppercase;
-    color: $background;
+    font-size: 6rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+    background-image: linear-gradient(
+        to left,
+        $primary,
+        $accent,
+        $primary);
+        background-size: 200% auto;
+    background-clip: text;
+    color: transparent;
 
-    animation: moveInLeft 1s ease-out 0.25s forwards;
+    animation: moveInLeft 1s ease-out 0.25s forwards, gradient-animation 7s linear infinite;
     opacity: 0;
+    text-transform: uppercase;
+
+    @include respond-to('phone') {
+        font-size: 4rem;
+    }
 }
 
 .portfolio {
@@ -40,7 +45,7 @@
         margin: 3rem;
         border-radius: 1.5rem;
         box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 28px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-        color: $background;
+        color: $white;
 
         &-title {
             height: 35%;
@@ -83,8 +88,7 @@
                 width: 80%;
                 text-align: center;
                 padding: 2px;
-                margin-bottom: 1.5rem;
-                border-bottom: 1px solid $accent;
+                margin-bottom: 1.5rem; 
             }
         }
 

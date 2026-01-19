@@ -9,25 +9,27 @@
 // Themes
 $theme: mat.define-light-theme((
   color: (
-    primary: mat.define-palette(mat.$light-blue-palette, 900),
-    accent: mat.define-palette(mat.$light-blue-palette, 800),
+    primary: mat.define-palette(mat.$blue-palette, 800),
+    accent: mat.define-palette(mat.$blue-palette, 300),
   ),
-  typography: mat.define-typography-config(),
 ));
 
 $darkTheme: mat.define-dark-theme((
   color: (
-    primary: mat.define-palette(mat.$light-blue-palette, 900),
-    accent: mat.define-palette(mat.$light-blue-palette, 800),
+    primary: mat.define-palette(mat.$blue-grey-palette, 800),
+    accent: mat.define-palette(mat.$blue-grey-palette, 300),
   ),
   typography: mat.define-typography-config(),
   density: 0,
 ));
+
+@include mat.core-theme($darkTheme);
+@include mat.button-theme($darkTheme);
 
 :root[theme='light'] {
 @include mat.all-component-themes($theme);
 }
 
 :root[theme='dark'] {
-  @include mat.all-component-colors($darkTheme);
+  @include mat.all-component-themes($darkTheme);
 }

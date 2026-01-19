@@ -1,10 +1,10 @@
 @import '../../../scss/main.scss';
 
+:host {
+    height: 100%;
+}
+
 .header {
-    background-image: linear-gradient(
-        to bottom,
-        $primary,
-        transparent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,10 +25,16 @@
     font-size: 6vw;
     font-weight: 500;
     letter-spacing: 2.5vw;
-    text-shadow: 3px 3px 7px $background;
-    color: $background;
+    background-image: linear-gradient(
+        to left,
+        $primary,
+        $accent,
+        $primary);
+        background-size: 200% auto;
+    background-clip: text;
+    color: transparent;
 
-    animation: moveInLeft 1s ease-out 0.25s forwards;
+    animation: moveInLeft 1s ease-out 0.25s forwards, gradient-animation 5s linear infinite;
     opacity: 0;
 }
 
@@ -37,29 +43,105 @@
     font-size: 2vw;
     font-weight: 400;
     letter-spacing: 1vw;
-    color: $background;
-
-    animation: moveInRight 1s ease-out 0.25s forwards;
-    opacity: 0;
-}
-
-.introduction {
-    width: 100%;
-    text-align: center;
-    padding: 2rem;
-}
-
-.about-me {
-    font-size: 2.5vw;
-    font-weight: 600;
-    letter-spacing: 0.5vw;
     background-image: linear-gradient(
         to left,
         $primary,
         $accent,
         $primary);
-    background-size: 200% auto;
+        background-size: 200% auto;
     background-clip: text;
     color: transparent;
-    animation: gradient-animation 5s linear infinite;
+
+    animation: moveInRight 1s ease-out 0.25s forwards, gradient-animation 5s linear infinite;
+    opacity: 0;
+}
+
+.introduction {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    align-items: center;
+    justify-items: center;
+    height: 100%;
+
+    @include respond-to('phone') {
+    grid-template-columns: 1fr;
+    column-gap: 2rem;
+  }
+}
+
+.hi {
+    font-size: 4rem;
+}
+
+.name {
+    font-size: 6rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+    background-image: linear-gradient(
+        to left,
+        $primary,
+        $accent,
+        $primary);
+        background-size: 200% auto;
+    background-clip: text;
+    color: transparent;
+
+    animation: moveInLeft 1s ease-out 0.25s forwards, gradient-animation 7s linear infinite;
+    opacity: 0;
+}
+
+.role {
+    color: $accent;
+}
+
+.about-me {
+    margin-top: 2rem;
+    line-height: 1.5;
+}
+
+.tech-container {
+    background: rgba($primary, 0.4);
+    border: solid 0.1rem $accent;
+    border-radius: 2rem;
+    box-shadow: 0 4px 8px rgba($accent, 0.3);
+    padding: 2rem;
+    max-width: max-content;
+}
+
+.tech-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    @include respond-to('phone') {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+
+.tech-card {
+  background: rgba($accent, 0.4);
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px rgba($accent, 0.3);
+  padding: 1rem;
+  max-width: 30%;
+  min-width: 150px;
+  word-wrap: break-word;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+
+  @include respond-to('phone') {
+    width: 95%;
+    max-width: unset;
+  }
+}
+
+.tech-card-content {
+    margin-top: 1rem;
+    text-align: center;
 }

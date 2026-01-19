@@ -1,10 +1,6 @@
 @import '../../../scss/main.scss';
 
 .header {
-    background-image: linear-gradient(
-        to bottom,
-        $primary,
-        transparent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,14 +8,49 @@
 }
 
 .title {
-    display: flex;
-    font-size: 6vw;
-    font-weight: 500;
-    letter-spacing: 2.5vw;
-    text-shadow: 3px 3px 7px $background;
-    color: $background;
+    font-size: 6rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+    background-image: linear-gradient(
+        to left,
+        $primary,
+        $accent,
+        $primary);
+        background-size: 200% auto;
+    background-clip: text;
+    color: transparent;
+
+    animation: moveInLeft 1s ease-out 0.25s forwards, gradient-animation 7s linear infinite;
+    opacity: 0;
     text-transform: uppercase;
 
-    animation: moveInLeft 1s ease-out 0.25s forwards;
-    opacity: 0;
+    @include respond-to('phone') {
+        font-size: 4rem;
+    }
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+    gap: 1rem;
+
+    @include respond-to('phone') {
+        width: 90%;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.message-field textarea {
+    height: 30rem;
+}
+
+.send-button {
+    margin-left: auto;
+    padding: 0.5rem;
+    width: 7rem;
+    border-radius: 0.5rem;
 }

@@ -94,8 +94,7 @@ export class AppComponent {
 
   //TODO: use cache to store selected theme
   private setDefaultTheme() {
-    const isDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    localStorage.setItem('theme', 'dark');
   }
 
   private setTheme(themeName: string) {

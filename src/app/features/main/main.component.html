@@ -1,11 +1,25 @@
-<div @openClose class="header">
+<!-- <div @openClose class="header">
     <div class="text-box">
-        <span class="title text-white">Luka Space</span>
-        <span class="sub-title text-white">Let's make it work together</span>
+        <span class="title">Luka Space</span>
+        <span class="sub-title">Let's make it work together</span>
     </div>
-</div>
+</div> -->
 <div class="introduction">
-    <span class="about-me">
-        About me
-    </span>
+    <div class="introduction-text">
+        <p class="hi">Hi, I'm</p>
+        <h2 class="name">Lukasz C</h2>
+        <p class="role">Full Stack Developer</p>
+        <p class="about-me">
+            Welcome to Luka Space! I'm Luka, a passionate developer dedicated to creating innovative solutions and sharing knowledge with the community. Here, you'll find a collection of my projects, blogs, and resources that reflect my journey in the tech world.
+        </p>
+    </div>
+    <mat-card class="tech-container">
+        <mat-card-title>My technologies:</mat-card-title>
+        <div class="tech-cards">
+            <mat-card *ngFor="let tech of technologies" class="tech-card">
+                <mat-card-title><mat-icon [fontIcon]="tech.icon">{{ tech.icon }}</mat-icon> {{ tech.name }}</mat-card-title>
+                <mat-card-content class="tech-card-content">{{ tech.description }}</mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card>
 </div>
