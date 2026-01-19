@@ -1,3 +1,33 @@
 <div class="header">
     <span class="title">Contact</span>
 </div>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="contactForm.get('name')?.hasError('required')">
+            Name is required
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required email>
+        <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+            Email is required
+        </mat-error>
+        <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+            Please enter a valid email address
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width message-field">
+        <mat-label>Message (max 500 characters)</mat-label>
+        <textarea matInput formControlName="message" required></textarea>
+        <mat-error *ngIf="contactForm.get('message')?.hasError('required')">
+            Message is required
+        </mat-error>
+        <mat-error *ngIf="contactForm.get('message')?.hasError('maxlength')">
+            Message cannot exceed 500 characters
+        </mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="contactForm.invalid" class="send-button">Send</button>
+</form>

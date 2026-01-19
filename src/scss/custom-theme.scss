@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@include mat.core();
 
 // Fonts
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -8,21 +9,22 @@
 // Themes
 $theme: mat.define-light-theme((
   color: (
-    primary: mat.define-palette(mat.$light-blue-palette, 900),
-    accent: mat.define-palette(mat.$light-blue-palette, 900),
+    primary: mat.define-palette(mat.$blue-palette, 800),
+    accent: mat.define-palette(mat.$blue-palette, 300),
+  ),
+));
+
+$darkTheme: mat.define-dark-theme((
+  color: (
+    primary: mat.define-palette(mat.$blue-grey-palette, 800),
+    accent: mat.define-palette(mat.$blue-grey-palette, 300),
   ),
   typography: mat.define-typography-config(),
   density: 0,
 ));
 
-$darkTheme: mat.define-dark-theme((
-  color: (
-    primary: mat.define-palette(mat.$light-blue-palette, 900),
-    accent: mat.define-palette(mat.$light-blue-palette, 900),
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
+@include mat.core-theme($darkTheme);
+@include mat.button-theme($darkTheme);
 
 :root[theme='light'] {
 @include mat.all-component-themes($theme);

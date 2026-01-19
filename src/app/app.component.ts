@@ -55,7 +55,12 @@ export class AppComponent {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
 
-    document.documentElement.setAttribute('theme', 'light');
+    if(!localStorage.getItem('theme'))
+      this.setDefaultTheme();
+
+      this.lightTheme = localStorage.getItem('theme') == 'light';
+      this.lightTheme ? this.setTheme('light') : this.setTheme('dark');
+
     this.subLinksExist = false;
     this.router.events.pipe(
       filter((event: Event | RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
@@ -81,10 +86,20 @@ export class AppComponent {
   toggleTheme() {
     this.lightTheme = !this.lightTheme;
     if (this.lightTheme) {
-      document.documentElement.setAttribute('theme', 'light');
+      this.setTheme('light');
     } else {
-      document.documentElement.setAttribute('theme', 'dark');
+      this.setTheme('dark');
     }
+  }
+
+  //TODO: use cache to store selected theme
+  private setDefaultTheme() {
+    localStorage.setItem('theme', 'dark');
+  }
+
+  private setTheme(themeName: string) {
+    document.documentElement.setAttribute('theme', themeName);
+    localStorage.setItem('theme', themeName);
   }
 
   ngOnDestroy(): void {

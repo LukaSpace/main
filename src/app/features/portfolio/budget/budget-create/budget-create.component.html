@@ -1,0 +1,145 @@
+<h2 mat-dialog-title>Add new month summary</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="form">
+            <mat-expansion-panel expanded="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Settings
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                    <mat-label>Year</mat-label>
+                    <input matInput type="number" formControlName="year" [tabIndex]="1" />
+                    <mat-error *ngIf="form.get('year')?.hasError('required')">
+                        Year is required
+                    </mat-error>
+                    <mat-error *ngIf="form.get('year')?.hasError('min') || form.get('year')?.hasError('max')">
+                        Year must be between 1900 and 2100
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Month</mat-label>
+                    <input matInput type="number" formControlName="month" [tabIndex]="2" />
+                    <mat-error *ngIf="form.get('month')?.hasError('required')">
+                        Month is required
+                    </mat-error>
+                    <mat-error *ngIf="form.get('month')?.hasError('min') || form.get('month')?.hasError('max')">
+                        Month must be between 1 and 12
+                    </mat-error>
+                </mat-form-field>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Incomes
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-container formArrayName="incomes">
+                    <ng-container *ngFor="let income of incomes.controls; let i = index">
+                        <form [formGroupName]="i">
+                            <mat-form-field>
+                                <mat-label>Value</mat-label>
+                                <input matInput placeholder="Enter income" formControlName="value" [tabIndex]="getTabIndex(i, 1, 1)" />
+                                <mat-error *ngIf="form.get('value')?.hasError('required')">
+                                    Value is required
+                                </mat-error>
+                            </mat-form-field>
+                    
+                            <mat-form-field>
+                                <mat-label>Income Type</mat-label>
+                                <mat-select name="type" formControlName="type" [tabIndex]="getTabIndex(i, 1, 2)">
+                                    <mat-option *ngFor="let incomeType of incomeTypes" [value]="incomeType">
+                                        {{incomeTypeDisplay[incomeType]}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('type')?.hasError('required')">
+                                    Income type is required
+                                </mat-error>
+                            </mat-form-field>
+                    
+                            <mat-form-field>
+                                <mat-label>Date</mat-label>
+                                <input matInput [matDatepicker]="datePicker" formControlName="date">
+                                <mat-datepicker-toggle matSuffix [for]="datePicker" [tabIndex]="getTabIndex(i, 1, 3)"></mat-datepicker-toggle>
+                                <mat-datepicker #datePicker color="primary"></mat-datepicker>
+                                <mat-error *ngIf="form.get('date')?.hasError('required')">
+                                    Date is required
+                                </mat-error>
+                            </mat-form-field>
+                            
+                            <button mat-icon-button color="primary" (click)="addIncome()" [tabIndex]="getTabIndex(i, 1, 4)">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                            
+                            <button *ngIf="incomes.length > 1" mat-icon-button color="primary" (click)="deleteIncome(i)" [tabIndex]="getTabIndex(i, 1, 5)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </form>
+                    </ng-container>
+                </ng-container>
+            </mat-expansion-panel>
+            
+            <mat-expansion-panel expanded="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Costs
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-container formArrayName="costs">
+                    <ng-container *ngFor="let cost of costs.controls; let i = index">
+                        <form [formGroupName]="i">
+                            <mat-form-field>
+                                <mat-label>Value</mat-label>
+                                <input matInput placeholder="Enter cost" formControlName="value" [tabIndex]="getTabIndex(i, 2, 1)" />
+                                <mat-error *ngIf="form.get('value')?.hasError('required')">
+                                    Value is required
+                                </mat-error>
+                            </mat-form-field>
+                    
+                            <mat-form-field>
+                                <mat-label>Cost Type</mat-label>
+                                <mat-select name="type" formControlName="type" [tabIndex]="getTabIndex(i, 2, 2)">
+                                    <mat-option *ngFor="let costType of costTypes" [value]="costType">
+                                        {{costTypeDisplay[costType]}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('type')?.hasError('required')">
+                                    Cost type is required
+                                </mat-error>
+                            </mat-form-field>
+                    
+                            <mat-form-field>
+                                <mat-label>Date</mat-label>
+                                <input matInput [matDatepicker]="datePicker" formControlName="date">
+                                <mat-datepicker-toggle matSuffix [for]="datePicker" [tabIndex]="getTabIndex(i, 2, 3)"></mat-datepicker-toggle>
+                                <mat-datepicker #datePicker color="primary"></mat-datepicker>
+                                <mat-error *ngIf="form.get('date')?.hasError('required')">
+                                    Date is required
+                                </mat-error>
+                            </mat-form-field>
+                            
+                            <button mat-icon-button color="primary" (click)="addCost()" [tabIndex]="getTabIndex(i, 2, 4)">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                            
+                            <button *ngIf="costs.length > 1" mat-icon-button color="primary" (click)="deleteCost(i)" [tabIndex]="getTabIndex(i, 2, 5)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </form>
+                    </ng-container>
+                </ng-container>
+            </mat-expansion-panel>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" color="primary">
+        Close
+    </button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="submit()">
+        Submit
+    </button>
+</mat-dialog-actions>

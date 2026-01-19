@@ -1,0 +1,35 @@
+:host {
+    height: 100%;
+}
+
+.actions {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.table-container {
+    height: calc(100% - 110px);
+    overflow: auto;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.paginator {
+    height: 60px;
+}

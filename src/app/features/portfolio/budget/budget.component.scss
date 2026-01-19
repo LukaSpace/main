@@ -1,0 +1,33 @@
+@import '../../../../scss/main.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.navigation-name {
+   color: $background;
+}
+
+.is-mobile .toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
+
+  

@@ -1,16 +1,11 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="toolbar">
-    <div class="sub-links-container">
-      <button mat-icon-button @openClose (click)="sidenav.toggle()" *ngIf="subLinksExist">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </div>
+  <mat-toolbar class="toolbar">
+    <div class="name-shortcut" (click)="changeMainLink(0)">LC</div>
+    <span class="spacer"></span>
     <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
-      <button mat-button (click)="changeMainLink(i)"><span class="navigation-name">{{navigationLink.name}}</span></button>
+      <button mat-button (click)="changeMainLink(i)"><span class="navigation-name" [ngClass]="{'selectedNavigation': currentMainLinkId == i}">{{navigationLink.name}}</span></button>
     </ng-container>
     <mat-slide-toggle #slideTheme class="slideTheme" [checked]="!lightTheme" (change)="toggleTheme()">
-      <mat-icon *ngIf="!lightTheme" class="material-symbols-outlined text-white">nights_stay</mat-icon>
-      <mat-icon *ngIf="lightTheme" class="material-symbols-outlined text-white">light_mode</mat-icon>
     </mat-slide-toggle>
   </mat-toolbar>
 
@@ -24,7 +19,10 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <router-outlet class="router-outlet"></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+  <mat-toolbar class="footer-toolbar" color="primary">
+    <span class="footer-text">© 2026 Luka Space. All rights reserved.</span>
+  </mat-toolbar>
 </div>
