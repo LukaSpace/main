@@ -1,7 +1,7 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar class="toolbar">
     <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
-      <button mat-button (click)="changeMainLink(i)"><span class="navigation-name">{{navigationLink.name}}</span></button>
+      <button mat-button (click)="changeMainLink(i)"><span class="navigation-name" [ngClass]="{'selectedNavigation': currentMainLinkId == i}">{{navigationLink.name}}</span></button>
     </ng-container>
   </mat-toolbar>
 

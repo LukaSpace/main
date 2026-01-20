@@ -26,6 +26,8 @@ import { PlotlyModule } from 'angular-plotly.js';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { GetCostByTypePipe } from '../../../core/pipes/get-cost-by-type.pipe';
+import { GetIncomeByTypePipe } from '../../../core/pipes/get-income-by-type.pipe';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
@@ -61,9 +63,13 @@ PlotlyModule.plotlyjs = PlotlyJS;
     BudgetOverviewComponent,
     BudgetListComponent,
     BudgetCreateComponent,
+    GetCostByTypePipe,
+    GetIncomeByTypePipe
   ],
   providers: [
-    MatDatepickerModule
+    MatDatepickerModule,
+    GetCostByTypePipe,
+    GetIncomeByTypePipe
   ]
 })
 export class BudgetModule {}

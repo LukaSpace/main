@@ -26,8 +26,11 @@ export class BudgetListComponent implements AfterViewInit {
   incomeDataSource: MatTableDataSource<Income> = new MatTableDataSource()
   costTypeDisplay = CostTypeDisplay;
   incomeTypeDisplay = IncomeTypeDisplay;
+  costTypeDisplayKeys = Object.keys(CostTypeDisplay).filter((item) => !isNaN(Number(item))).map(k => Number(k));
+  incomeTypeDisplayKeys = Object.keys(IncomeTypeDisplay).filter((item) => !isNaN(Number(item))).map(k => Number(k));
   displayedColumns: string[] = ['year', 'month', 'income', 'outcome', 'actions'];
   expandedElement: MonthSummary | null;
+  monthArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(x => new Date(0, x));
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
