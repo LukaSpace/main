@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cost, MonthSummary } from '../../../interfaces/portfolio/budget/model';
+import { Cost, CostType, IncomeType, MonthSummary } from '../../../interfaces/portfolio/budget/model';
+import { catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,15 @@ export class BudgetService {
   constructor(private http: HttpClient) { }
 
   getAllCosts() {
-    return this.http.get<Cost[]>('http://localhost:5264/Cost/GetAllCosts');
-  }
+    return this.http.get<Cost[]>('http://localhost:5264/Cost/GetAllCosts').pipe(
+      catchError(() => of(this.generateMockCosts()))
+    );
+    }
 
   getCostsByDate(startDate: Date, endDate: Date) {
-    return this.http.get<Cost[]>(`http://localhost:5264/Cost/GetCostsByDate?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`);
+    return this.http.get<Cost[]>(`http://localhost:5264/Cost/GetCostsByDate?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`).pipe(
+      catchError(() => of(this.generateMockCosts().filter(cost => cost.date >= startDate && cost.date <= endDate)))
+    );
   }
 
   addCosts(costs: Cost[]) {
@@ -25,7 +30,10 @@ export class BudgetService {
   }
 
   getAllMonthSummaries() {
-    return this.http.get<MonthSummary[]>('http://localhost:5264/MonthSummary/GetAllMonthSummaries');
+    return this.http.get<MonthSummary[]>('http://localhost:5264/MonthSummary/GetAllMonthSummaries').pipe(
+      catchError(() => of(this.generateMockMonthSummaries()))
+    
+    );
   }
 
   addMonthSummary(monthSummary: MonthSummary) {
@@ -34,5 +42,56 @@ export class BudgetService {
 
   deleteMonthSummary(summaryId: number) {
     return this.http.post<MonthSummary[]>('http://localhost:5264/MonthSummary/DeleteMonthSummaryByID', summaryId);
+  }
+
+  private generateMockCosts(startDate?: Date): Cost[] {
+    const costs: Cost[] = [];
+    const costTypes = [CostType.Cars, CostType.Credit, CostType.Food, CostType.Fun, CostType.General, CostType.House];
+    const startDateToUse = startDate ? startDate : new Date(2026, 0, 1);
+
+    for (let i = 0; i < 30; i++) {
+      const date = new Date(startDateToUse);
+      date.setDate(date.getDate() + Math.floor(Math.random() * 20));
+      
+      costs.push({
+      value: Math.floor(Math.random() * 500) + 10,
+      date: date,
+      costType: costTypes[Math.floor(Math.random() * costTypes.length)]
+      });
+    }
+
+    return costs;
+  }
+
+  private generateMockMonthSummaries(): MonthSummary[] {
+    const summaries: MonthSummary[] = [];
+    const incomeTypes = [IncomeType.Salary, IncomeType.WifeSalary, IncomeType.Sale, IncomeType.Other];
+    const startDate = new Date(2025, 0, 1);
+    for (let i = 0; i < 6; i++) {
+      const date = new Date(startDate);
+      date.setMonth(date.getMonth() + i);
+      let summary: MonthSummary = {
+        month: date.getMonth(),
+        year: date.getFullYear(),
+        incomes:
+        [
+          { value: Math.floor(Math.random() * 5000) + 2000,
+            date: new Date(date),
+            incomeType: incomeTypes[Math.floor(Math.random() * incomeTypes.length)]
+          },
+          { value: Math.floor(Math.random() * 2000) + 2000,
+            date: new Date(date),
+            incomeType: incomeTypes[Math.floor(Math.random() * incomeTypes.length)]
+          },
+          { value: Math.floor(Math.random() * 2000) + 2000,
+            date: new Date(date),
+            incomeType: incomeTypes[Math.floor(Math.random() * incomeTypes.length)]
+          },
+        ],
+        costs: this.generateMockCosts(date),
+      }
+      summaries.push(summary);
+    }
+    return summaries;
   }
 }

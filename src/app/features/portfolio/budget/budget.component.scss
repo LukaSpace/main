@@ -13,13 +13,18 @@
     overflow: hidden;
 }
 
-.navigation-name {
-   color: $background;
+.selectedNavigation {
+  color: $accent;
+  border-bottom: 0.25rem solid $accent;
 }
 
 .is-mobile .toolbar {
   position: fixed;
   z-index: 2;
+}
+
+.toolbar {
+  background: $background;
 }
 
 .sidenav-container {
@@ -30,4 +35,6 @@
   flex: 1 0 auto;
 }
 
-  
+.mat-icon {
+color: $text-color;
+}

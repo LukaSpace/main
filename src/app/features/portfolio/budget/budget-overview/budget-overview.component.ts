@@ -21,6 +21,7 @@ export class BudgetOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showAllCosts();
   }
 
   onDataChange()

@@ -16,5 +16,5 @@
   </mat-form-field>
     
   <plotly-plot *ngIf="graph; else noGraphAvailable" class="plot" [data]="graph.data" [layout]="graph.layout"></plotly-plot>
-  <ng-template #noGraphAvailable>No data available</ng-template>
+  <ng-template #noGraphAvailable>No data available for selected range</ng-template>
 </div>

@@ -15,8 +15,8 @@ export class BudgetComponent {
   mainNavigationLinks: Link[] = [
     { name: 'Overview', link: 'portfolio/budget/overview' },
     { name: 'List', link: 'portfolio/budget/list' },
-    { name: 'Edit', link: 'portfolio/budget/edit' },
-    { name: 'Graphs', link: 'portfolio/budget/graphs' },
+    // { name: 'Edit', link: 'portfolio/budget/edit' },
+    // { name: 'Graphs', link: 'portfolio/budget/graphs' },
   ];
 
   currentMainLinkId: number = 0;

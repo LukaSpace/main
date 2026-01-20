@@ -12,7 +12,7 @@
 
     <ng-container matColumnDef="month">
       <th mat-header-cell *matHeaderCellDef> Month </th>
-      <td mat-cell *matCellDef="let element"> {{ element.month }} </td>
+      <td mat-cell *matCellDef="let element"> {{ monthArr[element.month] | date: 'MMMM' }} </td>
     </ng-container>
   
     <ng-container matColumnDef="income">
@@ -37,8 +37,31 @@
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <div class="example-element-description">
-            Test content
+          <div class="detail-section">
+            <h4>Incomes</h4>
+            <table>
+              <tr>
+                <th>Type</th>
+                <th>Amount</th>
+              </tr>
+              <tr *ngFor="let incomeType of incomeTypeDisplayKeys">
+                <td>{{ incomeTypeDisplay[incomeType] }}</td>
+                <td>{{ element.incomes | getIncomeByType:incomeType }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="detail-section">
+            <h4>Costs</h4>
+            <table>
+              <tr>
+                <th>Type</th>
+                <th>Amount</th>
+              </tr>
+              <tr *ngFor="let costType of costTypeDisplayKeys">
+                <td>{{ costTypeDisplay[costType] }}</td>
+                <td>{{ element.costs | getCostByType:costType }}</td>
+              </tr>
+            </table>
           </div>
         </div>
       </td>
