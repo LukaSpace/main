@@ -28,6 +28,32 @@
         font-size: 4rem;
     }
 }
+
+.subtitle {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.2rem;
+    background-image: linear-gradient(
+        to left,
+        $primary,
+        $accent,
+        $primary);
+        background-size: 200% auto;
+    background-clip: text;
+    color: transparent;
+
+    animation: moveInRight 1s ease-out 0.25s forwards, gradient-animation 7s linear infinite;
+    opacity: 0;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 3rem;
+
+    @include respond-to('phone') {
+        font-size: 1.5rem;
+    }
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;

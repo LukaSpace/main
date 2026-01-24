@@ -36,17 +36,20 @@
       }
 }
 
-@keyframes rotate-scale-up {
+@keyframes rotate-shadow {
   0% {
-    -webkit-transform: scale(1) rotateZ(0);
-            transform: scale(1) rotateZ(0);
+    box-shadow: rgba($accent, 0.6) 5px 2px 5px;
+  }
+  25% {
+    box-shadow: rgba($accent, 0.6) -5px 2px 5px;
   }
   50% {
-    -webkit-transform: scale(1.3) rotateZ(180deg);
-            transform: scale(1.3) rotateZ(180deg);
+    box-shadow: rgba($accent, 0.6) -5px -2px 5px;
+  }
+  75% {
+    box-shadow: rgba($accent, 0.6) 5px -2px 5px;
   }
   100% {
-    -webkit-transform: scale(1) rotateZ(360deg);
-            transform: scale(1) rotateZ(360deg);
+    box-shadow: rgba($accent, 0.6) 5px 2px 5px;
   }
 }

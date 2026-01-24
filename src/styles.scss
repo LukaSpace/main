@@ -11,6 +11,11 @@
 html {
   font-size: 62.5%;
   height: 100%;
+
+  --sb-track-color: $background;
+  --sb-thumb-color: #64b5f6;
+  --sb-size: 1rem;
+  --sb-border-radius: 1rem;
 }
 
 body { 
@@ -19,4 +24,18 @@ body {
   margin: 0;
   height: 100%;
   background: $background;
+}
+
+::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: var(--sb-border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: var(--sb-border-radius);
 }

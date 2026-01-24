@@ -9,15 +9,15 @@
 // Themes
 $theme: mat.define-light-theme((
   color: (
-    primary: mat.define-palette(mat.$blue-grey-palette, 800),
-    accent: mat.define-palette(mat.$blue-grey-palette, 300),
+    primary: mat.define-palette(mat.$blue-palette, 800),
+    accent: mat.define-palette(mat.$blue-palette, 300),
   ),
 ));
 
 $darkTheme: mat.define-dark-theme((
   color: (
-    primary: mat.define-palette(mat.$blue-grey-palette, 800),
-    accent: mat.define-palette(mat.$blue-grey-palette, 300),
+    primary: mat.define-palette(mat.$blue-palette, 800),
+    accent: mat.define-palette(mat.$blue-palette, 300),
   ),
   typography: mat.define-typography-config(),
   density: 0,
