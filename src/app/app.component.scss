@@ -30,7 +30,11 @@
 
 .sidenav-container {
   flex: 1;
-}
+
+  @include respond-to('tablet') {
+    flex: 1 0 auto;
+  }
+} 
 
 .is-mobile .sidenav-container {
   flex: 1 0 auto;
@@ -45,18 +49,14 @@
 }
 
 .name-shortcut {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: $white;
   background: linear-gradient(135deg, $primary, $accent);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
-  box-shadow: rgba($accent, 0.6) 5px 3px 5px;
-}
-
-.name-shortcut:hover {
-  animation: rotate-scale-up 0.6s ease-in-out both;
-  cursor: pointer;
+  animation: rotate-shadow 5s linear infinite;
+  margin: 1rem;
 }
 
 .footer-toolbar {

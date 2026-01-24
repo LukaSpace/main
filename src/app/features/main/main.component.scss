@@ -60,12 +60,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    padding: 2rem;
+    padding: 1rem;
     align-items: center;
     justify-items: center;
     height: 100%;
 
-    @include respond-to('phone') {
+    @include respond-to('tablet') {
     grid-template-columns: 1fr;
     column-gap: 2rem;
   }
@@ -99,6 +99,8 @@
 .about-me {
     margin-top: 2rem;
     line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .tech-container {
@@ -116,7 +118,7 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 
-    @include respond-to('phone') {
+    @include respond-to('tablet') {
         display: grid;
         grid-template-columns: 1fr;
         justify-items: center;
@@ -135,7 +137,7 @@
   align-items: center;
   margin: 1rem;
 
-  @include respond-to('phone') {
+  @include respond-to('tablet') {
     width: 95%;
     max-width: unset;
   }
