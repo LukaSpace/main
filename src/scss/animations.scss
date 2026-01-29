@@ -55,10 +55,37 @@
 }
 
 @keyframes moveRotate {
-  from {
-    transform: rotate(0deg) scale(12) translateX(-3em);
+  0% {
+    transform: rotate(0deg) scale(4) translateX(-3em);
   }
-  to {
-    transform: rotate(360deg) scale(18) translateX(3em);
+  10% {
+    transform: rotate(36deg) scale(6) translateX(-2.7em);
+  }
+  20% {
+    transform: rotate(72deg) scale(8) translateX(-2.4em);
+  }
+  30% {
+    transform: rotate(108deg) scale(12) translateX(-1.8em);
+  }
+  40% {
+    transform: rotate(144deg) scale(16) translateX(-1.2em);
+  }
+  50% {
+    transform: rotate(144deg) scale(32);
+  }
+  60% {
+    transform: rotate(216deg) scale(24) translateX(1.2em);
+  }
+  70% {
+    transform: rotate(252deg) scale(22) translateX(1.8em);
+  }
+  80% {
+    transform: rotate(288deg) scale(18) translateX(2.4em);
+  }
+  90% {
+    transform: rotate(324deg) scale(14) translateX(2.7em);
+  }
+  100% {
+    transform: rotate(360deg) scale(12) translateX(3em);
   }
 }

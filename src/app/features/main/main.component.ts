@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 interface IconPoint {
   x: number;
   y: number;
@@ -21,8 +21,9 @@ interface IconPoint {
     ]),
   ],
 })
-export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MainComponent implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChildren('iconElement') iconElements!: QueryList<ElementRef>;
+  @ViewChild('sphereContainer') sphereContainer!: ElementRef;
 
   iconsData: string[] = [
     'javascript', 'typescript', 'angular', 'nodedotjs', 'ngrx',
@@ -44,29 +45,45 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private ngZone: NgZone, changeDetectorRef: ChangeDetectorRef,
       media: MediaMatcher,) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-    this.mobileQuery.onchange = () => {
-      this.radius = this.mobileQuery.matches ? 150 : 250;
-      this.points = [];
-      this.generateSpherePoints();
-      this.ngZone.runOutsideAngular(() => {
-      this.animate();
-    });
-    }
-      }
-
-  ngOnInit() {
-    this.generateSpherePoints();
+    // this.mobileQuery = media.matchMedia('(max-width: 1000px)');
+    // this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    // this.mobileQuery.addEventListener('change', this._mobileQueryListener);
+    // this.mobileQuery.onchange = () => {
+    //   this.radius = this.mobileQuery.matches ? 150 : 250;
+    //   this.points = [];
+    //   this.generateSpherePoints();
+    //   this.ngZone.runOutsideAngular(() => {
+    //   this.animate();
+    // });
+    // }
   }
 
-  ngAfterViewInit() {
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.recalculateRadius();
+    this.generateSpherePoints();
+    this.runAnimation();
+  }
+
+  recalculateRadius() {
+    this.radius = this.sphereContainer?.nativeElement.getBoundingClientRect().width / 2.5 || 250;
+  }
+
+  runAnimation() {
     this.ngZone.runOutsideAngular(() => {
       this.animate();
     });
   }
 
+  ngOnInit() {
+  }
+
+  ngAfterViewChecked() {
+    this.recalculateRadius();
+    this.generateSpherePoints();
+    this.runAnimation();
+  }
+    
   ngOnDestroy() {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
@@ -81,6 +98,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   generateSpherePoints() {
+    this.points = [];
     const count = this.iconsData.length;
     for (let i = 0; i < count; i++) {
       const phi = Math.acos(-1 + (2 * i) / count);
@@ -95,7 +113,6 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('window:mousemove', ['$event'])
   onMouseMove(e: MouseEvent) {
     const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
     const dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
