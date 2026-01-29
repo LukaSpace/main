@@ -21,7 +21,7 @@ html {
 
 body { 
   font-family: Raleway, Arial;
-  font-size: 3rem;
+  font-size: 2rem;
   margin: 0;
   height: 100%;
   color: transparent;
@@ -53,32 +53,32 @@ body::before, body::after {
   mix-blend-mode: screen;
   animation: 55s -27s moveRotate infinite ease-in-out alternate;
 
-  @include respond-to('phone') {
-    width: 5em;
-    height: 5em;
+  @include respond-to('tablet') {
+    width: 6em;
+    height: 6em;
   }
 }
 
 body::before {
-  @include dots(30);
+  @include dots(45);
   animation-duration: 55s;
   animation-delay: -27s;
 }
 
 body::after {
-  @include dots(30);
+  @include dots(45);
   animation-duration: 53s;
   animation-delay: -32s;
 }
 
 head::before {
-  @include dots(30);
+  @include dots(45);
   animation-duration: 51s;
   animation-delay: -23s;
 }
 
 head::after {
-  @include dots(30);
+  @include dots(45);
   animation-duration: 49s;
   animation-delay: -19s;
 }

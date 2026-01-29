@@ -14,9 +14,8 @@
     height: 100%;
 
     @include respond-to('phone') {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
         align-items: start;
     }
 }
@@ -26,7 +25,6 @@
     flex-direction: column;
 
     @include respond-to('phone') {
-        align-items: center;
         text-align: center;
     }
 }
@@ -58,8 +56,15 @@
 
 .actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 2rem;
     padding: 2rem;
+
+    @include respond-to('tablet') {
+        justify-content: space-between;
+        padding: 2rem 0;
+        gap: unset;
+    }
 }
 
 .about-me {

@@ -26,17 +26,17 @@
             <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
         </a>
     </div> -->
-
-    <div class="sphere-container">
-    <div class="sphere">
-        <div 
-            *ngFor="let point of points" 
-            #iconElement 
-            class="icon">
-            <img 
-                [src]="'https://cdn.simpleicons.org/' + point.tech" 
-                [alt]="point.tech">
-            </div>
+    <div #sphereContainer class="sphere-container" (mousemove)="onMouseMove($event)">
+        <div class="sphere">
+            <div 
+                *ngFor="let point of points" 
+                #iconElement 
+                class="icon">
+                <img 
+                    [src]="'https://cdn.simpleicons.org/' + point.tech" 
+                    [alt]="point.tech">
+                </div>
         </div>
     </div>
+    
 </div>
