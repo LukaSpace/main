@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContactComponent } from './features/contact/contact.component';
+import { TechnologiesComponent } from './features/technologies/technologies.component';
 
 const routes: Routes = [
     {
@@ -18,6 +19,10 @@ const routes: Routes = [
     {
         path: 'contact',
         component: ContactComponent 
+    },
+    {
+        path: 'technologies',
+        component: TechnologiesComponent
     },
     { path: '**', redirectTo: '' }
 ];

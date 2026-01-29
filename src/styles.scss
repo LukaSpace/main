@@ -11,6 +11,7 @@
 html {
   font-size: 62.5%;
   height: 100%;
+  background: $background;
 
   --sb-track-color: $background;
   --sb-thumb-color: #64b5f6;
@@ -19,11 +20,12 @@ html {
 }
 
 body { 
-  font-family: Roboto, Arial;
-  font-size: 2rem;
+  font-family: Raleway, Arial;
+  font-size: 3rem;
   margin: 0;
   height: 100%;
-  background: $background;
+  color: transparent;
+  display: block;
 }
 
 ::-webkit-scrollbar {
@@ -38,4 +40,52 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: var(--sb-border-radius);
+}
+
+head::before, head::after,
+body::before, body::after {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 8em;
+  height: 8em;
+  content: '.';
+  mix-blend-mode: screen;
+  animation: 55s -27s moveRotate infinite ease-in-out alternate;
+
+  @include respond-to('phone') {
+    width: 5em;
+    height: 5em;
+  }
+}
+
+body::before {
+  @include dots(30);
+  animation-duration: 55s;
+  animation-delay: -27s;
+}
+
+body::after {
+  @include dots(30);
+  animation-duration: 53s;
+  animation-delay: -32s;
+}
+
+head::before {
+  @include dots(30);
+  animation-duration: 51s;
+  animation-delay: -23s;
+}
+
+head::after {
+  @include dots(30);
+  animation-duration: 49s;
+  animation-delay: -19s;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+      scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
 }
