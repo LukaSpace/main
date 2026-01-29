@@ -1,17 +1,25 @@
   <div class="container">
     <mat-toolbar class="toolbar">
-      <div class="name-shortcut" (click)="changeMainLink(0)">LC</div>
-      <span class="spacer"></span>
-      <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
-        <button mat-button (click)="changeMainLink(i)"><span class="navigation-name" [ngClass]="{'selectedNavigation': currentMainLinkId == i}">{{navigationLink.name}}</span></button>
-      </ng-container>
-      <mat-slide-toggle #slideTheme [checked]="!lightTheme" (change)="toggleTheme()"></mat-slide-toggle>
+      <!-- <a href="#">
+          <img src="../assets/icons/logo1.png"class="icon1">
+      </a>
+      <span class="spacer"></span> -->
+      <div *ngIf="mobileQuery.matches">
+        <button mat-icon-button @openClose (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+      </div>
+      <div *ngIf="!mobileQuery.matches">
+        <ng-container *ngTemplateOutlet="navigations"></ng-container>
+      </div>
+      <!-- <div class="name-shortcut" (click)="changeMainLink(0)">LC</div> -->
+
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
-      <mat-sidenav #sidenav fixedTopGap="56">
+      <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'side' : 'over'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list>
-          <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a>
+          <ng-container *ngTemplateOutlet="navigations"></ng-container>
+          <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
         </mat-nav-list>
       </mat-sidenav>
 
@@ -24,3 +32,12 @@
       <span class="footer-text">© 2026 Luka Space. All rights reserved.</span>
     </mat-toolbar>
 </div>
+
+<ng-template #navigations>
+  <div class="navigations">
+    <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
+      <button mat-button (click)="changeMainLink(i)"><span class="navigation-name" [ngClass]="{'selectedNavigation': currentMainLinkId == i}">{{navigationLink.name}}</span></button>
+    </ng-container>
+    <mat-slide-toggle #slideTheme [checked]="!lightTheme" (change)="toggleTheme()"><span *ngIf="mobileQuery.matches">Theme</span></mat-slide-toggle>
+  </div>
+</ng-template>

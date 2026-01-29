@@ -18,3 +18,15 @@ $breakpoints: (
         + "Available breakpoints are: #{map-keys($breakpoints)}.";
   }
 }
+
+@mixin dots($count) {
+  $text-shadow: ();
+  @for $i from 0 through $count {
+    $text-shadow: $text-shadow,
+                 (-.5+(random()) * 6) + em
+                 (-.5+(random()) * 6) + em
+                 9px
+                 hsla(195, (18 + random() * 4) * 1%, (38 + random() * 37) * 1%, .8)
+  }
+  text-shadow: $text-shadow;
+}

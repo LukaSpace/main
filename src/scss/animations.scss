@@ -53,3 +53,12 @@
     box-shadow: rgba($accent, 0.6) 5px 2px 5px;
   }
 }
+
+@keyframes moveRotate {
+  from {
+    transform: rotate(0deg) scale(12) translateX(-3em);
+  }
+  to {
+    transform: rotate(360deg) scale(18) translateX(3em);
+  }
+}
