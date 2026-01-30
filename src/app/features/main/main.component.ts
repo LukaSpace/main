@@ -7,6 +7,7 @@ interface IconPoint {
   z: number;
   tech: string;
 }
+const maxRotationSpeed = 0.008;
 
 @Component({
   selector: 'main',
@@ -21,73 +22,38 @@ interface IconPoint {
     ]),
   ],
 })
-export class MainComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('iconElement') iconElements!: QueryList<ElementRef>;
   @ViewChild('sphereContainer') sphereContainer!: ElementRef;
 
-  iconsData: string[] = [
+  icons: string[] = [
     'javascript', 'typescript', 'angular', 'nodedotjs', 'ngrx',
     'tailwindcss', 'css', 'html5',
     'docker', 'kubernetes', 'xml', 'git', 'dotnet',
     'github', 'githubactions', 'githubcopilot'
   ];
 
-  points: IconPoint[] = [];
-  radius = 250;
-  rotationX = 0;
+  rotationX = -10;
   rotationY = 0;
-  targetRotationX = 0.005;
-  targetRotationY = 0.005;
-  animationId?: number;
+  velocityX = 0;
+  velocityY = 0;
+  maxSpeed = 0.8;
+  rotateDirection = 1; // 1 or -1
+  baseRotationSpeedY = 2; // degrees per frame (tweak to taste)
+  baseRotationSpeedX = 1;    // small tilt if desired, e.g. 0.02
+  maxAngularSpeed = 15; // degrees/frame, hard cap for combined rotation
+
+  private isHovering = false;
+  private lastX = 0;
+  private lastY = 0;
+  private radius = 250;
+  private animationId?: number;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
   constructor(private ngZone: NgZone, changeDetectorRef: ChangeDetectorRef,
       media: MediaMatcher,) {
-    // this.mobileQuery = media.matchMedia('(max-width: 1000px)');
-    // this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    // this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-    // this.mobileQuery.onchange = () => {
-    //   this.radius = this.mobileQuery.matches ? 150 : 250;
-    //   this.points = [];
-    //   this.generateSpherePoints();
-    //   this.ngZone.runOutsideAngular(() => {
-    //   this.animate();
-    // });
-    // }
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.recalculateRadius();
-    this.generateSpherePoints();
-    this.runAnimation();
-  }
-
-  recalculateRadius() {
-    this.radius = this.sphereContainer?.nativeElement.getBoundingClientRect().width / 2.5 || 250;
-  }
-
-  runAnimation() {
-    this.ngZone.runOutsideAngular(() => {
-      this.animate();
-    });
-  }
-
-  ngOnInit() {
-  }
-
-  ngAfterViewChecked() {
-    this.recalculateRadius();
-    this.generateSpherePoints();
-    this.runAnimation();
-  }
-    
-  ngOnDestroy() {
-    if (this.animationId) {
-      cancelAnimationFrame(this.animationId);
-    }
   }
 
   downloadResume() {
@@ -97,54 +63,137 @@ export class MainComponent implements OnInit, AfterViewChecked, OnDestroy {
     link.click();
   }
 
-  generateSpherePoints() {
-    this.points = [];
-    const count = this.iconsData.length;
-    for (let i = 0; i < count; i++) {
-      const phi = Math.acos(-1 + (2 * i) / count);
-      const theta = Math.sqrt(count * Math.PI) * phi;
+  ngOnInit(): void { }
+  ngAfterViewInit(): void {
+    this.runAnimation();
+  }
 
-      this.points.push({
-        x: this.radius * Math.cos(theta) * Math.sin(phi),
-        y: this.radius * Math.sin(theta) * Math.sin(phi),
-        z: this.radius * Math.cos(phi),
-        tech: this.iconsData[i]
-      });
+  ngOnDestroy() {
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
     }
   }
 
-  onMouseMove(e: MouseEvent) {
-    const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-    const dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+   runAnimation() {
+    this.ngZone.runOutsideAngular(() => {
+      this.animate();
+    });
+  }
 
-    this.targetRotationY = dx * 0.01;
-    this.targetRotationX = -dy * 0.01;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.recalculateRadius();
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+    this.runAnimation();
+  }
+
+  recalculateRadius() {
+    this.radius = this.sphereContainer?.nativeElement?.getBoundingClientRect().width / 3;
+  }
+
+  // Trigger only inside the sphere
+  onMouseDownInside(event: MouseEvent) {
+    this.lastX = event.clientX;
+    this.lastY = event.clientY;
+  }
+
+  // Mouse enters interactive zone
+  onMouseEnter(event: MouseEvent) {
+    this.isHovering = true;
+    this.lastX = event.clientX;
+    this.lastY = event.clientY;
+  }
+
+  // Mouse leaves — stop capturing movement
+  onMouseLeave(_event?: MouseEvent) {
+    this.isHovering = false;
+    // let velocities decay in animate() — don't abruptly snap
+  }
+
+  // Mouse move restricted to hover area
+  onMouseMoveInside(event: MouseEvent) {
+    if (!this.isHovering) return;
+
+    const dx = event.clientX - this.lastX;
+    const dy = event.clientY - this.lastY;
+
+    // set direction from horizontal movement
+    if (dx !== 0) this.rotateDirection = dx > 0 ? 1 : -1;
+
+    // sensitivity and smoothing
+    const sensitivity = 0.05;
+    const targetY = dx * sensitivity;
+    const targetX = -dy * sensitivity * 0.5;
+
+    // smooth toward target and clamp
+    this.velocityY = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityY * 0.8 + targetY * 0.2));
+    this.velocityX = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityX * 0.8 + targetX * 0.2));
+
+    this.lastX = event.clientX;
+    this.lastY = event.clientY;
   }
 
   animate() {
-    this.rotationX += this.targetRotationX;
-    this.rotationY += this.targetRotationY;
+    const icons = this.iconElements ? this.iconElements.toArray() : [];
+    const total = icons.length;
 
-    const nativeElements = this.iconElements.toArray();
+    // compute combined rotations but clamp to avoid runaway speed
+    let combinedY = (this.baseRotationSpeedY * this.rotateDirection) + this.velocityY;
+    let combinedX = (this.baseRotationSpeedX * this.rotateDirection) + this.velocityX;
 
-    this.points.forEach((point, i) => {
-      const el = nativeElements[i].nativeElement;
+    combinedY = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedY));
+    combinedX = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedX));
 
-      let currentY = point.y * Math.cos(this.rotationX) - point.z * Math.sin(this.rotationX);
-      let currentZ = point.y * Math.sin(this.rotationX) + point.z * Math.cos(this.rotationX);
+    this.rotationY += combinedY;
+    this.rotationX += combinedX;
 
-      let finalX = point.x * Math.cos(this.rotationY) + currentZ * Math.sin(this.rotationY);
-      let finalY = currentY;
-      let finalZ = -point.x * Math.sin(this.rotationY) + currentZ * Math.cos(this.rotationY);
+    const rx = this.rotationX * Math.PI / 180;
+    const ry = this.rotationY * Math.PI / 180;
 
-      const scale = (finalZ + this.radius) / (2 * this.radius) * 0.5 + 0.5;
-      const opacity = (finalZ + this.radius) / (2 * this.radius) * 0.8 + 0.2;
+    for (let i = 0; i < total; i++) {
+      const el = icons[i].nativeElement as HTMLElement;
+      const phi = Math.acos(-1 + (2 * i) / total);
+      const theta = Math.sqrt(total * Math.PI) * phi;
+      const x0 = this.radius * Math.cos(theta) * Math.sin(phi);
+      const y0 = this.radius * Math.sin(theta) * Math.sin(phi);
+      const z0 = this.radius * Math.cos(phi);
 
-      el.style.transform = `translate3d(${finalX}px, ${finalY}px, ${finalZ}px) scale(${scale})`;
-      el.style.opacity = opacity.toString();
-      el.style.zIndex = Math.round(finalZ + this.radius).toString();
-    });
+      const y1 = y0 * Math.cos(rx) - z0 * Math.sin(rx);
+      const z1 = y0 * Math.sin(rx) + z0 * Math.cos(rx);
+      const x2 = x0 * Math.cos(ry) + z1 * Math.sin(ry);
+      const z2 = -x0 * Math.sin(ry) + z1 * Math.cos(ry);
+
+      const scale = ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
+
+      el.style.transform = `translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
+      el.style.zIndex = String(Math.round(z2 + this.radius));
+      el.style.opacity = (0.3 + ((z2 + this.radius) / (2 * this.radius)) * 0.7).toString();
+    }
+
+    // stronger damping when mouse isn't over the sphere
+    if (!this.isHovering) {
+      this.velocityX *= 0.9;
+      this.velocityY *= 0.9;
+    } else {
+      this.velocityX *= 0.96;
+      this.velocityY *= 0.96;
+    }
 
     this.animationId = requestAnimationFrame(() => this.animate());
+  }
+
+  calculatePosition(i: number, total: number) {
+    const phi = Math.acos(-1 + (2 * i) / total);
+    const theta = Math.sqrt(total * Math.PI) * phi;
+
+    const x = this.radius * Math.cos(theta) * Math.sin(phi);
+    const y = this.radius * Math.sin(theta) * Math.sin(phi);
+    const z = this.radius * Math.cos(phi);
+
+    return {
+      transform: `translate3d(${x}px, ${y}px, ${z}px)`
+    };
   }
 }

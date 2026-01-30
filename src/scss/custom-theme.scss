@@ -14,10 +14,11 @@ $theme: mat.define-light-theme((
   ),
 ));
 
+//default - TODO support theme switching
 $darkTheme: mat.define-dark-theme((
   color: (
-    primary: mat.define-palette(mat.$blue-gray-palette, 800),
-    accent: mat.define-palette(mat.$blue-gray-palette, 200),
+    primary: mat.define-palette(mat.$indigo-palette, 900),
+    accent: mat.define-palette(mat.$pink-palette, A400),
   ),
   typography: mat.define-typography-config(),
   density: 0,

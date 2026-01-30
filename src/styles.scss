@@ -11,10 +11,11 @@
 html {
   font-size: 62.5%;
   height: 100%;
-  background: $background;
+  background: radial-gradient(circle at 0% 0%, #0d001a 0%, #000000 70%);
+  background-attachment: fixed;
 
   --sb-track-color: $background;
-  --sb-thumb-color: #64b5f6;
+  --sb-thumb-color: $primary;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
 }
