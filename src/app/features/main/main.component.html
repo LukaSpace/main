@@ -11,7 +11,7 @@
         <p class="role">Full Stack Developer</p>
         
         <div class="actions">
-            <button mat-raised-button color="accent" (click)="downloadResume()"><mat-icon class="material-symbols-outlined icon1">download</mat-icon> Download Resume</button>
+            <button mat-raised-button color="accent" (click)="downloadResume()"><mat-icon class="material-symbols-outlined">download</mat-icon> Download Resume</button>
             <button mat-raised-button color="primary" routerLink="/contact">Contact Me</button>
         </div>
     </div>
@@ -26,16 +26,14 @@
             <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
         </a>
     </div> -->
-    <div #sphereContainer class="sphere-container" (mousemove)="onMouseMove($event)">
-        <div class="sphere">
-            <div 
-                *ngFor="let point of points" 
-                #iconElement 
-                class="icon">
-                <img 
-                    [src]="'https://cdn.simpleicons.org/' + point.tech" 
-                    [alt]="point.tech">
-                </div>
+    <div #sphereContainer class="sphere-container">
+        <div class="sphere"
+            (mousemove)="onMouseMoveInside($event)"
+            (mouseenter)="onMouseEnter($event)"
+            (mouseleave)="onMouseLeave($event)">
+            <div #iconElement class="icon" *ngFor="let icon of icons; let i = index" [ngStyle]="calculatePosition(i, icons.length)">
+                 <img [src]="'https://cdn.simpleicons.org/' + icon" [alt]="icon" />
+             </div>
         </div>
     </div>
     
