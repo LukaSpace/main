@@ -53,3 +53,7 @@
       transform: translateY(0);
     }
   }
+
+:host ::ng-deep .mdc-text-field--filled {
+  background-color: rgba($accent, 0.15) !important;
+}

@@ -19,14 +19,18 @@ $breakpoints: (
   }
 }
 
-@mixin dots($count) {
+@mixin dots($count, $blur: 4px, $spread: 25) {
   $text-shadow: ();
+
   @for $i from 0 through $count {
+    $x: (-.5 + random()) * $spread + em;
+    $y: (-.5 + random()) * $spread + em;
     $text-shadow: $text-shadow,
-                 (-.5+(random()) * 8) + em
-                 (-.5+(random()) * 8) + em
-                 6px
-                 rgba($accent, 0.8)
+                 #{$x}
+                 #{$y}
+                 #{$blur}
+                 mix(white, $accent, 20%);
   }
+
   text-shadow: $text-shadow;
 }

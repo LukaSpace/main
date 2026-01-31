@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 5rem;
+    padding-bottom: 3rem;
 }
 
 .title {
@@ -34,14 +34,6 @@
     font-size: 2rem;
     font-weight: 400;
     letter-spacing: 0.2rem;
-    background-image: linear-gradient(
-        to left,
-        $primary,
-        $accent,
-        $primary);
-        background-size: 200% auto;
-    background-clip: text;
-    color: transparent;
 
     animation: moveInRight 1s ease-out 0.25s forwards, gradient-animation 7s linear infinite;
     opacity: 0;

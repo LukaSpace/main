@@ -75,6 +75,10 @@ mat-sidenav-content {
   flex-direction: column;
 }
 
+mat-sidenav {
+  background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+}
+
 /* router pages will fill available space and scroll internally */
 .router-outlet {
   flex: 1 1 auto;
