@@ -50,8 +50,44 @@
     opacity: 0;
 }
 
-.role {
-    color: $accent;
+.role-container {
+  position: relative;
+  color: $accent;
+}
+
+.dust-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  filter: blur(20px);
+  animation: dust-cycle 12s infinite;
+}
+
+.dust-text:nth-child(1) { animation-delay: 0s; }
+.dust-text:nth-child(2) { animation-delay: 4s; }
+.dust-text:nth-child(3) { animation-delay: 8s; }
+
+@keyframes dust-cycle {
+  0% {
+    opacity: 0;
+    filter: blur(20px);
+    transform: translate(-50%, -40%) skewX(20deg);
+  }
+  10%, 25% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translate(-50%, -50%) skewX(0deg);
+  }
+  35% {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translate(-45%, -60%) skewX(-20deg) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .actions {
