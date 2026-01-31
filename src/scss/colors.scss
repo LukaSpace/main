@@ -8,7 +8,7 @@ $primary-palette: map-get($color-config, 'primary');
 $accent-palette: map-get($color-config, 'accent');
 
 $primary: mat.get-color-from-palette($primary-palette, 500);
-$accent: mat.get-color-from-palette($accent-palette, A200);
+$accent: mat.get-color-from-palette($accent-palette, 900);
 $white: white;
 $text-color: var(--mat-app-text-color);
 $background: #000000; //var(--mat-sidenav-content-background-color);

@@ -38,7 +38,7 @@
 }
 
 .mat-mdc-raised-button, .mat-mdc-unelevated-button {
-    background: linear-gradient(45deg, #310062, #8a2be2) !important;
+    background: linear-gradient(45deg, $primary, $accent) !important;
     color: white !important;
     border-radius: 1rem !important;
     transition: all 0.3s ease;

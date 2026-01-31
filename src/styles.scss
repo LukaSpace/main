@@ -11,13 +11,17 @@
 html {
   font-size: 62.5%;
   height: 100%;
-  background: radial-gradient(circle at 0% 0%, #0d001a 0%, #000000 70%);
+  background: radial-gradient(circle at 100% 0%, $primary 0%, #000000 90%);
   background-attachment: fixed;
 
   --sb-track-color: $background;
   --sb-thumb-color: $primary;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
+
+  @include respond-to('phone') {
+    background: radial-gradient(circle at 0% 100%, $primary 0%, #000000 90%);
+  }
 }
 
 body { 

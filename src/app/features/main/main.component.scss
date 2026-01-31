@@ -30,11 +30,11 @@
 }
 
 .hi {
-    font-size: 5rem;
+    font-size: 4.5rem;
 }
 
 .name {
-    font-size: 7rem;
+    font-size: 6rem;
     letter-spacing: 1rem;
     background-image: linear-gradient(
         to left,
@@ -51,7 +51,7 @@
 }
 
 .role {
-    color: $primary;
+    color: $accent;
 }
 
 .actions {
@@ -142,7 +142,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .sphere {

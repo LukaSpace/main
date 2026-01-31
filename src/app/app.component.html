@@ -15,8 +15,7 @@
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
-      <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'side' : 'over'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
         <mat-nav-list>
           <ng-container *ngTemplateOutlet="navigations"></ng-container>
           <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->

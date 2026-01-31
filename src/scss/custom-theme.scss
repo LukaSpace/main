@@ -6,19 +6,119 @@
 @import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined';
 @import 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap';
 
+/* These palettes are generated using https://themes.angular-material.dev/ */
+$m2-primary: (
+    50 : #eae0ec,
+    100 : #cab3d0,
+    200 : #a780b1,
+    300 : #834d91,
+    400 : #69267a,
+    500 : #4e0062,
+    600 : #47005a,
+    700 : #3e0050,
+    800 : #350046,
+    900 : #250034,
+    A100 : #834d91,
+    A200 : #69267a,
+    A400 : #4e0062,
+    A700 : #47005a,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$m2-accent: (
+    50 : #fbf5fc,
+    100 : #f6e5f9,
+    200 : #f0d4f5,
+    300 : #eac2f0,
+    400 : #e6b5ed,
+    500 : #e1a8ea,
+    600 : #dda0e7,
+    700 : #d997e4,
+    800 : #d58de1,
+    900 : #cd7ddb,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$m2-error: (
+    50 : #fde4e5,
+    100 : #fabbbd,
+    200 : #f68e92,
+    300 : #f26066,
+    400 : #f03e45,
+    500 : #ed1c24,
+    600 : #eb1920,
+    700 : #e8151b,
+    800 : #e51116,
+    900 : #e0090d,
+    A100 : #ffffff,
+    A200 : #ffeef1,
+    A400 : #ffbbc6,
+    A700 : #ffa1b1,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
 // Themes
 $theme: mat.define-light-theme((
   color: (
-    primary: mat.define-palette(mat.$blue-gray-palette, 800),
-    accent: mat.define-palette(mat.$blue-gray-palette, 200),
+    primary: mat.define-palette($m2-primary),
+    accent: mat.define-palette($m2-accent, A200, A100, A400),
   ),
 ));
 
 //default - TODO support theme switching
 $darkTheme: mat.define-dark-theme((
   color: (
-    primary: mat.define-palette(mat.$indigo-palette, 900),
-    accent: mat.define-palette(mat.$pink-palette, A400),
+    primary: mat.define-palette($m2-primary),
+    accent: mat.define-palette($m2-accent, A200, A100, A400),
   ),
   typography: mat.define-typography-config(),
   density: 0,
