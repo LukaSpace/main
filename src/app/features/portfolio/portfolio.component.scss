@@ -1,10 +1,19 @@
 @import '../../../scss/main.scss';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 5rem;
+    flex: 0 0 auto;
+    text-align: center;
+    padding-bottom: 3rem;
+
+    @include respond-to('phone') {
+        padding-bottom: 1rem;
+    }
 }
 
 .title {
@@ -29,88 +38,72 @@
     }
 }
 
+h2 {
+    text-align: center;
+}
+
 .portfolio {
+    flex: 1 1 0; 
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 0 1.5rem;
+}
+
+.projects {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     padding: 1.5rem;
     align-items: center;
     justify-content: center;
-
-    &-card {
-        position: relative;
-        height: 35rem;
-        width: 25rem;
-        background-color: $primary;
-        margin: 3rem;
-        border-radius: 1.5rem;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 28px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-        color: $white;
-
-        &-title {
-            height: 35%;
-            filter: drop-shadow(0px 13px 9px rgba($accent, .85));
-            position: relative;
-
-            &-img {
-                height: 100%;
-                border-radius: 1.5rem 1.5rem 0px 0px;
-                background-size: cover;
-                clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            }
-
-            &-name {
-                position: absolute;
-                text-align: right;
-                top: 55%;
-                right: 5%;
-
-                &-span {
-                    font-weight: 400;
-                    padding: 0.3rem;
-                    border-radius: 0.5rem;
-                    background-image: linear-gradient(to right bottom, rgba($primary, .95), rgba($accent, .95) 50%);
-                    box-shadow: 3px 4px 3px rgba($accent, .55);
-                }
-            }
-        }
-
-        &-body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding-top: 2.5rem;
-            padding-left: 2.5rem;
-            padding-right: 2.5rem;
-
-            &-content {
-                width: 80%;
-                text-align: center;
-                padding: 2px;
-                margin-bottom: 1.5rem; 
-            }
-        }
-
-        &-footer {
-            position: absolute;
-            bottom: 0;
-            display: flex;
-            padding: 1.5rem;
-            width: 100%;
-            flex-direction: row-reverse;
-        }
-    }
 }
 
-.budgetApi {
-    &-img {
-        background-image: linear-gradient(to right bottom, rgba($primary, .2), rgba($accent, .2) 50%), url('../../../assets/backgrounds/portfolio/budget.jpg');
-    }
-}
+.project-card {
+    position: relative;
+    height: 40rem;
+    width: 35rem;
+    background-color: rgba($accent, 0.15);
+    margin: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 8px rgba($accent, 0.6);
+    color: $white;
+    word-wrap: break-word;
+    padding: 2rem;
 
-.secondApp {
-    &-img {
-        background-image: linear-gradient(to right bottom, rgba($primary, .2), rgba($accent, .2) 50%), url('https://picsum.photos/id/201/250/120');
+    mat-card-title {
+        font-size: 3rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+
+    mat-card-content {
+        font-size: 1.5rem;
+        line-height: 1.5;
+        margin-bottom: 4rem;
+
+        .tech-tags {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            .tech-tag {
+                background-color: rgba($primary, 0.9);
+                padding: 0.3rem 0.6rem;
+                border-radius: 1rem;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    mat-card-actions {
+        position: absolute;
+        gap: 2rem;
+        bottom: 1rem;
+        right: 1rem;
     }
 }

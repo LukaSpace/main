@@ -46,7 +46,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private isHovering = false;
   private lastX = 0;
   private lastY = 0;
-  private radius = 250;
+  private radius = 150;
   private animationId?: number;
 
   mobileQuery: MediaQueryList;
@@ -54,6 +54,9 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private ngZone: NgZone, changeDetectorRef: ChangeDetectorRef,
       media: MediaMatcher,) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
 
   downloadResume() {
@@ -65,7 +68,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void { }
   ngAfterViewInit(): void {
-    this.runAnimation();
+    this.rerunAnimation();
   }
 
   ngOnDestroy() {
@@ -74,23 +77,21 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-   runAnimation() {
-    this.ngZone.runOutsideAngular(() => {
-      this.animate();
-    });
-  }
-
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.recalculateRadius();
+    this.rerunAnimation();
+  }
+
+  private rerunAnimation() {
+    this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3;
+
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
     }
-    this.runAnimation();
-  }
 
-  recalculateRadius() {
-    this.radius = this.sphereContainer?.nativeElement?.getBoundingClientRect().width / 3;
+    this.ngZone.runOutsideAngular(() => {
+      this.animate();
+    });
   }
 
   // Trigger only inside the sphere
@@ -167,7 +168,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
       const scale = ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
 
-      el.style.transform = `translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
+      el.style.transform = `translate(-50%, -50%) translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
       el.style.zIndex = String(Math.round(z2 + this.radius));
       el.style.opacity = (0.3 + ((z2 + this.radius) / (2 * this.radius)) * 0.7).toString();
     }

@@ -2,36 +2,33 @@
     <span class="title">Portfolio</span>
 </div>
 <div class="portfolio">
-    <div class="portfolio-card budgetApi">
-        <div class="portfolio-card-title">
-            <div class="portfolio-card-title-img budgetApi-img"></div>
-            <h4 class="portfolio-card-title-name"><span class="portfolio-card-title-name-span">Budget API</span></h4>
-        </div>
-        <div class="portfolio-card-body">
-            <span class="portfolio-card-body-content">.NET Core API</span>
-            <span class="portfolio-card-body-content">MS SQL Database</span>
-            <span class="portfolio-card-body-content">Angular</span>
-        </div>
-        <div class="portfolio-card-footer">
-            <button mat-flat-button routerLink="budget/overview">
-                Demo
-                <mat-icon class="material-symbols-outlined">arrow_right_alt</mat-icon>
-            </button>
+    <div>
+        <h2>My Projects</h2>
+        <div class="projects">
+            <ng-container *ngTemplateOutlet="projectCard; context: {projects: myProjects}"></ng-container>
         </div>
     </div>
-    <div class="portfolio-card secondApp">
-        <div class="portfolio-card-title">
-            <div class="portfolio-card-title-img secondApp-img"></div>
-            <h4 class="portfolio-card-title-name"><span class="portfolio-card-title-name-span">Under construction</span></h4>
+    
+    <div>
+        <h2>Commercial Projects</h2>    
+        <div class="projects">
+            <ng-container *ngTemplateOutlet="projectCard; context: {projects: comercialProjects}"></ng-container>
         </div>
-        <div class="portfolio-card-body">
-            <span class="portfolio-card-body-content">TBD</span>
-        </div>
-        <div class="portfolio-card-footer">
-            <button mat-flat-button routerLink="secondApp" disabled="true">
-                Demo
-                <mat-icon class="material-symbols-outlined">arrow_right_alt</mat-icon>
-            </button>
-        </div>
-    </div>        
+    </div>
 </div>
+
+<ng-template #projectCard let-projects="projects">
+    <mat-card class="project-card" *ngFor="let project of projects" >
+        <mat-card-title>{{ project.title }}</mat-card-title>
+        <mat-card-content>
+            <p>{{ project.description }}</p>
+            <div class="tech-tags">
+                <span *ngFor="let tech of project.technologies" class="tech-tag">{{ tech }}</span>
+            </div>
+        </mat-card-content>
+        <mat-card-actions *ngIf="project.demoLink || project.codeLink">
+            <a mat-raised-button *ngIf="project.demoLink" [href]="project.demoLink" target="_blank"><mat-icon>play_circle_outline</mat-icon> Demo</a>
+            <a mat-raised-button *ngIf="project.codeLink" [href]="project.codeLink" target="_blank"><mat-icon>code</mat-icon> Code</a>
+        </mat-card-actions>
+    </mat-card>
+</ng-template>

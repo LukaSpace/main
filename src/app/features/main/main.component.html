@@ -7,12 +7,16 @@
 <div class="introduction">
     <div class="introduction-text">
         <p class="hi">Hi, I'm</p>
-        <h2 class="name">Lukas Cwajna</h2>
-        <p class="role">Full Stack Developer</p>
+        <h2 class="name">Lucas Cwajna</h2>
+        <div class="role-container">
+            <div class="dust-text">Full Stack Developer</div>
+            <div class="dust-text">Problem Solver</div>
+            <div class="dust-text">Concept Creator</div>
+        </div>
         
         <div class="actions">
-            <button mat-raised-button color="accent" (click)="downloadResume()"><mat-icon class="material-symbols-outlined">download</mat-icon> Download Resume</button>
-            <button mat-raised-button color="primary" routerLink="/contact">Contact Me</button>
+            <button mat-raised-button (click)="downloadResume()"><mat-icon class="material-symbols-outlined">download</mat-icon> Download Resume</button>
+            <button mat-raised-button routerLink="/contact">Contact Me</button>
         </div>
     </div>
     <!-- <div class="icons">
