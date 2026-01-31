@@ -42,6 +42,7 @@
     z-index: 2;
     height: 6rem;
     justify-content: left;
+    background: $background;
   }
 }
 
@@ -62,10 +63,25 @@
   }
 } 
 
-.router-outlet {
-  padding: 2rem;
+mat-sidenav-container,
+mat-sidenav-content {
+  height: 100%;
+  min-height: 0; /* important so children with overflow:auto can shrink */
 }
 
+/* make content a column so router-outlet can flex */
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* router pages will fill available space and scroll internally */
+.router-outlet {
+  flex: 1 1 auto;
+  min-height: 0; /* again ensures inner scrolling works */
+  overflow: auto;
+  padding: 2rem;
+}
 .mat-icon {
   color: $text-color;
 }

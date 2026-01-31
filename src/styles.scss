@@ -9,26 +9,26 @@
 }
 
 html, body {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
   height: 100%;
 }
 
 html {
   font-size: 62.5%;
-  background: radial-gradient(circle at 100% 0%, $primary 0%, #000000 60%);
-  background-attachment: fixed;
-
   --sb-track-color: $background;
-  --sb-thumb-color: $primary;
+  --sb-thumb-color: $accent;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
+}
 
-  @include respond-to('phone') {
-    background: radial-gradient(circle at 0% 100%, $primary 0%, #000000 60%);
-    background-attachment: scroll;
-    background-size: cover;
-  }
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 0% 100%, $primary 0%, #000000 60%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 body { 

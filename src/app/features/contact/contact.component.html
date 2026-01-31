@@ -3,14 +3,7 @@
 </div>
 <span class="subtitle">I'd love to hear from you! <br>
     Please fill out the form below to get in touch.</span>
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
-    <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" required>
-        <mat-error *ngIf="contactForm.get('name')?.hasError('required')">
-            Name is required
-        </mat-error>
-    </mat-form-field>
+<form [formGroup]="contactForm" #contactFormDirective="ngForm" (ngSubmit)="onSubmit()" class="contact-form">
     <mat-form-field appearance="fill" class="full-width">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" required email>
@@ -19,6 +12,16 @@
         </mat-error>
         <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
             Please enter a valid email address
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Subject</mat-label>
+        <input matInput formControlName="subject" required>
+        <mat-error *ngIf="contactForm.get('subject')?.hasError('required')">
+            Subject is required
+        </mat-error>
+        <mat-error *ngIf="contactForm.get('subject')?.hasError('maxlength')">
+            Subject cannot exceed 100 characters
         </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="full-width message-field">

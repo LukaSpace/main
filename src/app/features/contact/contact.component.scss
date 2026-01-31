@@ -59,7 +59,7 @@
     flex-direction: column;
     width: 50%;
     margin: 0 auto;
-    gap: 1rem;
+    gap: 0.5rem;
 
     @include respond-to('phone') {
         width: 90%;
@@ -71,7 +71,7 @@
 }
 
 .message-field textarea {
-    height: 30rem;
+    height: 15rem;
 }
 
 .send-button {
