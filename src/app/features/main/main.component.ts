@@ -83,7 +83,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private rerunAnimation() {
-    this.radius = this.sphereContainer?.nativeElement?.getBoundingClientRect().width / 3;
+    this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3;
 
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
@@ -168,7 +168,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
       const scale = ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
 
-      el.style.transform = `translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
+      el.style.transform = `translate(-50%, -50%) translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
       el.style.zIndex = String(Math.round(z2 + this.radius));
       el.style.opacity = (0.3 + ((z2 + this.radius) / (2 * this.radius)) * 0.7).toString();
     }

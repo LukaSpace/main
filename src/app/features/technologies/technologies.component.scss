@@ -29,13 +29,23 @@
         font-size: 4rem;
     }
 }
-
 .tech-cards {
     display: flex;
-    flex-direction: row;
+    padding: 10rem;
+    gap: 4rem;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+
+    @include respond-to('tablet') {
+        padding: 3rem;
+        gap: 2rem;
+    }
+
+    @include respond-to('phone') {
+        padding: 2rem;
+        flex-direction: column;
+    }
 }
 
 .tech-card {

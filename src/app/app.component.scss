@@ -24,7 +24,6 @@
 }
 
 .selectedNavigation {
-  color: $accent;
   padding-bottom: 0.2rem;
   background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat;
   background-size: 100% 0.2rem;
@@ -56,6 +55,10 @@
 
   @include respond-to('phone') {
     margin-top: 6rem;
+  }
+
+  .mat-drawer-content {
+    display: unset;
   }
 } 
 

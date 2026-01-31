@@ -1,9 +1,11 @@
 <div class="header">
     <span class="title">My Technologies</span>
 </div>
-<div class="tech-cards">
-    <mat-card *ngFor="let tech of technologies" class="tech-card">
-        <mat-card-title><mat-icon [fontIcon]="tech.icon">{{ tech.icon }}</mat-icon> {{ tech.name }}</mat-card-title>
-        <mat-card-content class="tech-card-content">{{ tech.description }}</mat-card-content>
-    </mat-card>
+<div class="tech-container">
+    <div class="tech-cards">
+        <mat-card *ngFor="let tech of technologies" class="tech-card">
+            <mat-card-title><mat-icon [fontIcon]="tech.icon">{{ tech.icon }}</mat-icon> {{ tech.name }}</mat-card-title>
+            <mat-card-content class="tech-card-content">{{ tech.description }}</mat-card-content>
+        </mat-card>
+    </div>
 </div>
