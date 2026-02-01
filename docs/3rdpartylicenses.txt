@@ -26,6 +26,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 --------------------------------------------------------------------------------
+Package: ngx-window-token
+License: "MIT"
+
+
+--------------------------------------------------------------------------------
+Package: ngx-clipboard
+License: "MIT"
+
+
+--------------------------------------------------------------------------------
 Package: plotly.js-dist-min
 License: "MIT"
 
