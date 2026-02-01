@@ -33,8 +33,7 @@
             "assets": [
               "src/ls-icon.ico",
               "src/assets",
-              "src/assets/icons",
-              "./web.config"
+              "src/assets/icons"
             ],
             "styles": [
               "src/scss/main.scss",
