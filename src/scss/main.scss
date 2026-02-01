@@ -30,18 +30,19 @@
   }
 
 .material-symbols-outlined {
-  vertical-align: middle;
+  vertical-align: baseline;
 }
 
 .mat-icon {
-  vertical-align: middle;
+  vertical-align: baseline;
 }
 
 .mat-mdc-raised-button, .mat-mdc-unelevated-button {
-    background: linear-gradient(45deg, $primary, $accent) !important;
+    background: linear-gradient(45deg, rgba($primary, 0.4), rgba($accent, 0.4)) !important;
     color: white !important;
     border-radius: 1rem !important;
     transition: all 0.3s ease;
+    padding: 0 1rem;
 
     &:hover {
       filter: brightness(1.1);

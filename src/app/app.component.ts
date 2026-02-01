@@ -1,10 +1,21 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
 import { filter } from 'rxjs';
 import { Link, SubLink } from './interfaces/app/model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+interface Star {
+  top: string;
+  left: string;
+  delay: string;
+  duration: string;
+  size: string;
+  isExploding?: boolean;
+  hoverTimer?: any;
+}
 
 @Component({
   selector: 'app-root',
@@ -22,7 +33,9 @@ import { Link, SubLink } from './interfaces/app/model';
     ]),
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  stars: Star[] = [];
+  private startsCount = 100; // Adjust for density
 
   @ViewChild('sidenav') sidenav: MatSidenav = null as any;
 
@@ -51,10 +64,12 @@ export class AppComponent {
 
   constructor(changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private router: Router) {
+    private router: Router,
+    private snackBar: MatSnackBar) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
+    this.mobileQuery.onchange = () => this.startsCount = this.mobileQuery.matches ? 100 : 200;
 
     if(!localStorage.getItem('theme'))
       this.setDefaultTheme();
@@ -72,6 +87,53 @@ export class AppComponent {
         this.subLinksExist = this.mainNavigationLinks[this.currentMainLinkId].subLinks != null;
     });
   }
+
+  ngOnInit() {
+    this.generateStars();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.generateStars();
+  }
+
+  generateStars() {
+    this.stars = [];
+    for (let i = 0; i < this.startsCount; i++) {
+      this.stars.push({
+        top: Math.random() * 95 + '%',
+        left: Math.random() * 95 + '%',
+        delay: Math.random() * 7 + 's',
+        duration: 4 + Math.random() * 6 + 's',
+        size: (Math.random() * 2 + 1) + 'px',
+        isExploding: false
+      });
+    }
+  }
+
+  onStarHover(star: Star) {
+  if (star.isExploding) return;
+
+  star.hoverTimer = setTimeout(() => {
+    this.triggerBurst(star);
+  }, 500);
+}
+
+onStarLeave(star: Star) {
+  if (star.hoverTimer) {
+    clearTimeout(star.hoverTimer);
+    star.hoverTimer = null;
+  }
+}
+
+private triggerBurst(star: Star) {
+  star.isExploding = true;
+  star.hoverTimer = null;
+
+  setTimeout(() => {
+    star.isExploding = false;
+  }, 1000);
+}
 
   changeMainLink(linkId: number) {
     this.router.navigate([this.mainNavigationLinks[linkId].link]);
@@ -101,6 +163,17 @@ export class AppComponent {
   private setTheme(themeName: string) {
     document.documentElement.setAttribute('theme', themeName);
     localStorage.setItem('theme', themeName);
+  }
+
+  downloadResume() {
+    const link = document.createElement('a');
+    link.href = 'assets/CV.pdf';
+    link.download = 'Lukas_Cwajna_Resume.pdf';
+    link.click();
+  }
+
+  copyEmail() {
+    this.snackBar.open('Email copied to clipboard!', 'Ok')
   }
 
   ngOnDestroy(): void {

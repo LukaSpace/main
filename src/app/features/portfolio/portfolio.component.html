@@ -27,7 +27,7 @@
             </div>
         </mat-card-content>
         <mat-card-actions *ngIf="project.demoLink || project.codeLink">
-            <a mat-raised-button *ngIf="project.demoLink" [href]="project.demoLink" target="_blank"><mat-icon>play_circle_outline</mat-icon> Demo</a>
+            <a mat-raised-button *ngIf="project.demoLink" [href]="project.demoLink" [target]="project.isInternal ? '_self' : '_blank'"><mat-icon>play_circle_outline</mat-icon> Demo</a>
             <a mat-raised-button *ngIf="project.codeLink" [href]="project.codeLink" target="_blank"><mat-icon>code</mat-icon> Code</a>
         </mat-card-actions>
     </mat-card>

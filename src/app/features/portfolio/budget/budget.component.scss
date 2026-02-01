@@ -14,8 +14,9 @@
 }
 
 .selectedNavigation {
-  color: $accent;
-  border-bottom: 0.25rem solid $accent;
+  padding-bottom: 0.2rem;
+  background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat;
+  background-size: 100% 0.2rem;
 }
 
 .is-mobile .toolbar {
@@ -24,11 +25,12 @@
 }
 
 .toolbar {
-  background: $background;
+  background: transparent;
 }
 
 .sidenav-container {
   flex: 1;
+  background: transparent;
 }
 
 .is-mobile .sidenav-container {
