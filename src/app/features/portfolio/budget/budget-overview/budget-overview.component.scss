@@ -26,9 +26,6 @@
 }
 
 .plot {
-    width: 45%;
-
-    @include respond-to('phone'){
-        width: 90%;
-    }
+    width: 90%;
+    justify-items: center;
 }
