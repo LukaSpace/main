@@ -22,12 +22,14 @@ import { MatButton } from "@angular/material/button";
   imports: [FormsModule, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatButton]
 })
 export class ContactComponent {
+  private readonly myEmail: string = 'lukaspace.contact@gmail.com';
     @ViewChild('contactFormDirective') contactFormDirective: FormGroupDirective;
 
     contactForm: FormGroup;
 
     constructor(private fb: FormBuilder) {
       this.contactForm = this.fb.group({
+        name: ['', [Validators.required, Validators.maxLength(50)]],
         email: ['', [Validators.required, Validators.email]],
         subject: ['', [Validators.required, Validators.maxLength(100)]],
         message: ['', [Validators.required, Validators.maxLength(500)]],
@@ -36,8 +38,8 @@ export class ContactComponent {
 
     onSubmit() {
       if (this.contactForm.valid) {
-        const { email, subject, message } = this.contactForm.value;
-        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        const { name, email, subject, message } = this.contactForm.value;
+        window.location.href = `mailto:${this.myEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message + '\n\n My contact: ' + email + '\n\nBR,\n ' + name)}`;
         this.contactFormDirective.resetForm();
         this.contactForm.reset();
       }

@@ -53,17 +53,10 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private _mobileQueryListener: () => void;
 
   constructor(private ngZone: NgZone, changeDetectorRef: ChangeDetectorRef,
-      media: MediaMatcher,) {
+      media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-  }
-
-  downloadResume() {
-    const link = document.createElement('a');
-    link.href = 'assets/CV.pdf';
-    link.download = 'Lukas_Cwajna_Resume.pdf';
-    link.click();
   }
 
   ngOnInit(): void { }
@@ -77,13 +70,20 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+   downloadResume() {
+    const link = document.createElement('a');
+    link.href = 'assets/CV.pdf';
+    link.download = 'Lukas_Cwajna_Resume.pdf';
+    link.click();
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.rerunAnimation();
   }
 
   private rerunAnimation() {
-    this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3;
+    this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3.2;
 
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);

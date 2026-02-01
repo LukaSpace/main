@@ -16,6 +16,10 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LoadingInterceptor } from '../shared/services/loading/loading.interceptor';
 import { SharedModule } from '../shared/shared.module';
+import { ClipboardModule } from 'ngx-clipboard';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 
 
 @NgModule({
@@ -36,8 +40,10 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ClipboardModule,
     HttpClientModule,
     SharedModule,
+    MatSnackBarModule,
   ],
   providers: [ 
     provideHttpClient(

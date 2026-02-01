@@ -16,7 +16,6 @@
     @include respond-to('phone') {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
-        align-items: start;
     }
 }
 
@@ -24,10 +23,15 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .hi {
-    font-size: 4.5rem;
+    font-size: 4rem;
+    @include respond-to('phone') {
+      font-size: 3rem;
+    }
 }
 
 .name {
@@ -45,31 +49,44 @@
 
     animation: moveInLeft 1s ease-out .25s forwards, gradient-animation 7s linear infinite;
     opacity: 0;
+
+    @include respond-to('phone') {
+    font-size: 5rem;
+  }
 }
 
 .role-container {
   position: relative;
-  color: $accent;
+  height: 5rem;
+  width: 100%;
+  @include respond-to('phone') {
+    height: 4rem;
+  }
 }
 
 .dust-text {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  animation: dust-cycle 10.5s infinite;
+  width: 100%;
+  font-size: 4rem;
   opacity: 0;
-  filter: blur(20px);
-  animation: dust-cycle 12s infinite;
+  filter: blur(30px);
+
+  @include respond-to('phone') {
+    font-size: 3rem;
+  }
 }
 
 .dust-text:nth-child(1) { animation-delay: 0s; }
-.dust-text:nth-child(2) { animation-delay: 4s; }
-.dust-text:nth-child(3) { animation-delay: 8s; }
+.dust-text:nth-child(2) { animation-delay: 3.5s; }
+.dust-text:nth-child(3) { animation-delay: 7s; }
 
 @keyframes dust-cycle {
   0% {
     opacity: 0;
-    filter: blur(20px);
+    filter: blur(30px);
     transform: translate(-50%, -40%) skewX(20deg);
   }
   10%, 25% {
@@ -79,7 +96,7 @@
   }
   35% {
     opacity: 0;
-    filter: blur(15px);
+    filter: blur(20px);
     transform: translate(-45%, -60%) skewX(-20deg) scale(1.1);
   }
   100% {
@@ -87,16 +104,18 @@
   }
 }
 
-.actions {
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-    padding: 2rem;
 
-    @include respond-to('tablet') {
-        padding: 2rem 0;
-        gap: unset;
-    }
+
+.actions {
+  display: flex;
+  width: 100%;
+  gap: 4rem;
+  justify-content: center;
+  margin-top: 1rem;
+
+  @include respond-to('phone') {
+    gap: 2rem;
+  }
 }
 
 .about-me {
@@ -157,12 +176,7 @@
     margin-top: 3rem;
 }
 
-.icon1 {
-    width: 4rem;
-    height: 4rem;
-    margin-top: 2rem;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
+
 
 .sphere-container {
   width: 100%;
@@ -174,6 +188,11 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  @include respond-to('phone') {
+    height: unset;
+    padding: 5rem;
+  }
 }
 
 .sphere {
@@ -209,5 +228,5 @@
 
   .img:hover {
   filter: brightness(1.5) drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-}
+  }
 }

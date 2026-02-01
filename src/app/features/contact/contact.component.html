@@ -5,7 +5,17 @@
     Please fill out the form below to get in touch.</span>
 <form [formGroup]="contactForm" #contactFormDirective="ngForm" (ngSubmit)="onSubmit()" class="contact-form">
     <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Email</mat-label>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="contactForm.get('name')?.hasError('required')">
+            Name is required
+        </mat-error>
+        <mat-error *ngIf="contactForm.get('name')?.hasError('maxlength')">
+            Name cannot exceed 50 characters
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contact Email</mat-label>
         <input matInput formControlName="email" required email>
         <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
             Email is required
