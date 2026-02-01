@@ -27,15 +27,15 @@
       </div>
       <span class="spacer"></span>
       <div class="links">
-        <a href="https://github.com/LukaSpace" target="_blank" rel="noopener noreferrer">
-            <img src="assets/icons/github.svg" alt="GitHub" class="icon1 invert-color">
+        <a mat-icon-button href="https://github.com/LukaSpace" target="_blank" rel="noopener noreferrer">
+            <img src="assets/icons/github.svg" alt="GitHub" class="invert-color">
         </a>
-        <a href="https://www.linkedin.com/in/%C5%82ukasz-cwajna-7a5567180/" target="_blank" rel="noopener noreferrer">
-            <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="icon1 invert-color">
+        <a mat-icon-button href="https://www.linkedin.com/in/%C5%82ukasz-cwajna-7a5567180/" target="_blank" rel="noopener noreferrer">
+            <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="invert-color">
         </a>
-        <a ngxClipboard [cbContent]="'lukaspace.contact@gmail.com'" (click)="copyEmail()">
+        <button mat-icon-button ngxClipboard [cbContent]="'lukaspace.contact@gmail.com'" (click)="copyEmail()">
             <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
-        </a>
+        </button>
       </div>
     </mat-toolbar>
 
