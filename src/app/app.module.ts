@@ -30,7 +30,6 @@ import { BudgetRoutingModule } from './features/portfolio/budget/budget-routing.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BudgetRoutingModule,
     CommonModule,
     RouterModule,
     MatToolbarModule,
