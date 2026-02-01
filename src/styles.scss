@@ -68,6 +68,7 @@ body::before, body::after {
   color: transparent;
   mix-blend-mode: screen;
   animation: 35s -17s moveRotate infinite ease-in-out alternate;
+  z-index: -1;
 
   @include respond-to('tablet') {
     width: 3em;
@@ -84,24 +85,28 @@ body::before {
   @include dots(70);
   animation-duration: 35s;
   animation-delay: -17s;
+  z-index: -1;
 }
 
 body::after {
   @include dots(70);
   animation-duration: 33s;
   animation-delay: -22s;
+  z-index: -1;
 }
 
 head::before {
   @include dots(70);
   animation-duration: 31s;
   animation-delay: -13s;
+  z-index: -1;
 }
 
 head::after {
   @include dots(70);
   animation-duration: 29s;
   animation-delay: -12s;
+  z-index: -1;
 }
 
 @supports not selector(::-webkit-scrollbar) {

@@ -20,7 +20,7 @@ export class PortfolioComponent {
       description: 'A web application to help users track their income and expenses and visualize their financial health through charts.' +
                   'Depending on environment all data are stored locally or in the browser.',
       technologies: ['.NET Core', 'C#', 'EF Core', 'MS SQL','Angular', 'TypeScript', 'Plotly.js'],
-      demoLink: 'portfolio/budget/overview',
+      demoLink: 'budget/overview',
       isInternal: true,
       codeLink: 'https://github.com/LukaSpace?tab=repositories',
     },
