@@ -1,3 +1,5 @@
+@import '../../../../../scss/main.scss';
+
 :host {
     height: 100%;
 }
@@ -19,13 +21,8 @@ tr.example-detail-row {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
+  background: rgba($accent, 0.2);
 }
-
-tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
-}
-
 .example-element-row td {
   border-bottom-width: 0;
 }
@@ -36,5 +33,16 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-detail {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 200px);
+  gap: 1rem;
+
+  .detail-section {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
 }

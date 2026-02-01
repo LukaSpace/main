@@ -82,11 +82,16 @@ export class BudgetOverviewComponent implements OnInit {
         }
       ],
       layout: {
-        title: 'Incomes vs Costs',
+        title: { text: 'Incomes vs Costs', font: { color: '#fff' } },
         autosize: true,
-        xaxis: { title: 'Month/Year' },
-        yaxis: { title: 'Amount' },
-        hovermode: 'x unified'
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { color: '#fff' },
+        xaxis: { title: 'Month/Year', tickfont: { color: '#fff' }, gridcolor: 'rgba(255,255,255,0.2)' },
+        yaxis: { title: 'Amount', tickfont: { color: '#fff' }, gridcolor: 'rgba(255,255,255,0.2)' },
+        hovermode: 'x unified',
+        hoverlabel: { font: { color: '#000' } },
+        legend: { font: { color: '#fff' } } // white legend text
       }
     };
   }
@@ -135,6 +140,9 @@ export class BudgetOverviewComponent implements OnInit {
       layout: {
         title: 'Costs Overview',
         autosize: true,
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { color: '#fff' },
         annotations: [
           {
             font: {

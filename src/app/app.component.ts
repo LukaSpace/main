@@ -173,7 +173,7 @@ private triggerBurst(star: Star) {
   }
 
   copyEmail() {
-    this.snackBar.open('Email copied to clipboard!', 'Ok')
+    this.snackBar.open('Email copied to clipboard!', undefined, { duration: 2000 })
   }
 
   ngOnDestroy(): void {

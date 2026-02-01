@@ -64,17 +64,17 @@
                                 <mat-label>Date</mat-label>
                                 <input matInput [matDatepicker]="datePicker" formControlName="date">
                                 <mat-datepicker-toggle matSuffix [for]="datePicker" [tabIndex]="getTabIndex(i, 1, 3)"></mat-datepicker-toggle>
-                                <mat-datepicker #datePicker color="primary"></mat-datepicker>
+                                <mat-datepicker #datePicker></mat-datepicker>
                                 <mat-error *ngIf="form.get('date')?.hasError('required')">
                                     Date is required
                                 </mat-error>
                             </mat-form-field>
                             
-                            <button mat-icon-button color="primary" (click)="addIncome()" [tabIndex]="getTabIndex(i, 1, 4)">
+                            <button mat-icon-button (click)="addIncome()" [tabIndex]="getTabIndex(i, 1, 4)">
                                 <mat-icon>add</mat-icon>
                             </button>
                             
-                            <button *ngIf="incomes.length > 1" mat-icon-button color="primary" (click)="deleteIncome(i)" [tabIndex]="getTabIndex(i, 1, 5)">
+                            <button *ngIf="incomes.length > 1" mat-icon-button (click)="deleteIncome(i)" [tabIndex]="getTabIndex(i, 1, 5)">
                                 <mat-icon>remove</mat-icon>
                             </button>
                         </form>
@@ -115,17 +115,17 @@
                                 <mat-label>Date</mat-label>
                                 <input matInput [matDatepicker]="datePicker" formControlName="date">
                                 <mat-datepicker-toggle matSuffix [for]="datePicker" [tabIndex]="getTabIndex(i, 2, 3)"></mat-datepicker-toggle>
-                                <mat-datepicker #datePicker color="primary"></mat-datepicker>
+                                <mat-datepicker #datePicker></mat-datepicker>
                                 <mat-error *ngIf="form.get('date')?.hasError('required')">
                                     Date is required
                                 </mat-error>
                             </mat-form-field>
                             
-                            <button mat-icon-button color="primary" (click)="addCost()" [tabIndex]="getTabIndex(i, 2, 4)">
+                            <button mat-icon-button (click)="addCost()" [tabIndex]="getTabIndex(i, 2, 4)">
                                 <mat-icon>add</mat-icon>
                             </button>
                             
-                            <button *ngIf="costs.length > 1" mat-icon-button color="primary" (click)="deleteCost(i)" [tabIndex]="getTabIndex(i, 2, 5)">
+                            <button *ngIf="costs.length > 1" mat-icon-button (click)="deleteCost(i)" [tabIndex]="getTabIndex(i, 2, 5)">
                                 <mat-icon>remove</mat-icon>
                             </button>
                         </form>
@@ -135,11 +135,11 @@
     </form>
 </mat-dialog-content>
 
-<mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="false" color="primary">
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">
         Close
     </button>
-    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="submit()">
+    <button mat-raised-button [disabled]="form.invalid" (click)="submit()">
         Submit
     </button>
 </mat-dialog-actions>

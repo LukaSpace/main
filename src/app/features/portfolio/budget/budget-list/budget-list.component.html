@@ -37,7 +37,7 @@
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="detail-section">
-            <h4>Incomes</h4>
+            <h2>Incomes</h2>
             <table>
               <tr>
                 <th>Type</th>
@@ -50,7 +50,7 @@
             </table>
           </div>
           <div class="detail-section">
-            <h4>Costs</h4>
+            <h2>Costs</h2>
             <table>
               <tr>
                 <th>Type</th>
@@ -74,7 +74,9 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
+  <div class="paginator">
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="25" aria-label="Select page"></mat-paginator>
+  </div>
 </div>
-<div class="paginator">
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="25" aria-label="Select page"></mat-paginator>
-</div>
+
+

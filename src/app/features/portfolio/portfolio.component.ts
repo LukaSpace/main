@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Project {
   title: string;
@@ -6,6 +7,7 @@ interface Project {
   technologies: string[];
   demoLink?: string;
   isInternal?: boolean;
+  alert?:string
   codeLink?: string;
 }
 @Component({
@@ -14,6 +16,9 @@ interface Project {
   styleUrl: './portfolio.component.scss',
 })
 export class PortfolioComponent {
+
+  constructor(private snackBar: MatSnackBar) {}
+
   myProjects: Project[] = [
     {
       title: 'Budget Tracker',
@@ -22,6 +27,7 @@ export class PortfolioComponent {
       technologies: ['.NET Core', 'C#', 'EF Core', 'MS SQL','Angular', 'TypeScript', 'Plotly.js'],
       demoLink: 'budget/overview',
       isInternal: true,
+      alert: 'Onine version of project use mocked data, so some functionalities can not work as expected. To test full functionality please visit the repository and run application locally.',
       codeLink: 'https://github.com/LukaSpace?tab=repositories',
     },
     {
@@ -43,4 +49,9 @@ export class PortfolioComponent {
       technologies: ['.NET Core', 'C#', 'EF Core', 'MS SQL', 'XUnit','Angular', 'Rest API', 'Hangfire', 'Animations', 'Azure CD/CI'],
     },
   ];
+
+  onDemoRun(alertMsg?: string) {
+    if (alertMsg)
+      this.snackBar.open(alertMsg, undefined, { duration: 8000 });
+  }
 }
