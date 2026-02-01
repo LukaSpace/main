@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../../../../services/portfolio/budget/budget.service';
-import { Cost, CostType, CostTypeDisplay } from '../../../../interfaces/portfolio/budget/model';
+import { Cost, CostType, CostTypeDisplay, Income, MonthSummary } from '../../../../interfaces/portfolio/budget/model';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrl: './budget-overview.component.scss',
 })
 export class BudgetOverviewComponent implements OnInit {
-  public graph: any;
+  public costGraph: any;
+  public incomesVsCostsGraph: any;
   public range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
@@ -21,7 +22,7 @@ export class BudgetOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showAllCosts();
+    this.loadData();
   }
 
   onDataChange()
@@ -29,15 +30,74 @@ export class BudgetOverviewComponent implements OnInit {
     let start = this.range.controls.start.value;
     let end = this.range.controls.end.value;
 
-    if(start && end)
-      this.budgetService.getCostsByDate(this.range.controls.start.value!, this.range.controls.end.value!).subscribe((costs) => this.updateGraphData(costs));
+    if(start && end) {
+      this.budgetService.getMonthSummariesByDate(start, end).subscribe((monthSumaries) => {
+        let costs: Cost[] = [];
+        monthSumaries.forEach(monthSummary => monthSummary.costs.forEach(cost => costs.push(cost)));
+        this.updateIncomesVsCostsGraphData(monthSumaries);
+        this.updateCostGraphData(costs)
+    });
+    }
+  }
+
+  loadData() {
+    this.showIncomesVsCosts();
+    this.showAllCosts();
+  }
+
+  showIncomesVsCosts() {
+    this.budgetService.getAllMonthSummaries().subscribe((monthSumaries) => {
+      this.updateIncomesVsCostsGraphData(monthSumaries);
+    })
+  }
+
+  updateIncomesVsCostsGraphData (monthSumaries: MonthSummary[]) {
+    if(!monthSumaries || monthSumaries.length < 1)
+    {
+      this.incomesVsCostsGraph = null;
+      return;
+    }
+
+    const months = monthSumaries.map(m => `${m.month + 1}/${m.year}`);
+    const incomes = monthSumaries.map(m => m.incomes.map((income: Income) => income.value).reduce((a: number, b: number) => a + b, 0));
+    const costs = monthSumaries.map(m => m.costs.map((cost: Cost) => cost.value).reduce((a: number, b: number) => a + b, 0));
+
+    this.incomesVsCostsGraph = {
+      data: [
+        {
+          x: months,
+          y: incomes,
+          name: 'Income',
+          type: 'scatter',
+          mode: 'lines',
+          line: { color: 'green' }
+        },
+        {
+          x: months,
+          y: costs,
+          name: 'Costs',
+          type: 'scatter',
+          mode: 'lines',
+          line: { color: 'red' }
+        }
+      ],
+      layout: {
+        title: 'Incomes vs Costs',
+        autosize: true,
+        xaxis: { title: 'Month/Year' },
+        yaxis: { title: 'Amount' },
+        hovermode: 'x unified'
+      }
+    };
   }
 
   showAllCosts()
   {
-    this.budgetService.getAllCosts().subscribe((costs) => 
+    this.budgetService.getAllMonthSummaries().subscribe((monthSumaries) => 
       {
-        this.updateGraphData(costs);
+        let costs: Cost[] = [];
+        monthSumaries.forEach(monthSummary => monthSummary.costs.forEach(cost => costs.push(cost)))
+        this.updateCostGraphData(costs);
         if(costs.length < 1)
           return;
 
@@ -46,11 +106,11 @@ export class BudgetOverviewComponent implements OnInit {
       });
   }
 
-  updateGraphData (costs: Cost[])
+  updateCostGraphData (costs: Cost[])
   {
     if(!costs || costs.length < 1)
     {
-      this.graph = null;
+      this.costGraph = null;
       return;
     }
 
@@ -58,7 +118,7 @@ export class BudgetOverviewComponent implements OnInit {
     costs.forEach((cost: Cost) => {
         countPerType[cost.costType] += cost.value
     });
-    this.graph = {
+    this.costGraph = {
       data: [
           {
             values: Object.values(countPerType),

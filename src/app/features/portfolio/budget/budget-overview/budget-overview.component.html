@@ -14,7 +14,10 @@
       </mat-date-range-picker-actions>
     </mat-date-range-picker>
   </mat-form-field>
-    
-  <plotly-plot *ngIf="graph; else noGraphAvailable" class="plot" [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+  
+  <div class="plots" *ngIf="costGraph && incomesVsCostsGraph; else noGraphAvailable">
+    <plotly-plot class="plot" [data]="incomesVsCostsGraph.data" [layout]="incomesVsCostsGraph.layout"></plotly-plot>
+    <plotly-plot class="plot" [data]="costGraph.data" [layout]="costGraph.layout"></plotly-plot>
+  </div>
   <ng-template #noGraphAvailable>No data available for selected range</ng-template>
 </div>
