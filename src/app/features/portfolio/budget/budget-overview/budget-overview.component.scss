@@ -15,17 +15,15 @@
 }
 
 .plots {
-    width: 100vw;
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
-
-    @include respond-to('phone'){
-        grid-template-columns: 1fr;
-    }
 }
 
 .plot {
-    width: 90%;
-    justify-items: center;
+    width: 100%;
+    padding: 1rem;
+
+    @include respond-to('phone') {
+        justify-items: center;
+    }
 }
