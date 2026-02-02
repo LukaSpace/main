@@ -63,8 +63,7 @@ h2 {
 }
 
 .project-card {
-    position: relative;
-    height: 40rem;
+    height: fit-content;
     width: 35rem;
     background-color: rgba($accent, 0.15);
     margin: 2rem;
@@ -83,16 +82,19 @@ h2 {
     mat-card-content {
         font-size: 1.5rem;
         line-height: 1.5;
-        margin-bottom: 4rem;
+        text-align: justify;
+        text-justify: inter-word;
 
         .tech-tags {
-            margin-top: 1rem;
+            padding-top: 4rem;
+            padding-bottom: 2rem;
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
 
             .tech-tag {
                 background-color: rgba($primary, 0.9);
+                box-shadow: 0 2px 4px rgba($accent, 0.6);
                 padding: 0.3rem 0.6rem;
                 border-radius: 1rem;
                 font-size: 1.2rem;
@@ -101,9 +103,7 @@ h2 {
     }
 
     mat-card-actions {
-        position: absolute;
         gap: 2rem;
-        bottom: 1rem;
-        right: 1rem;
+        align-self: flex-end;
     }
 }

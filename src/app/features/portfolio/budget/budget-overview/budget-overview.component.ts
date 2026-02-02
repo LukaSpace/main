@@ -84,7 +84,7 @@ export class BudgetOverviewComponent implements OnInit {
         yaxis: { title: 'Amount', tickfont: { color: '#fff' }, gridcolor: 'rgba(255,255,255,0.2)' },
         hovermode: 'x unified',
         hoverlabel: { font: { color: '#000' } },
-        legend: { font: { color: '#fff' } } // white legend text
+        legend: { font: { color: '#fff' }, orientation: 'h', y: 1.1}
       }
     };
   }

@@ -15,15 +15,5 @@
 }
 
 .plots {
-    width: 100%;
-    display: grid;
-}
-
-.plot {
-    width: 100%;
-    padding: 1rem;
-
-    @include respond-to('phone') {
-        justify-items: center;
-    }
+   display: contents;
 }
