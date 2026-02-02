@@ -89,3 +89,8 @@
     transform: rotate(360deg) scale(12) translateX(3em);
   }
 }
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: $primary; }
+}

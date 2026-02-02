@@ -32,6 +32,8 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     'docker', 'kubernetes', 'xml', 'git', 'dotnet',
     'github', 'githubactions', 'githubcopilot'
   ];
+  phrases: string[] = ['Full Stack Developer', 'Problem Solver', 'Concept Creator'];
+  displayText: string = '';
 
   rotationX = -10;
   rotationY = 0;
@@ -49,6 +51,15 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private radius = 150;
   private animationId?: number;
 
+  private phraseIndex: number = 0;
+  private charIndex: number = 0;
+  private isDeleting: boolean = false;
+  private typingTimer: any;
+  private readonly typeBase = 40;
+  private readonly typeJitter = 60;
+  private readonly eraseSpeed = 25;
+  private readonly waitTime = 1200;
+
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
@@ -59,7 +70,10 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.handleTyping();
+   }
+
   ngAfterViewInit(): void {
     this.rerunAnimation();
   }
@@ -68,6 +82,8 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
     }
+
+    if (this.typingTimer) clearTimeout(this.typingTimer);
   }
 
    downloadResume() {
@@ -196,5 +212,39 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     return {
       transform: `translate3d(${x}px, ${y}px, ${z}px)`
     };
+  }
+
+  handleTyping() {
+    const currentPhrase = this.phrases[this.phraseIndex];
+    
+    if (!this.isDeleting) {
+      this.displayText = currentPhrase.substring(0, this.charIndex + 1);
+      this.charIndex++;
+    } else {
+      this.displayText = currentPhrase.substring(0, this.charIndex - 1);
+      this.charIndex--;
+    }
+
+    // CALCULATE NEXT DELAY
+    let nextStepDelay: number;
+
+    if (this.isDeleting) {
+      nextStepDelay = this.eraseSpeed;
+    } else {
+      // Randomized "Human" typing: Base speed + random variation
+      nextStepDelay = this.typeBase + Math.random() * this.typeJitter;
+    }
+
+    // State switching logic
+    if (!this.isDeleting && this.charIndex === currentPhrase.length) {
+      nextStepDelay = this.waitTime;
+      this.isDeleting = true;
+    } else if (this.isDeleting && this.charIndex === 0) {
+      this.isDeleting = false;
+      this.phraseIndex = (this.phraseIndex + 1) % this.phrases.length;
+      nextStepDelay = 300; 
+    }
+
+    this.typingTimer = setTimeout(() => this.handleTyping(), nextStepDelay);
   }
 }
