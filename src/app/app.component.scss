@@ -63,6 +63,7 @@
   }
 
   @include respond-to('phone') {
+    flex: 1 0 auto;
     margin-top: 6rem;
   }
 } 
@@ -71,10 +72,9 @@ mat-sidenav {
   background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
 }
 
-/* router pages will fill available space and scroll internally */
 .router-outlet {
   flex: 1 1 auto;
-  min-height: 0; /* again ensures inner scrolling works */
+  min-height: 0;
   overflow: auto;
   padding: 2rem;
 }
