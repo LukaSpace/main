@@ -69,6 +69,8 @@
 } 
 
 mat-sidenav {
+  position: absolute;
+  min-height: 100% !important;
   background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
 }
 
