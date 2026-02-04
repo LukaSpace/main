@@ -1,5 +1,9 @@
 @import '../scss/main.scss';
 
+:host {
+  height: 100%;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -60,17 +64,16 @@
   }
 } 
 
-mat-sidenav {
-  background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-}
+// mat-sidenav {
+// }
 
-/* router pages will fill available space and scroll internally */
-.router-outlet {
-  flex: 1 1 auto;
-  min-height: 0; /* again ensures inner scrolling works */
-  overflow: auto;
-  padding: 2rem;
-}
+// /* router pages will fill available space and scroll internally */
+// .router-outlet {
+//   flex: 1 1 auto;
+//   min-height: 0; /* again ensures inner scrolling works */
+//   overflow: auto;
+//   padding: 2rem;
+// }
 .mat-icon {
   color: $text-color;
 }
