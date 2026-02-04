@@ -14,18 +14,8 @@ html, body {
 
 html {
   font-size: 62.5%;
-  --sb-track-color: $background;
-  --sb-thumb-color: $accent;
-  --sb-size: 1rem;
-  --sb-border-radius: 1rem;
-}
-
-html::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   pointer-events: none;
@@ -33,7 +23,27 @@ html::before {
   @include respond-to('phone') {
     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
   }
+
+  --sb-track-color: $background;
+  --sb-thumb-color: $accent;
+  --sb-size: 1rem;
+  --sb-border-radius: 1rem;
 }
+
+// html::before {
+//   content: '';
+//   position: fixed;
+//   inset: 0;
+//   z-index: -1;
+//   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   pointer-events: none;
+
+//   @include respond-to('phone') {
+//     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+//   }
+// }
 
 body { 
   font-family: Raleway, Arial;
