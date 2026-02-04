@@ -8,21 +8,16 @@
   box-sizing: inherit;
 }
 
-html, body, app-root {
-  min-height: 100dvh; 
-  min-height: -webkit-fill-available;
+html, body {
+  height: 100%; 
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  overflow: hidden; /* Disable browser scrollbar, let Angular handle it */
 }
 
 html {
   font-size: 62.5%;
-  background-color: #000000;
-  overscroll-behavior: none;
 
-  --sb-track-color: $background;
   --sb-thumb-color: $accent;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
@@ -31,12 +26,9 @@ html {
 html::before {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%; 
+  inset: 0; /* Top/Left/Right/Bottom: 0 */
+  width: 100vw;
+  height: 100%; /* Fixed height is safe here because body is hidden */
   z-index: -1;
   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
   background-size: cover;
@@ -45,19 +37,21 @@ html::before {
 
   @include respond-to('phone') {
     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-    /* On mobile, standard 100% height inside position:fixed is often more 
-       stable than dvh for background gradients specifically */
-    height: 100%; 
   }
+}
+
+app-root {
+  display: block;
+  height: 100%;
 }
 
 body { 
   font-family: Raleway, Arial;
   font-size: 2rem;
   margin: 0;
-  color: transparent;
-  display: block;
-  height: 100%;
+  // color: transparent;
+  // display: block;
+  // height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -65,8 +59,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--sb-track-color);
-  border-radius: var(--sb-border-radius);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
