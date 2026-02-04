@@ -1,23 +1,75 @@
 @import '../scss/main.scss';
 
 :host {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
   display: block;
+  height: 100%;
+  width: 100%;
 }
 
+/* THE APP SHELL */
 .container {
-    height: 100dvh; 
-    width: 100vw;
+  /* Exactly the height of the screen. No more, no less. */
+  height: 100dvh; 
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevents whole-page scrolling */
+}
+
+.toolbar {
+  background: transparent;
+  justify-content: center;
+  padding: 0 3vw;
+  flex-shrink: 0; 
+  z-index: 10; 
+
+  @include respond-to('phone') {
+    height: 6rem;
+    justify-content: left;
+    background: transparent; 
+  }
+}
+
+.sidenav-container {
+  flex: 1; 
+  background-color: transparent !important;
+  min-height: 0; 
+
+  /* This targets the scrollable area inside the sidenav */
+  ::ng-deep .mat-drawer-content {
+    background-color: transparent !important;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto; /* SCROLL HAPPENS HERE */
+    overflow-x: hidden;
+    
+    /* Smooth scrolling for mobile */
+    -webkit-overflow-scrolling: touch; 
+  }
+
+  @include respond-to('tablet') { flex: 1 0 auto; }
+  @include respond-to('phone') { flex: 1 0 auto; margin-top: 6rem; }
 }
 
+.content-wrapper {
+  flex: 1 0 auto; /* Grow to fill space, push footer down */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.footer-toolbar {
+  width: 100%;
+  justify-content: center;
+  background: transparent;
+  flex-shrink: 0; /* Ensures footer keeps its height */
+  padding: 2rem 0; 
+}
+
+/* ... Keep the rest of your existing component styles (navigations, links, stars, etc.) ... */
 .navigations {
   display: flex;
   flex-direction: row;
-
   @include respond-to('phone') {
     flex-direction: column;
     justify-items: center;
@@ -26,172 +78,9 @@
     padding: 2rem;
   }
 }
-
-.selectedNavigation {
-  padding-bottom: 0.2rem;
-  background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat;
-  background-size: 100% 0.2rem;
-}
-
-.sub-links-container {
-  width: 5rem;
-}
-
-.toolbar {
-  background: transparent;
-  justify-content: center;
-  padding: 0 3vw;
-  flex-shrink: 0; /* Prevents header from shrinking */
-  z-index: 10; /* Ensures it stays above content */
-
-  @include respond-to('phone') {
-    height: 6rem;
-    justify-content: left;
-    background: transparent; /* Keep transparent to show gradient */
-  }
-}
-
-.sidenav-container {
-  flex: 1; /* Fills all space between Header and Bottom of screen */
-  background-color: transparent !important;
-  min-height: 0; /* Firefox fix for flex containers */
-
-  /* Ensure the scrollable area is transparent */
-  ::ng-deep .mat-drawer-content {
-    background-color: transparent !important;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* Enable internal scrolling */
-    overflow-x: hidden;
-  }
-
-  @include respond-to('tablet') {
-    flex: 1 0 auto;
-  }
-
-  @include respond-to('phone') {
-    flex: 1 0 auto;
-    margin-top: 6rem;
-  }
-}
-
-.content-wrapper {
-  flex: 1; /* Pushes the footer down if content is short */
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-// mat-sidenav {
-// }
-
-// /* router pages will fill available space and scroll internally */
-// .router-outlet {
-//   flex: 1 1 auto;
-//   min-height: 0; /* again ensures inner scrolling works */
-//   overflow: auto;
-//   padding: 2rem;
-// }
-.mat-icon {
-  color: $text-color;
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.name-shortcut {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: $white;
-  background: linear-gradient(135deg, $primary, $accent);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  animation: rotate-shadow 5s linear infinite;
-  margin: 1rem;
-  cursor: pointer;
-}
-
-.footer-toolbar {
-  width: 100%;
-  justify-content: center;
-  background: transparent;
-  flex-shrink: 0;
-  padding: 2rem 0; /* Add some breathing room */
-}
-
-.links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-
-    a {
-      height: 3rem;
-    }
-
-    @include respond-to('phone') {
-      gap: 1rem;
-    }
-}
-
-.invert-color {
-  filter: invert(1);
-}
-
-.footer-text {
-  color: $text-color;
-
-  @include respond-to('phone') {
-    font-size: 1.5rem;
-  }
-}
-
-.star-wrapper {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  transition: transform 0.2s ease-out;
-}
-
-.star {
-  background: #fff;
-  border-radius: 50%;
-  opacity: 0.6;
-  box-shadow: 0 0 5px white;
-  animation: fall linear infinite, shine ease-in-out infinite;
-}
-
-.star.exploding {
-  animation: burst 0.5s ease-out forwards !important;
-  background: #fff;
-  z-index: 10;
-}
-
-@keyframes burst {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 5px 1px white;
-    filter: brightness(1);
-  }
-  25% {
-    transform: scale(1.8); 
-    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9), 
-                0 0 25px 10px rgba($accent, 0.3);
-    filter: brightness(1.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 5px 1px white;
-    opacity: 0.6;
-  }
-}
-
-@keyframes shine {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
+/* (Paste the rest of your existing styles here) */
+.selectedNavigation { padding-bottom: 0.2rem; background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat; background-size: 100% 0.2rem; }
+.links { display: flex; align-items: center; gap: 2rem; a { height: 3rem; } @include respond-to('phone') { gap: 1rem; } }
+.invert-color { filter: invert(1); }
+.footer-text { color: $text-color; @include respond-to('phone') { font-size: 1.5rem; } }
+.spacer { flex: 1 1 auto; }
