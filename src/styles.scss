@@ -15,7 +15,6 @@ html, body {
 
 html {
   font-size: 62.5%;
-  --sb-track-color: $background;
   --sb-thumb-color: $accent;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
@@ -26,13 +25,15 @@ html::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+  background: radial-gradient(circle at 100% 100%, $primary 10%, $background 70%);
   background-size: cover;
   background-repeat: no-repeat;
   pointer-events: none;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 
   @include respond-to('phone') {
-    background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+    background: radial-gradient(circle at 0% 100%, $primary 10%, $background 70%);
   }
 }
 
@@ -49,8 +50,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--sb-track-color);
-  border-radius: var(--sb-border-radius);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {

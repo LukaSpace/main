@@ -14,11 +14,8 @@
           }">
       </div>
     </div>
+
     <mat-toolbar class="toolbar">
-      <!-- <a href="#">
-          <img src="../assets/icons/logo1.png"class="icon1">
-      </a>
-      <span class="spacer"></span> -->
       <div *ngIf="mobileQuery.matches">
         <button mat-icon-button @openClose (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
       </div>
@@ -43,7 +40,6 @@
       <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
         <mat-nav-list>
           <ng-container *ngTemplateOutlet="navigations"></ng-container>
-          <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
         </mat-nav-list>
       </mat-sidenav>
 
@@ -59,9 +55,9 @@
 
 <ng-template #navigations>
   <div class="navigations">
-    <!-- <button mat-raised-button (click)="downloadResume()"><mat-icon class="material-symbols-outlined">download</mat-icon>Resume</button> -->
     <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
       <button mat-button (click)="changeMainLink(i)"><span class="navigation-name" [ngClass]="{'selectedNavigation': currentMainLinkId == i}">{{navigationLink.name}}</span></button>
+      <!-- <a mat-list-item (click)="changeSubLink(i, j)" *ngFor="let nav of mainNavigationLinks[i].subLinks; index as j">{{nav.name}}</a> TODO: think about using-->
     </ng-container>
     <!-- <mat-slide-toggle #slideTheme [checked]="!lightTheme" (change)="toggleTheme()"><span *ngIf="mobileQuery.matches">Theme</span></mat-slide-toggle> -->
   </div>

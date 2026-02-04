@@ -55,10 +55,10 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private charIndex: number = 0;
   private isDeleting: boolean = false;
   private typingTimer: any;
-  private readonly typeBase = 40;
+  private readonly typeBase = 50;
   private readonly typeJitter = 60;
-  private readonly eraseSpeed = 25;
-  private readonly waitTime = 1200;
+  private readonly eraseSpeed = 45;
+  private readonly waitTime = 1500;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
