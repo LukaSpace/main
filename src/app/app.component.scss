@@ -54,6 +54,12 @@
   flex: 1;
   background-color: transparent !important;
 
+  mat-sidenav-content {
+    background-color: transparent !important;
+    display: flex;
+    flex-direction: column;
+  }
+
   @include respond-to('tablet') {
     flex: 1 0 auto;
   }
@@ -62,7 +68,7 @@
     flex: 1 0 auto;
     margin-top: 6rem;
   }
-} 
+}
 
 // mat-sidenav {
 // }

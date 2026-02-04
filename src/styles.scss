@@ -13,11 +13,14 @@ html, body, app-root {
   min-height: -webkit-fill-available;
   margin: 0;
   padding: 0;
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 html {
   font-size: 62.5%;
+  background-color: #000000;
+  overscroll-behavior: none;
 
   --sb-track-color: $background;
   --sb-thumb-color: $accent;
@@ -28,9 +31,12 @@ html {
 html::before {
   content: '';
   position: fixed;
-  inset: 0; /* Shorthand for top, bottom, left, right: 0 */
-  width: 100vw;
-  height: 100dvh; /* Force it to follow the dynamic viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%; 
   z-index: -1;
   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
   background-size: cover;
@@ -39,8 +45,9 @@ html::before {
 
   @include respond-to('phone') {
     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-    /* Ensure height is strictly filling the screen on phones */
-    height: 100dvh;
+    /* On mobile, standard 100% height inside position:fixed is often more 
+       stable than dvh for background gradients specifically */
+    height: 100%; 
   }
 }
 

@@ -1,10 +1,10 @@
 @import '../../../scss/main.scss';
 
 :host {
-    height: 100%;
+    display: block;
+    flex: 1; /* This tells the component to fill the available space in the flex container */
     width: 100%;
 }
-
 .introduction {
     display: grid;
     grid-template-columns: 1fr 1fr;
