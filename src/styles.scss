@@ -11,6 +11,7 @@
 html, body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  width: 100vw;
 }
 
 html {
@@ -30,6 +31,8 @@ html::before {
   background-size: cover;
   background-repeat: no-repeat;
   pointer-events: none;
+  width: 100vw;
+  height: 100vh;
 
   @include respond-to('phone') {
     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
