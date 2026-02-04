@@ -6,15 +6,11 @@
 }
 
 .container {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
+    min-height: 100dvh; /* Use dynamic height instead of absolute bottom */
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative; /* Changed from absolute to prevent height clipping */
+    width: 100%;
 }
 
 .navigations {

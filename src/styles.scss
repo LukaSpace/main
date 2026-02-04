@@ -9,48 +9,38 @@
 }
 
 html, body, app-root {
-  height: 100%;
-  display: block; /* app-root is inline by default */
+  min-height: 100dvh; 
+  min-height: -webkit-fill-available;
+  margin: 0;
+  padding: 0;
+  display: block;
 }
 
 html {
-  height: 100%; 
-  background-color: #000000;
-  margin: 0;
+  font-size: 62.5%;
+
+  --sb-track-color: $background;
+  --sb-thumb-color: $accent;
+  --sb-size: 1rem;
+  --sb-border-radius: 1rem;
 }
 
-// html::before {
-//   content: '';
-//   position: fixed;
-//   inset: 0;
-//   z-index: -1;
-//   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
-//   background-size: cover;
-//   background-repeat: no-repeat;
-//   pointer-events: none;
-
-//   @include respond-to('phone') {
-//     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-//   }
-// }
 html::before {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* Using 100% inside fixed position covers the viewport */
+  inset: 0; /* Shorthand for top, bottom, left, right: 0 */
+  width: 100vw;
+  height: 100dvh; /* Force it to follow the dynamic viewport */
   z-index: -1;
   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
   background-size: cover;
   background-repeat: no-repeat;
-  
-  /* Use svh (Small Viewport Height) as a fallback for mobile address bars */
-  height: 100svh; 
-  height: 100dvh;
+  pointer-events: none;
 
   @include respond-to('phone') {
     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+    /* Ensure height is strictly filling the screen on phones */
+    height: 100dvh;
   }
 }
 
@@ -58,7 +48,9 @@ body {
   font-family: Raleway, Arial;
   font-size: 2rem;
   margin: 0;
-  min-height: 100dvh;
+  color: transparent;
+  display: block;
+  height: 100%;
 }
 
 ::-webkit-scrollbar {
