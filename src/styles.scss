@@ -8,8 +8,9 @@
   box-sizing: inherit;
 }
 
-html, body {
-  height: 100%;
+html {
+  height: 100dvh;
+  height: -webkit-fill-available;
 }
 
 html {
@@ -51,6 +52,7 @@ body {
   margin: 0;
   color: transparent;
   display: block;
+  height: 100%;
 }
 
 ::-webkit-scrollbar {
