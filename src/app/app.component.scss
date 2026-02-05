@@ -1,56 +1,31 @@
 @import '../scss/main.scss';
 
+/* THE APP SHELL */
 .container {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.navigations {
+  /* Exactly the height of the screen. No more, no less. */
+  height: 100dvh; 
+  width: 100vw;
   display: flex;
-  flex-direction: row;
-
-  @include respond-to('phone') {
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    row-gap: 2rem;
-    padding: 2rem;
-  }
-}
-
-.selectedNavigation {
-  padding-bottom: 0.2rem;
-  background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat;
-  background-size: 100% 0.2rem;
-}
-
-.sub-links-container {
-  width: 5rem;
+  flex-direction: column;
+  overflow: hidden; /* Prevents whole-page scrolling */
 }
 
 .toolbar {
   background: transparent;
   justify-content: center;
   padding: 0 3vw;
+  flex-shrink: 0; 
+  z-index: 10; 
 
   @include respond-to('phone') {
-    position: fixed;
-    z-index: 2;
     height: 6rem;
     justify-content: left;
-    background: $background;
+    background: transparent; 
   }
 }
 
 .sidenav-container {
-  flex: 1;
+  flex: 1; 
   background-color: transparent !important;
 
   @include respond-to('tablet') {
@@ -92,82 +67,26 @@
 .footer-toolbar {
   width: 100%;
   justify-content: center;
-  box-shadow: none;
   background: transparent;
+  flex-shrink: 0; /* Ensures footer keeps its height */
+  padding: 2rem 0; 
 }
 
-.links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-
-    a {
-      height: 3rem;
-    }
-
-    @include respond-to('phone') {
-      gap: 1rem;
-    }
-}
-
-.invert-color {
-  filter: invert(1);
-}
-
-.footer-text {
-  color: $text-color;
-
-  @include respond-to('phone') {
-    font-size: 1.5rem;
-  }
-}
-
-.star-wrapper {
-  position: absolute;
-  width: 20px;
-  height: 20px;
+/* ... Keep the rest of your existing component styles (navigations, links, stars, etc.) ... */
+.navigations {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  transition: transform 0.2s ease-out;
-}
-
-.star {
-  background: #fff;
-  border-radius: 50%;
-  opacity: 0.6;
-  box-shadow: 0 0 5px white;
-  animation: fall linear infinite, shine ease-in-out infinite;
-}
-
-.star.exploding {
-  animation: burst 0.5s ease-out forwards !important;
-  background: #fff;
-  z-index: 10;
-}
-
-@keyframes burst {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 5px 1px white;
-    filter: brightness(1);
-  }
-  25% {
-    transform: scale(1.8); 
-    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9), 
-                0 0 25px 10px rgba($accent, 0.3);
-    filter: brightness(1.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 5px 1px white;
-    opacity: 0.6;
+  flex-direction: row;
+  @include respond-to('phone') {
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    row-gap: 2rem;
+    padding: 2rem;
   }
 }
-
-@keyframes shine {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
+/* (Paste the rest of your existing styles here) */
+.selectedNavigation { padding-bottom: 0.2rem; background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat; background-size: 100% 0.2rem; }
+.links { display: flex; align-items: center; gap: 2rem; a { height: 3rem; } @include respond-to('phone') { gap: 1rem; } }
+.invert-color { filter: invert(1); }
+.footer-text { color: $text-color; @include respond-to('phone') { font-size: 1.5rem; } }
+.spacer { flex: 1 1 auto; }
