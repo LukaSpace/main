@@ -27,23 +27,18 @@
 .sidenav-container {
   flex: 1; 
   background-color: transparent !important;
+  min-height: 0;
 
   @include respond-to('tablet') {
     flex: 1 0 auto;
   }
 
   @include respond-to('phone') {
+    flex: 1 0 auto;
     margin-top: 6rem;
   }
 } 
 
-/* router pages will fill available space and scroll internally */
-.router-outlet {
-  flex: 1 1 auto;
-  min-height: 0; /* again ensures inner scrolling works */
-  overflow: auto;
-  padding: 2rem;
-}
 .mat-icon {
   color: $text-color;
 }
