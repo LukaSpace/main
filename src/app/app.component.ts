@@ -54,11 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { name: 'Home', link: '' },
     //{ name: 'Blog', link: '/blog', subLinks: this.blogSubLinks },
     { name: 'Technologies', link: '/technologies' },
-    { name: 'Portfolio',
-      link: '/portfolio',
-    subLinks: [
-      { name: 'Budget', link: '/portfolio/budget/overview'},
-    ] },
+    { name: 'Portfolio', link: '/portfolio' },
     { name: 'Contact', link: '/contact' },
   ];
 
@@ -143,11 +139,11 @@ private triggerBurst(star: Star) {
     this.router.navigate([this.mainNavigationLinks[linkId].link]);
   }
 
-  changeSubLink(linkId: number, subLinkId: number) {
-    let currentLink = this.mainNavigationLinks[linkId];
+  changeSubLink(subLinkId: number) {
+    let currentLink = this.mainNavigationLinks[this.currentMainLinkId];
     let subLinks = currentLink.subLinks;
     let subLink = subLinks ? subLinks[subLinkId].link : '';
-    this.router.navigate([subLink]);
+    this.router.navigate([currentLink.link + subLink]);
   }
 
   toggleTheme() {

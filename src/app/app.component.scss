@@ -1,5 +1,10 @@
 @import '../scss/main.scss';
 
+:host {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 .container {
     min-height: 100vh;
     min-height: -webkit-fill-available;
@@ -61,6 +66,10 @@
     margin-top: 6rem;
   }
 } 
+
+mat-sidenav {
+  background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+}
 
 /* router pages will fill available space and scroll internally */
 .router-outlet {
