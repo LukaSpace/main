@@ -18,10 +18,6 @@ import { LoadingInterceptor } from '../shared/services/loading/loading.intercept
 import { SharedModule } from '../shared/shared.module';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { BudgetRoutingModule } from './features/portfolio/budget/budget-routing.module';
-
-
-
 
 @NgModule({
   declarations: [

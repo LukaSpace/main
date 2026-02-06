@@ -47,16 +47,14 @@
         </mat-nav-list>
       </mat-sidenav>
 
-        <mat-sidenav-content>
-          <div class="content-wrapper">
-            <router-outlet class="router-outlet"></router-outlet>
-          </div>
-
-          <mat-toolbar class="footer-toolbar">
-            <span class="footer-text">© 2026 Luka Space. All rights reserved.</span>
-          </mat-toolbar>
+      <mat-sidenav-content>
+        <router-outlet class="router-outlet"></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
+    
+    <mat-toolbar class="footer-toolbar">
+        <span class="footer-text">© 2026 Luka Space. All rights reserved.</span>
+      </mat-toolbar>
 </div>
 
 <ng-template #navigations>
