@@ -1,30 +1,25 @@
 @import './scss/main.scss';
 
-*,
-*::after,
-*::before {
-  padding: 0;
-  margin: 0;
-  box-sizing: inherit;
-}
-
-html, body {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-}
-
+/* 1. RESET & SAFETY LAYER */
 html {
   font-size: 62.5%;
   --sb-track-color: $background;
   --sb-thumb-color: $accent;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
+  height: 100dvh; 
+  width: 100vw;
 }
 
+/* 2. THE WALLPAPER */
 html::before {
   content: '';
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  /* OVERSIZE FIX: Use 120vh to ensure it covers the screen even if the address bar hides/shows dynamically */
+  height: 120vh; 
   z-index: -1;
   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
   background-size: cover;
@@ -36,28 +31,46 @@ html::before {
   }
 }
 
-body { 
+/* 3. TRANSPARENT BODY (Crucial Fix) */
+body {
   font-family: Raleway, Arial;
   font-size: 2rem;
   margin: 0;
-  color: transparent;
-  display: block;
+  padding: 0;
+  /* This was missing! Without this, the body is white and covers the gradient */
+  background-color: transparent; 
+  min-height: 100dvh;
 }
 
+/* 4. ANGULAR ROOT */
+app-root {
+  display: block;
+  /* Ensure root takes full height but doesn't overflow */
+  height: 100dvh; 
+  width: 100vw;
+  overflow: hidden; 
+}
+
+/* ... Keep your existing Scrollbar and Dot animation styles below ... */
 ::-webkit-scrollbar {
   width: var(--sb-size);
 }
-
 ::-webkit-scrollbar-track {
   background: var(--sb-track-color);
   border-radius: var(--sb-border-radius);
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: var(--sb-border-radius);
 }
 
+@supports not selector(::-webkit-scrollbar) {
+  html {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+
+/* (Include your dots animation mixins here as they were) */
 head::before, head::after,
 body::before, body::after {
   position: fixed;
@@ -71,44 +84,14 @@ body::before, body::after {
   animation: 35s -17s moveRotate infinite ease-in-out alternate;
   z-index: -1;
 
-  @include respond-to('tablet') {
-    width: 3em;
-    height: 3em;
-  }
-
-   @include respond-to('phone') {
-    width: 2em;
-    height: 2em;
-  }
+  @include respond-to('tablet') { width: 3em; height: 3em; }
+  @include respond-to('phone') { width: 2em; height: 2em; }
 }
 
-body::before {
-  @include dots(70);
-  animation-duration: 35s;
-  animation-delay: -17s;
-  z-index: -1;
-}
-
-body::after {
-  @include dots(70);
-  animation-duration: 33s;
-  animation-delay: -22s;
-  z-index: -1;
-}
-
-head::before {
-  @include dots(70);
-  animation-duration: 31s;
-  animation-delay: -13s;
-  z-index: -1;
-}
-
-head::after {
-  @include dots(70);
-  animation-duration: 29s;
-  animation-delay: -12s;
-  z-index: -1;
-}
+body::before { @include dots(70); animation-duration: 35s; animation-delay: -17s; }
+body::after { @include dots(70); animation-duration: 33s; animation-delay: -22s; }
+head::before { @include dots(70); animation-duration: 31s; animation-delay: -13s; }
+head::after { @include dots(70); animation-duration: 29s; animation-delay: -12s; }
 
 @supports not selector(::-webkit-scrollbar) {
   html {
