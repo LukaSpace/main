@@ -30,6 +30,7 @@
 }
 
 .hi {
+  margin: 1rem;
     font-size: 4rem;
     @include respond-to('phone') {
       font-size: 3rem;
@@ -37,6 +38,7 @@
 }
 
 .name {
+    margin: 1rem;
     font-size: 6rem;
     letter-spacing: 1rem;
     background-image: linear-gradient(

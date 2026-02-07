@@ -23,6 +23,13 @@
   overflow: hidden; /* Prevents whole-page scrolling */
 }
 
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // same height as browser window height
+}
+
+
 .toolbar {
   background: transparent;
   justify-content: center;
@@ -37,20 +44,39 @@
   }
 }
 
-.sidenav-container {
-  flex: 1; 
-  background-color: transparent !important;
-  min-height: 0;
-
-  @include respond-to('tablet') {
-    flex: 1 0 auto;
-  }
+.content {
+  flex: 1; // child will set to an equal size inside the container
+  -webkit-flex: 1 1 auto;
+  overflow-y: auto;
+  height: 0px;
 
   @include respond-to('phone') {
-    flex: 1 0 auto;
     margin-top: 6rem;
   }
-} 
+}
+ 
+ 
+main {
+  display: flex;
+  flex-direction: column;
+
+  > *:not(router-outlet) {
+ 
+    flex: 1; // child will set to an equal size inside the container
+    display: block;
+ 
+  }
+}
+ 
+
+.sidenav-container {
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+footer {
+  text-align: center;
+}
 
 // mat-sidenav {
 //   background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
