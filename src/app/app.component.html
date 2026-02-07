@@ -1,5 +1,5 @@
   <div class="container">
-    <!-- <div *ngFor="let star of stars" 
+    <div *ngFor="let star of stars" 
       class="star-wrapper"
       [ngStyle]="{'top': star.top, 'left': star.left}"
       (mouseenter)="onStarHover(star)"
@@ -13,8 +13,8 @@
             'animation-duration': star.duration
           }">
       </div>
-    </div> -->
-    <!-- <mat-toolbar class="toolbar">
+    </div>
+    <mat-toolbar class="toolbar">
       <div *ngIf="mobileQuery.matches">
         <button mat-icon-button @openClose (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
       </div>
@@ -33,7 +33,7 @@
             <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
         </button>
       </div>
-    </mat-toolbar> -->
+    </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
       <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
@@ -48,9 +48,9 @@
       </mat-sidenav-content>
     </mat-sidenav-container>
 
-    <!-- <mat-toolbar class="footer-toolbar">
+    <mat-toolbar class="footer-toolbar">
       <span class="footer-text">© 2026 Luka Space. All rights reserved.</span>
-    </mat-toolbar> -->
+    </mat-toolbar>
 </div>
 
 <ng-template #navigations>
