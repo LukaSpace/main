@@ -1,4 +1,4 @@
-<div *ngFor="let star of stars" 
+<!-- <div *ngFor="let star of stars" 
   class="star-wrapper"
   [ngStyle]="{'top': star.top, 'left': star.left}"
   (mouseenter)="onStarHover(star)"
@@ -12,7 +12,7 @@
         'animation-duration': star.duration
       }">
   </div>
-</div>
+</div> -->
 
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
   <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">

@@ -18,9 +18,7 @@ html::before {
   top: 0;
   left: 0;
   width: 100vw;
-  min-height: 100vh;
-  min-height: -moz-available;
-  min-height: -webkit-fill-available;
+  height: 100vh;
   z-index: -1;
   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
   background-size: cover;
