@@ -55,10 +55,10 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private charIndex: number = 0;
   private isDeleting: boolean = false;
   private typingTimer: any;
-  private readonly typeBase = 40;
+  private readonly typeBase = 50;
   private readonly typeJitter = 60;
-  private readonly eraseSpeed = 25;
-  private readonly waitTime = 1200;
+  private readonly eraseSpeed = 35;
+  private readonly waitTime = 1500;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -110,41 +110,33 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  // Trigger only inside the sphere
   onMouseDownInside(event: MouseEvent) {
     this.lastX = event.clientX;
     this.lastY = event.clientY;
   }
 
-  // Mouse enters interactive zone
   onMouseEnter(event: MouseEvent) {
     this.isHovering = true;
     this.lastX = event.clientX;
     this.lastY = event.clientY;
   }
 
-  // Mouse leaves — stop capturing movement
   onMouseLeave(_event?: MouseEvent) {
     this.isHovering = false;
-    // let velocities decay in animate() — don't abruptly snap
   }
 
-  // Mouse move restricted to hover area
   onMouseMoveInside(event: MouseEvent) {
     if (!this.isHovering) return;
 
     const dx = event.clientX - this.lastX;
     const dy = event.clientY - this.lastY;
 
-    // set direction from horizontal movement
     if (dx !== 0) this.rotateDirection = dx > 0 ? 1 : -1;
 
-    // sensitivity and smoothing
     const sensitivity = 0.05;
     const targetY = dx * sensitivity;
     const targetX = -dy * sensitivity * 0.5;
 
-    // smooth toward target and clamp
     this.velocityY = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityY * 0.8 + targetY * 0.2));
     this.velocityX = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityX * 0.8 + targetX * 0.2));
 
@@ -156,7 +148,6 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     const icons = this.iconElements ? this.iconElements.toArray() : [];
     const total = icons.length;
 
-    // compute combined rotations but clamp to avoid runaway speed
     let combinedY = (this.baseRotationSpeedY * this.rotateDirection) + this.velocityY;
     let combinedX = (this.baseRotationSpeedX * this.rotateDirection) + this.velocityX;
 
@@ -189,7 +180,6 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
       el.style.opacity = (0.3 + ((z2 + this.radius) / (2 * this.radius)) * 0.7).toString();
     }
 
-    // stronger damping when mouse isn't over the sphere
     if (!this.isHovering) {
       this.velocityX *= 0.9;
       this.velocityY *= 0.9;
@@ -225,17 +215,14 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
       this.charIndex--;
     }
 
-    // CALCULATE NEXT DELAY
     let nextStepDelay: number;
 
     if (this.isDeleting) {
       nextStepDelay = this.eraseSpeed;
     } else {
-      // Randomized "Human" typing: Base speed + random variation
       nextStepDelay = this.typeBase + Math.random() * this.typeJitter;
     }
 
-    // State switching logic
     if (!this.isDeleting && this.charIndex === currentPhrase.length) {
       nextStepDelay = this.waitTime;
       this.isDeleting = true;

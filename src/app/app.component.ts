@@ -100,14 +100,19 @@ export class AppComponent implements OnInit, OnDestroy {
   generateStars() {
     this.stars = [];
     for (let i = 0; i < this.startsCount; i++) {
-      this.stars.push({
+      let star : Star = {
         top: Math.random() * 95 + '%',
         left: Math.random() * 95 + '%',
         delay: Math.random() * 7 + 's',
         duration: 4 + Math.random() * 6 + 's',
         size: (Math.random() * 2 + 1) + 'px',
         isExploding: false
-      });
+      };
+      let loopTime = (i + 1) * 15000;
+      star.hoverTimer = setTimeout(() => {
+                      this.triggerBurst(star, loopTime);
+                    }, loopTime)
+      this.stars.push(star);
     }
   }
 
@@ -126,13 +131,19 @@ onStarLeave(star: Star) {
   }
 }
 
-private triggerBurst(star: Star) {
+private triggerBurst(star: Star, loopTime?: number) {
   star.isExploding = true;
   star.hoverTimer = null;
 
   setTimeout(() => {
     star.isExploding = false;
   }, 1000);
+
+  if (loopTime) {
+    star.hoverTimer = setTimeout(() => {
+                      this.triggerBurst(star, loopTime + 2000);
+                    }, loopTime + 2000)
+  }
 }
 
   changeMainLink(linkId: number) {

@@ -37,11 +37,11 @@
   background: transparent;
   justify-content: center;
   padding: 0 3vw;
+  height: 6rem;
 
   @include respond-to('phone') {
     position: fixed;
     z-index: 2;
-    height: 6rem;
     justify-content: left;
     background: $background;
   }
@@ -54,23 +54,12 @@
   @include respond-to('tablet') {
     flex: 1 0 auto;
   }
-
-  @include respond-to('phone') {
-    margin-top: 6rem;
-  }
 } 
 
 mat-sidenav {
-  background-color: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+  background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
 }
 
-/* router pages will fill available space and scroll internally */
-.router-outlet {
-  flex: 1 1 auto;
-  min-height: 0; /* again ensures inner scrolling works */
-  overflow: auto;
-  padding: 2rem;
-}
 .mat-icon {
   color: $text-color;
 }
@@ -93,6 +82,7 @@ mat-sidenav {
 
 .footer-toolbar {
   width: 100%;
+  height: 6rem;
   justify-content: center;
   box-shadow: none;
   background: transparent;
@@ -145,27 +135,3 @@ mat-sidenav {
   z-index: 10;
 }
 
-@keyframes burst {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 5px 1px white;
-    filter: brightness(1);
-  }
-  25% {
-    transform: scale(1.8); 
-    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9), 
-                0 0 25px 10px rgba($accent, 0.3);
-    filter: brightness(1.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 5px 1px white;
-    opacity: 0.6;
-  }
-}
-
-@keyframes shine {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.3); opacity: 1; }
-}

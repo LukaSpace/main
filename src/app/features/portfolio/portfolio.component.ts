@@ -52,6 +52,6 @@ export class PortfolioComponent {
 
   onDemoRun(alertMsg?: string) {
     if (alertMsg)
-      this.snackBar.open(alertMsg, undefined, { duration: 8000 });
+      this.snackBar.open(alertMsg, "OK", { duration: 12000 });
   }
 }

@@ -1,5 +1,14 @@
 @import '../../../scss/main.scss';
 
+:host {
+    height: calc(100% - 12rem);
+    display: block;
+
+    @include respond-to('phone') {
+        margin-top: 6rem;
+    }
+}
+
 .header {
     display: flex;
     align-items: center;
