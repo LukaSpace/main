@@ -1,7 +1,8 @@
 @import '../../../scss/main.scss';
 
 :host {
-    height: calc(100% - 12rem);
+    height: 100%;
+    margin-top: 6rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -12,7 +13,6 @@
     @include respond-to('phone') {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
-        margin-top: 6rem;
     }
 }
 

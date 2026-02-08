@@ -19,7 +19,7 @@ export class BudgetOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadData();
+    this.showIncomesVsCosts();
   }
 
   onDataChange()
@@ -34,13 +34,25 @@ export class BudgetOverviewComponent implements OnInit {
     }
   }
 
-  loadData() {
-    this.showIncomesVsCosts();
-  }
-
   showIncomesVsCosts() {
     this.budgetService.getAllMonthSummaries().subscribe((monthSumaries) => {
       this.updateIncomesVsCostsGraphData(monthSumaries);
+
+      if(monthSumaries.length < 1)
+          return;
+
+      const monthSummariesSorted = monthSumaries.sort((a, b) => {
+        if (a.year !== b.year) return a.year - b.year;
+        return a.month - b.month;
+      })
+      const costsStartSorted = monthSummariesSorted[0].costs.sort((a,b) => {
+        return b.date.getTime() - a.date.getTime();
+      });
+      const costsEndSorted = monthSummariesSorted[monthSumaries.length - 1].costs.sort((a,b) => {
+        return b.date.getTime() - a.date.getTime();
+      });
+      this.range.controls.start.setValue(costsStartSorted[0].date);
+      this.range.controls.end.setValue(costsEndSorted[0].date);
     })
   }
 

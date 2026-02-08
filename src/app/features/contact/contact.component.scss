@@ -1,12 +1,9 @@
 @import '../../../scss/main.scss';
 
 :host {
-    height: calc(100% - 12rem);
+    height: 100%;
     display: block;
-
-    @include respond-to('phone') {
-        margin-top: 6rem;
-    }
+    margin-top: 6rem;
 }
 
 .header {
