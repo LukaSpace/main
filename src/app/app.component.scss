@@ -35,23 +35,25 @@
   justify-content: center;
   padding: 0 3vw;
   flex-shrink: 0; 
-  z-index: 10; 
+  z-index: 10;
+  height: 6rem;
+
 
   @include respond-to('phone') {
-    height: 6rem;
     justify-content: left;
     background: transparent; 
   }
 }
 
 .content {
-  flex: 1; // child will set to an equal size inside the container
-  -webkit-flex: 1 1 auto;
+  flex: 1;
   overflow-y: auto;
-  height: 0px;
+
+  @include respond-to('tablet') {
+    flex: 1 1 auto;
+  }
 
   @include respond-to('phone') {
-    margin-top: 6rem;
   }
 }
  
@@ -59,16 +61,8 @@
 main {
   display: flex;
   flex-direction: column;
-
-  > *:not(router-outlet) {
- 
-    flex: 1; // child will set to an equal size inside the container
-    display: block;
- 
-  }
 }
  
-
 .sidenav-container {
   min-height: 100vh;
   background-color: transparent;
@@ -78,17 +72,6 @@ footer {
   text-align: center;
 }
 
-// mat-sidenav {
-//   background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-// }
-
-// /* router pages will fill available space and scroll internally */
-// .router-outlet {
-//   flex: 1 1 auto;
-//   min-height: 0; /* again ensures inner scrolling works */
-//   overflow: auto;
-//   padding: 2rem;
-// }
 .mat-icon {
   color: $text-color;
 }

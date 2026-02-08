@@ -11,10 +11,7 @@
     margin: 1rem;
     border-radius: 1rem;
     overflow: hidden;
-
-    @include respond-to('phone') {
-      margin-top: 6rem;
-    }
+    margin-top: 6rem;
 }
 
 .selectedNavigation {
