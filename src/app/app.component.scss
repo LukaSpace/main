@@ -1,7 +1,6 @@
 @import '../scss/main.scss';
 
 .container {
-    height: 100%;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -13,58 +12,65 @@
 
 .navigations {
   display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Prevents whole-page scrolling */
+  flex-direction: row;
+
+  @include respond-to('phone') {
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    row-gap: 2rem;
+    padding: 2rem;
+  }
 }
 
-.page-wrap {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+.selectedNavigation {
+  padding-bottom: 0.2rem;
+  background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat;
+  background-size: 100% 0.2rem;
 }
 
+.sub-links-container {
+  width: 5rem;
+}
 
 .toolbar {
   background: transparent;
   justify-content: center;
   padding: 0 3vw;
-  flex-shrink: 0; 
-  z-index: 10;
-  height: 6rem;
-
 
   @include respond-to('phone') {
+    position: fixed;
+    z-index: 2;
+    height: 6rem;
     justify-content: left;
+    background: $background;
   }
 }
 
-.content {
+.sidenav-container {
   flex: 1;
-  overflow-y: auto;
+  background-color: transparent !important;
 
   @include respond-to('tablet') {
-    flex: 1 1 auto;
+    flex: 1 0 auto;
   }
+
   @include respond-to('phone') {
-    flex: 1 1 auto;
+    margin-top: 6rem;
   }
-}
- 
- 
-main {
-  display: flex;
-  flex-direction: column;
-}
- 
-.sidenav-container {
-  height: 100%;
-  background-color: transparent;
+} 
+
+mat-sidenav {
+  background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
 }
 
-footer {
-  text-align: center;
+/* router pages will fill available space and scroll internally */
+.router-outlet {
+  flex: 1 1 auto;
+  min-height: 0; /* again ensures inner scrolling works */
+  overflow: auto;
+  padding: 2rem;
 }
-
 .mat-icon {
   color: $text-color;
 }
@@ -88,27 +94,31 @@ footer {
 .footer-toolbar {
   width: 100%;
   justify-content: center;
+  box-shadow: none;
   background: transparent;
-  padding: 2rem 0; 
 }
 
-.navigations {
-  display: flex;
-  flex-direction: row;
+.links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    a {
+      height: 3rem;
+    }
+}
+
+.invert-color {
+  filter: invert(1);
+}
+
+.footer-text {
+  color: $text-color;
 
   @include respond-to('phone') {
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    row-gap: 2rem;
-    padding: 2rem;
+    font-size: 1.5rem;
   }
 }
-
-.selectedNavigation { padding-bottom: 0.2rem; background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat; background-size: 100% 0.2rem; }
-.links { display: flex; align-items: center; gap: 2rem; a { height: 3rem; } @include respond-to('phone') { gap: 1rem; } }
-.invert-color { filter: invert(1); }
-.footer-text { color: $text-color; @include respond-to('phone') { font-size: 1.5rem; } }
 
 .star-wrapper {
   position: absolute;

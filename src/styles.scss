@@ -43,15 +43,6 @@ body {
   display: block;
 }
 
-// app-root {
-//   display: block;
-//   min-height: 100vh;
-//   min-height: -moz-available;
-//   min-height: -webkit-fill-available;
-//   width: 100vw;
-//   overflow: hidden; 
-// }
-
 ::-webkit-scrollbar {
   width: var(--sb-size);
 }

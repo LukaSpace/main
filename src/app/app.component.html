@@ -1,29 +1,24 @@
-<!-- <div *ngFor="let star of stars" 
-  class="star-wrapper"
-  [ngStyle]="{'top': star.top, 'left': star.left}"
-  (mouseenter)="onStarHover(star)"
-  (mouseleave)="onStarLeave(star)">
-  <div class="star"
-      [class.exploding]="star.isExploding"
-      [ngStyle]="{
-        'width': star.size, 
-        'height': star.size, 
-        'animation-delay': star.delay, 
-        'animation-duration': star.duration
-      }">
-  </div>
-</div> -->
-
-<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
-  <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
-    <mat-nav-list>
-      <ng-container *ngTemplateOutlet="navigations"></ng-container>
-      <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content class="page-wrap">
+  <div class="container">
+    <div *ngFor="let star of stars" 
+      class="star-wrapper"
+      [ngStyle]="{'top': star.top, 'left': star.left}"
+      (mouseenter)="onStarHover(star)"
+      (mouseleave)="onStarLeave(star)">
+      <div class="star"
+          [class.exploding]="star.isExploding"
+          [ngStyle]="{
+            'width': star.size, 
+            'height': star.size, 
+            'animation-delay': star.delay, 
+            'animation-duration': star.duration
+          }">
+      </div>
+    </div>
     <mat-toolbar class="toolbar">
+      <!-- <a href="#">
+          <img src="../assets/icons/logo1.png"class="icon1">
+      </a>
+      <span class="spacer"></span> -->
       <div *ngIf="mobileQuery.matches">
         <button mat-icon-button @openClose (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
       </div>
@@ -44,16 +39,23 @@
       </div>
     </mat-toolbar>
 
-    <main class="content">
-      <router-outlet class="router-outlet"></router-outlet>
-    </main>
+    <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+      <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
+        <mat-nav-list>
+          <ng-container *ngTemplateOutlet="navigations"></ng-container>
+          <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
+        </mat-nav-list>
+      </mat-sidenav>
 
-    <footer>
+      <mat-sidenav-content>
+        <router-outlet class="router-outlet"></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <mat-toolbar class="footer-toolbar">
       <span class="footer-text">© 2026 Luka Space. All rights reserved.</span>
-    </footer>
-    
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    </mat-toolbar>
+</div>
 
 <ng-template #navigations>
   <div class="navigations">
