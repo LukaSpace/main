@@ -8,8 +8,6 @@
     padding: 1rem;
     align-items: center;
     justify-items: center;
-    height: 100%;
-    width: 100%;
 
     @include respond-to('phone') {
         grid-template-columns: 1fr;

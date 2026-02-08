@@ -1,13 +1,15 @@
 @import './scss/main.scss';
 
-/* 1. RESET & SAFETY LAYER */
 html {
   font-size: 62.5%;
   --sb-track-color: $background;
   --sb-thumb-color: $accent;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
-  height: 100dvh; 
+  min-height: 100vh;
+  min-height: -moz-available;
+  min-height: -webkit-fill-available;
+  min-height: fill-available; 
   width: 100vw;
 }
 
@@ -39,14 +41,20 @@ body {
   padding: 0;
   /* This was missing! Without this, the body is white and covers the gradient */
   background-color: transparent; 
-  min-height: 100dvh;
+  min-height: 100vh;
+  min-height: -moz-available;
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
 }
 
 /* 4. ANGULAR ROOT */
 app-root {
   display: block;
   /* Ensure root takes full height but doesn't overflow */
-  height: 100dvh; 
+  min-height: 100vh;
+  min-height: -moz-available;
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
   width: 100vw;
   overflow: hidden; 
 }
