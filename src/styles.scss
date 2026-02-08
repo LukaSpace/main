@@ -10,8 +10,6 @@
 
 html, body {
   height: 100%;
-  height: -webkit-fill-available;
-  height: fill-available;
 }
 
 html {
@@ -43,13 +41,10 @@ body {
   margin: 0;
   color: transparent;
   display: block;
-  overflow: hidden;
 }
 
 app-root {
   height: 100%;
-  height: -webkit-fill-available;
-  height: fill-available;
 }
 
 ::-webkit-scrollbar {
