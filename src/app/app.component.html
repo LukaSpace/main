@@ -1,6 +1,6 @@
   <div class="container">
 
-    <!-- <div *ngFor="let star of stars" 
+    <div *ngFor="let star of stars" 
       class="star-wrapper"
       [ngStyle]="{'top': star.top, 'left': star.left}"
       (mouseenter)="onStarHover(star)"
@@ -14,7 +14,7 @@
             'animation-duration': star.duration
           }">
       </div>
-    </div> -->
+    </div>
 
     <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
       <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
@@ -49,7 +49,7 @@
         <router-outlet class="router-outlet"></router-outlet>
 
         <mat-toolbar class="footer-toolbar">
-          <span class="footer-text">© 2026 Luka Space. All rights reserved.</span>
+          <span class="footer-text">© {{currentYear}} Luka Space. All rights reserved.</span>
         </mat-toolbar>
       </mat-sidenav-content>
 

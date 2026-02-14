@@ -10,6 +10,13 @@
 
 html, body {
   height: 100%;
+  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  @include respond-to('phone') {
+    background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+  }
 }
 
 html {
@@ -20,20 +27,20 @@ html {
   --sb-border-radius: 1rem;
 }
 
-html::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
-  background-size: cover;
-  background-repeat: no-repeat;
-  pointer-events: none;
+// html::before {
+//   content: '';
+//   position: fixed;
+//   inset: 0;
+//   z-index: -1;
+//   background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   pointer-events: none;
 
-  @include respond-to('phone') {
-    background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-  }
-}
+//   @include respond-to('phone') {
+//     background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+//   }
+// }
 
 body { 
   font-family: Raleway, Arial;
@@ -41,10 +48,12 @@ body {
   margin: 0;
   color: transparent;
   display: block;
+  background: transparent;
 }
 
 app-root {
   height: 100%;
+  background: transparent;
 }
 
 ::-webkit-scrollbar {
@@ -65,23 +74,23 @@ app-root {
   }
 }
 
-// head::before, head::after,
-// body::before, body::after {
-//   position: fixed;
-//   top: 50%;
-//   left: 50%;
-//   width: 5em;
-//   height: 5em;
-//   content: '.';
-//   color: transparent;
-//   mix-blend-mode: screen;
-//   animation: 35s -17s moveRotate infinite ease-in-out alternate;
-//   z-index: -1;
+head::before, head::after,
+body::before, body::after {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 5em;
+  height: 5em;
+  content: '.';
+  color: transparent;
+  mix-blend-mode: screen;
+  animation: 35s -17s moveRotate infinite ease-in-out alternate;
+  z-index: -1;
 
-//   @include respond-to('tablet') { width: 3em; height: 3em; }
-// }
+  @include respond-to('tablet') { width: 3em; height: 3em; }
+}
 
-// body::before { @include dots(70); animation-duration: 35s; animation-delay: -17s; }
-// body::after { @include dots(70); animation-duration: 33s; animation-delay: -22s; }
-// head::before { @include dots(70); animation-duration: 31s; animation-delay: -13s; }
-// head::after { @include dots(70); animation-duration: 29s; animation-delay: -12s; }
+body::before { @include dots(70); animation-duration: 35s; animation-delay: -17s; }
+body::after { @include dots(70); animation-duration: 33s; animation-delay: -22s; }
+head::before { @include dots(70); animation-duration: 31s; animation-delay: -13s; }
+head::after { @include dots(70); animation-duration: 29s; animation-delay: -12s; }

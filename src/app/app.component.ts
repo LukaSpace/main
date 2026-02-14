@@ -35,6 +35,7 @@ interface Star {
 })
 export class AppComponent implements OnInit, OnDestroy {
   stars: Star[] = [];
+  currentYear: number = new Date().getFullYear();
   private startsCount = 100; // Adjust for density
 
   @ViewChild('sidenav') sidenav: MatSidenav = null as any;
