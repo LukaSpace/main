@@ -126,6 +126,10 @@ mat-sidenav {
     a {
       height: 3rem;
     }
+
+    @include respond-to('phone') {
+      gap: 0.5rem;
+    }
 }
 
 .invert-color {
