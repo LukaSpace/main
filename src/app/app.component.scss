@@ -78,6 +78,40 @@
   @include respond-to('tablet') {
     flex: 1 0 auto;
   }
+
+  
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+
+  @include respond-to('phone') {
+    background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+  }
+  
+  @supports (-webkit-touch-callout: none) {
+    background-attachment: scroll;
+    background-size: cover;
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: fill-available;
+    
+    &::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      inset: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      pointer-events: none;
+
+      background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+    }
+  }
 }
 
 mat-sidenav {
