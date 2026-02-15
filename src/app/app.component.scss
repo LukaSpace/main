@@ -78,20 +78,15 @@
     flex: 1 0 auto;
   }
 
-  
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
-
-  @include respond-to('phone') {
-    background-color: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-  }
   
   @supports (-webkit-touch-callout: none) {
     background-attachment: scroll;
     background-size: cover;
-    height: 100vh;
+    height: 100%;
     height: -webkit-fill-available;
     height: fill-available;
     
