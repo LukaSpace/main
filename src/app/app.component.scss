@@ -63,7 +63,7 @@
     height: 5rem;
     padding: 1rem;
     border-radius: 4rem;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
@@ -73,38 +73,14 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  background: transparent;
 
   @include respond-to('tablet') {
     flex: 1 0 auto;
   }
 
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
-  
-  @supports (-webkit-touch-callout: none) {
-    background-attachment: scroll;
-    background-size: cover;
-    height: 100%;
-    height: -webkit-fill-available;
-    height: fill-available;
-    
-    &::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-      inset: 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-      pointer-events: none;
-
-      background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
-    }
+  @include respond-to('phone') {
+    flex: 1 0 auto;
   }
 }
 

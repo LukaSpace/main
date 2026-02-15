@@ -24,6 +24,23 @@ html {
   --sb-border-radius: 1rem;
 }
 
+html::before {
+  content: '';
+  position: fixed;
+  min-height: 100vh;
+  width: 100vw;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+
+  @include respond-to('phone') {
+    background-image: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+  }
+}
+
 body { 
   font-family: Raleway, Arial;
   font-size: 2rem;
