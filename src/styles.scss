@@ -13,10 +13,8 @@ html, body {
   min-height: 100dvh;
   width: 100%;
   
-  // Fix for iOS viewport height issues
   min-height: -webkit-fill-available;
-  
-  // Prevent overflow and unwanted scrolling
+  min-height: fill-available;
   overflow-x: hidden;
 }
 
@@ -26,8 +24,41 @@ html {
   --sb-thumb-color: $accent;
   --sb-size: 1rem;
   --sb-border-radius: 1rem;
-}
 
+  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+  background-attachment: fixed; // This fixes the background on scroll
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  @supports (-webkit-touch-callout: none) {
+    background-attachment: scroll;
+    background-size: cover;
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: fill-available;
+    
+    &::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      inset: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      pointer-events: none;
+
+      background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+
+      @include respond-to('phone') {
+        background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+      }
+    }
+  }
+}
 // html::before {
 //   content: '';
 //   position: fixed;
@@ -50,36 +81,7 @@ body {
   font-size: 2rem;
   margin: 0;
   display: block;
-
-  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
-  background-attachment: fixed; // This fixes the background on scroll
-  
-  // Ensure background covers everything
-  background-size: cover;
-  background-repeat: no-repeat;
-  
-  // Alternative approach for better iOS support
-  @supports (-webkit-touch-callout: none) {
-    // iOS specific fix
-    background-attachment: scroll;
-    background-size: cover;
-    height: 100vh;
-    height: -webkit-fill-available;
-    
-    &::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-      background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-  }
+  background: transparent;
 }
 
 app-root {
