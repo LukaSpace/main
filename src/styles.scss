@@ -4,6 +4,7 @@
 *::after,
 *::before {
   padding: 0;
+  padding: env(safe-area-inset);
   margin: 0;
   box-sizing: inherit;
 }
@@ -11,6 +12,7 @@
 html, body {
   height: 100%;
   min-height: 100vh;
+  padding: env(safe-area-inset);
 }
 
 html {
@@ -24,21 +26,18 @@ html {
 html::before {
   content: '';
   position: fixed;
+  min-height: 100vh;
+  width: 100vw;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   pointer-events: none;
+  background-image: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
 
   @include respond-to('phone') {
-    background: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+    background-image: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
   }
-}
-
-body {
-  background: #000000;
 }
 
 body { 

@@ -1,23 +1,7 @@
   <div class="container">
 
-    <div *ngFor="let star of stars" 
-      class="star-wrapper"
-      [ngStyle]="{'top': star.top, 'left': star.left}"
-      (mouseenter)="onStarHover(star)"
-      (mouseleave)="onStarLeave(star)">
-      <div class="star"
-          [class.exploding]="star.isExploding"
-          [ngStyle]="{
-            'width': star.size, 
-            'height': star.size, 
-            'animation-delay': star.delay, 
-            'animation-duration': star.duration
-          }">
-      </div>
-    </div>
-
     <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
-      <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="80">
+      <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches">
         <mat-nav-list>
           <ng-container *ngTemplateOutlet="navigations"></ng-container>
           <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
@@ -25,6 +9,22 @@
       </mat-sidenav>
 
       <mat-sidenav-content class="main-content">
+        <div *ngFor="let star of stars" 
+          class="star-wrapper"
+          [ngStyle]="{'top': star.top, 'left': star.left}"
+          (mouseenter)="onStarHover(star)"
+          (mouseleave)="onStarLeave(star)">
+          <div class="star"
+              [class.exploding]="star.isExploding"
+              [ngStyle]="{
+                'width': star.size, 
+                'height': star.size, 
+                'animation-delay': star.delay, 
+                'animation-duration': star.duration
+              }">
+          </div>
+        </div>
+
         <div class="toolbar-wrapper">
           <mat-toolbar class="toolbar">
             <div *ngIf="mobileQuery.matches">
