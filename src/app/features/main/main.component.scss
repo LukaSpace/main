@@ -13,7 +13,7 @@
     @include respond-to('phone') {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
-        margin-top: 8rem;
+        margin-top: 7rem;
     }
 }
 
