@@ -4,6 +4,10 @@
     height: 100%;
     display: block;
     margin-top: 6rem;
+
+    @include respond-to('phone') {
+        margin-top: 8rem;
+    }
 }
 
 .header {

@@ -17,7 +17,7 @@
     </div>
 
     <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
-      <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
+      <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="80">
         <mat-nav-list>
           <ng-container *ngTemplateOutlet="navigations"></ng-container>
           <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
@@ -25,26 +25,29 @@
       </mat-sidenav>
 
       <mat-sidenav-content class="main-content">
-        <mat-toolbar class="toolbar">
-          <div *ngIf="mobileQuery.matches">
-            <button mat-icon-button @openClose (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-          </div>
-          <div *ngIf="!mobileQuery.matches">
-            <ng-container *ngTemplateOutlet="navigations"></ng-container>
-          </div>
-          <span class="spacer"></span>
-          <div class="links">
-            <a mat-icon-button href="https://github.com/LukaSpace" target="_blank" rel="noopener noreferrer">
-                <img src="assets/icons/github.svg" alt="GitHub" class="invert-color">
-            </a>
-            <a mat-icon-button href="https://www.linkedin.com/in/%C5%82ukasz-cwajna-7a5567180/" target="_blank" rel="noopener noreferrer">
-                <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="invert-color">
-            </a>
-            <button mat-icon-button ngxClipboard [cbContent]="'lukaspace.contact@gmail.com'" (click)="copyEmail()">
-                <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
-            </button>
-          </div>
-        </mat-toolbar>
+        <div class="toolbar-wrapper">
+          <mat-toolbar class="toolbar">
+            <div *ngIf="mobileQuery.matches">
+              <button mat-icon-button @openClose (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+            </div>
+            <div *ngIf="!mobileQuery.matches">
+              <ng-container *ngTemplateOutlet="navigations"></ng-container>
+            </div>
+            <span class="spacer"></span>
+            <div class="links">
+              <a mat-icon-button href="https://github.com/LukaSpace" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/icons/github.svg" alt="GitHub" class="invert-color">
+              </a>
+              <a mat-icon-button href="https://www.linkedin.com/in/%C5%82ukasz-cwajna-7a5567180/" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="invert-color">
+              </a>
+              <button mat-icon-button ngxClipboard [cbContent]="'lukaspace.contact@gmail.com'" (click)="copyEmail()">
+                  <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
+              </button>
+            </div>
+          </mat-toolbar>
+        </div>
+        
 
         <router-outlet class="router-outlet"></router-outlet>
 
