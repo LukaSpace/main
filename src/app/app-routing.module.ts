@@ -4,32 +4,36 @@ import { ContactComponent } from './features/contact/contact.component';
 import { TechnologiesComponent } from './features/technologies/technologies.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        loadChildren: () => import('./features/main/main.module').then(m => m.MainModule),
-    },
-    {
-        path: 'blog',
-        loadChildren: () => import('./features/blog/blog.module').then(m => m.BlogModule),
-    },
-    {
-        path: 'portfolio',
-        loadChildren: () => import('./features/portfolio/portfolio.module').then(m => m.PortfolioModule),
-    },
-    {
-        path: 'contact',
-        component: ContactComponent 
-    },
-    {
-        path: 'technologies',
-        component: TechnologiesComponent
-    },
-    { path: '**', redirectTo: '' }
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/main/main.module').then(m => m.MainModule),
+  },
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('./features/blog/blog.module').then(m => m.BlogModule),
+  },
+  {
+    path: 'portfolio',
+    loadChildren: () =>
+      import('./features/portfolio/portfolio.module').then(
+        m => m.PortfolioModule
+      ),
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+  },
+  {
+    path: 'technologies',
+    component: TechnologiesComponent,
+  },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
+export class AppRoutingModule {}

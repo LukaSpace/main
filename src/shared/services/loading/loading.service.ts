@@ -5,7 +5,7 @@ import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { LoadingComponent } from './loading.component';
 
 export class LoadingOverlayRef {
-  constructor(private overlayRef: OverlayRef) { }
+  constructor(private overlayRef: OverlayRef) {}
 
   close(): void {
     this.overlayRef.dispose();
@@ -13,11 +13,13 @@ export class LoadingOverlayRef {
 }
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root',
+})
 export class LoadingService {
-  constructor(private injector: Injector, private overlay: Overlay) {
-  }
+  constructor(
+    private injector: Injector,
+    private overlay: Overlay
+  ) {}
 
   open(): LoadingOverlayRef {
     const overlayRef = this.createOverlay();
@@ -36,16 +38,24 @@ export class LoadingService {
     const overlayConfig = new OverlayConfig({
       hasBackdrop: true,
       scrollStrategy: this.overlay.scrollStrategies.block(),
-      positionStrategy
+      positionStrategy,
     });
 
     return this.overlay.create(overlayConfig);
   }
 
-  private attachDialogContainer(overlayRef: OverlayRef, dialogRef: LoadingOverlayRef): LoadingComponent {
+  private attachDialogContainer(
+    overlayRef: OverlayRef,
+    dialogRef: LoadingOverlayRef
+  ): LoadingComponent {
     const injector = this.createInjector(dialogRef);
-    const containerPortal = new ComponentPortal(LoadingComponent, null, injector);
-    const containerRef: ComponentRef<LoadingComponent> = overlayRef.attach(containerPortal);
+    const containerPortal = new ComponentPortal(
+      LoadingComponent,
+      null,
+      injector
+    );
+    const containerRef: ComponentRef<LoadingComponent> =
+      overlayRef.attach(containerPortal);
 
     return containerRef.instance;
   }

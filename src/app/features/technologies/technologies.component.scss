@@ -1,46 +1,44 @@
 @import '../../../scss/main.scss';
 
 :host {
-    height: 100%;
-    display: block;
-    margin-top: 6rem;
+  height: 100%;
+  display: block;
+  margin-top: 6rem;
 
-    @include respond-to('phone') {
-        margin-top: 7rem;
-    }
+  @include respond-to('phone') {
+    margin-top: 7rem;
+  }
 }
 
 .header {
-    flex: 0 0 auto;
-    text-align: center;
-    padding-bottom: 3rem;
+  flex: 0 0 auto;
+  text-align: center;
+  padding-bottom: 3rem;
 
-    @include respond-to('phone') {
-        padding-bottom: 1rem;
-    }
+  @include respond-to('phone') {
+    padding-bottom: 1rem;
+  }
 }
 
 .title {
-    font-size: 6rem;
-    font-weight: 600;
-    letter-spacing: 0.5rem;
-    background-image: linear-gradient(
-        to left,
-        $primary,
-        $accent,
-        $primary);
-        background-size: 200% auto;
-    background-clip: text;
-    color: transparent;
+  font-size: 6rem;
+  font-weight: 600;
+  letter-spacing: 0.5rem;
+  background-image: linear-gradient(to left, $primary, $accent, $primary);
+  background-size: 200% auto;
+  background-clip: text;
+  color: transparent;
 
-    animation: moveInLeft 1s ease-out 0.25s forwards, gradient-animation 7s linear infinite;
-    opacity: 0;
-    text-transform: uppercase;
-    text-align: center;
+  animation:
+    moveInLeft 1s ease-out 0.25s forwards,
+    gradient-animation 7s linear infinite;
+  opacity: 0;
+  text-transform: uppercase;
+  text-align: center;
 
-    @include respond-to('phone') {
-        font-size: 4rem;
-    }
+  @include respond-to('phone') {
+    font-size: 4rem;
+  }
 }
 
 .tech-cards {
@@ -55,13 +53,13 @@
   justify-content: space-evenly;
 
   @include respond-to('tablet') {
-        padding: 3rem;
-        gap: 2rem;
-    }
+    padding: 3rem;
+    gap: 2rem;
+  }
 
-    @include respond-to('phone') {
-        padding: 2rem;
-    }
+  @include respond-to('phone') {
+    padding: 2rem;
+  }
 }
 
 .tech-card {
@@ -76,12 +74,12 @@
   align-items: center;
   margin: 1rem;
 
-    @include respond-to('phone') {
-        max-width: 80%;
-    }
+  @include respond-to('phone') {
+    max-width: 80%;
+  }
 }
 
 .tech-card-content {
-    margin-top: 1rem;
-    text-align: center;
+  margin-top: 1rem;
+  text-align: center;
 }

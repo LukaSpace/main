@@ -1,13 +1,13 @@
 @import '../scss/main.scss';
 
 .container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .navigations {
@@ -25,7 +25,8 @@
 
 .selectedNavigation {
   padding-bottom: 0.2rem;
-  background: linear-gradient(to left, $primary, $accent, $primary) left bottom no-repeat;
+  background: linear-gradient(to left, $primary, $accent, $primary) left bottom
+    no-repeat;
   background-size: 100% 0.2rem;
 }
 
@@ -119,17 +120,17 @@ mat-sidenav {
 }
 
 .links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 
-    a {
-      height: 3rem;
-    }
+  a {
+    height: 3rem;
+  }
 
-    @include respond-to('phone') {
-      gap: 0.5rem;
-    }
+  @include respond-to('phone') {
+    gap: 0.5rem;
+  }
 }
 
 .invert-color {
@@ -160,7 +161,9 @@ mat-sidenav {
   border-radius: 50%;
   opacity: 0.6;
   box-shadow: 0 0 5px white;
-  animation: fall linear infinite, shine ease-in-out infinite;
+  animation:
+    fall linear infinite,
+    shine ease-in-out infinite;
 }
 
 .star.exploding {
@@ -168,4 +171,3 @@ mat-sidenav {
   background: #fff;
   z-index: 10;
 }
-

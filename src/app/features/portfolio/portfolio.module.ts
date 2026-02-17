@@ -14,9 +14,7 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatCardModule,
     PortfolioRoutingModule,
-    ],
-  declarations: [
-    PortfolioComponent,
-  ]
+  ],
+  declarations: [PortfolioComponent],
 })
 export class PortfolioModule {}

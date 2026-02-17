@@ -1,6 +1,21 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 interface IconPoint {
   x: number;
   y: number;
@@ -17,7 +32,7 @@ const maxRotationSpeed = 0.008;
     trigger('openClose', [
       transition(':enter', [
         style({ transform: 'translateY(-100%)' }),
-        animate(250, style({ transform: 'translateY(0)' }))
+        animate(250, style({ transform: 'translateY(0)' })),
       ]),
     ]),
   ],
@@ -27,13 +42,29 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sphereContainer') sphereContainer!: ElementRef;
 
   icons: string[] = [
-    'javascript', 'typescript', 'angular', 'nodedotjs', 'ngrx',
-    'tailwindcss', 'css', 'html5',
-    'docker', 'kubernetes', 'xml', 'git', 'dotnet',
-    'github', 'githubactions', 'githubcopilot'
+    'javascript',
+    'typescript',
+    'angular',
+    'nodedotjs',
+    'ngrx',
+    'tailwindcss',
+    'css',
+    'html5',
+    'docker',
+    'kubernetes',
+    'xml',
+    'git',
+    'dotnet',
+    'github',
+    'githubactions',
+    'githubcopilot',
   ];
-  phrases: string[] = ['Full Stack Developer', 'Problem Solver', 'Concept Creator'];
-  displayText: string = '';
+  phrases: string[] = [
+    'Full Stack Developer',
+    'Problem Solver',
+    'Concept Creator',
+  ];
+  displayText = '';
 
   rotationX = -10;
   rotationY = 0;
@@ -42,7 +73,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   maxSpeed = 0.8;
   rotateDirection = 1; // 1 or -1
   baseRotationSpeedY = 2; // degrees per frame (tweak to taste)
-  baseRotationSpeedX = 1;    // small tilt if desired, e.g. 0.02
+  baseRotationSpeedX = 1; // small tilt if desired, e.g. 0.02
   maxAngularSpeed = 15; // degrees/frame, hard cap for combined rotation
 
   private isHovering = false;
@@ -51,9 +82,9 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private radius = 150;
   private animationId?: number;
 
-  private phraseIndex: number = 0;
-  private charIndex: number = 0;
-  private isDeleting: boolean = false;
+  private phraseIndex = 0;
+  private charIndex = 0;
+  private isDeleting = false;
   private typingTimer: any;
   private readonly typeBase = 50;
   private readonly typeJitter = 60;
@@ -63,8 +94,11 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
-  constructor(private ngZone: NgZone, changeDetectorRef: ChangeDetectorRef,
-      media: MediaMatcher) {
+  constructor(
+    private ngZone: NgZone,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
@@ -72,7 +106,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.handleTyping();
-   }
+  }
 
   ngAfterViewInit(): void {
     this.rerunAnimation();
@@ -86,7 +120,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.typingTimer) clearTimeout(this.typingTimer);
   }
 
-   downloadResume() {
+  downloadResume() {
     const link = document.createElement('a');
     link.href = 'assets/CV.pdf';
     link.download = 'Lukas_Cwajna_Resume.pdf';
@@ -99,7 +133,9 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private rerunAnimation() {
-    this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3.2;
+    this.radius =
+      (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ??
+        0) / 3.2;
 
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
@@ -137,8 +173,14 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     const targetY = dx * sensitivity;
     const targetX = -dy * sensitivity * 0.5;
 
-    this.velocityY = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityY * 0.8 + targetY * 0.2));
-    this.velocityX = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityX * 0.8 + targetX * 0.2));
+    this.velocityY = Math.max(
+      -this.maxSpeed,
+      Math.min(this.maxSpeed, this.velocityY * 0.8 + targetY * 0.2)
+    );
+    this.velocityX = Math.max(
+      -this.maxSpeed,
+      Math.min(this.maxSpeed, this.velocityX * 0.8 + targetX * 0.2)
+    );
 
     this.lastX = event.clientX;
     this.lastY = event.clientY;
@@ -148,17 +190,25 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     const icons = this.iconElements ? this.iconElements.toArray() : [];
     const total = icons.length;
 
-    let combinedY = (this.baseRotationSpeedY * this.rotateDirection) + this.velocityY;
-    let combinedX = (this.baseRotationSpeedX * this.rotateDirection) + this.velocityX;
+    let combinedY =
+      this.baseRotationSpeedY * this.rotateDirection + this.velocityY;
+    let combinedX =
+      this.baseRotationSpeedX * this.rotateDirection + this.velocityX;
 
-    combinedY = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedY));
-    combinedX = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedX));
+    combinedY = Math.max(
+      -this.maxAngularSpeed,
+      Math.min(this.maxAngularSpeed, combinedY)
+    );
+    combinedX = Math.max(
+      -this.maxAngularSpeed,
+      Math.min(this.maxAngularSpeed, combinedX)
+    );
 
     this.rotationY += combinedY;
     this.rotationX += combinedX;
 
-    const rx = this.rotationX * Math.PI / 180;
-    const ry = this.rotationY * Math.PI / 180;
+    const rx = (this.rotationX * Math.PI) / 180;
+    const ry = (this.rotationY * Math.PI) / 180;
 
     for (let i = 0; i < total; i++) {
       const el = icons[i].nativeElement as HTMLElement;
@@ -173,11 +223,15 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
       const x2 = x0 * Math.cos(ry) + z1 * Math.sin(ry);
       const z2 = -x0 * Math.sin(ry) + z1 * Math.cos(ry);
 
-      const scale = ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
+      const scale =
+        ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
 
       el.style.transform = `translate(-50%, -50%) translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
       el.style.zIndex = String(Math.round(z2 + this.radius));
-      el.style.opacity = (0.3 + ((z2 + this.radius) / (2 * this.radius)) * 0.7).toString();
+      el.style.opacity = (
+        0.3 +
+        ((z2 + this.radius) / (2 * this.radius)) * 0.7
+      ).toString();
     }
 
     if (!this.isHovering) {
@@ -200,13 +254,13 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     const z = this.radius * Math.cos(phi);
 
     return {
-      transform: `translate3d(${x}px, ${y}px, ${z}px)`
+      transform: `translate3d(${x}px, ${y}px, ${z}px)`,
     };
   }
 
   handleTyping() {
     const currentPhrase = this.phrases[this.phraseIndex];
-    
+
     if (!this.isDeleting) {
       this.displayText = currentPhrase.substring(0, this.charIndex + 1);
       this.charIndex++;
@@ -229,7 +283,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     } else if (this.isDeleting && this.charIndex === 0) {
       this.isDeleting = false;
       this.phraseIndex = (this.phraseIndex + 1) % this.phrases.length;
-      nextStepDelay = 300; 
+      nextStepDelay = 300;
     }
 
     this.typingTimer = setTimeout(() => this.handleTyping(), nextStepDelay);

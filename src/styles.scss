@@ -8,7 +8,8 @@
   box-sizing: inherit;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   min-height: -webkit-fill-available;
   min-height: fill-available;
@@ -22,7 +23,7 @@ html {
   --sb-border-radius: 1rem;
 }
 
-body { 
+body {
   font-family: Raleway, Arial;
   font-size: 2rem;
   display: block;
@@ -39,15 +40,25 @@ html::before {
   background-size: cover;
   background-repeat: no-repeat;
   pointer-events: none;
-  background-image: radial-gradient(circle at 100% 100%, $primary 10%, #000000 70%);
+  background-image: radial-gradient(
+    circle at 100% 100%,
+    $primary 10%,
+    #000000 70%
+  );
 
   @include respond-to('phone') {
-    background-image: radial-gradient(circle at 0% 100%, $primary 10%, #000000 70%);
+    background-image: radial-gradient(
+      circle at 0% 100%,
+      $primary 10%,
+      #000000 70%
+    );
   }
 }
 
-head::before, head::after,
-body::before, body::after {
+head::before,
+head::after,
+body::before,
+body::after {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -59,23 +70,34 @@ body::before, body::after {
   animation: 35s -17s moveRotate infinite ease-in-out alternate;
   z-index: -1;
 
-  @include respond-to('tablet') { width: 3em; height: 3em; }
+  @include respond-to('tablet') {
+    width: 3em;
+    height: 3em;
+  }
 }
 
-body::before { 
-  @include dots(70); animation-duration: 35s; animation-delay: -17s; 
+body::before {
+  @include dots(70);
+  animation-duration: 35s;
+  animation-delay: -17s;
 }
 
-body::after { 
-  @include dots(70); animation-duration: 33s; animation-delay: -22s;
+body::after {
+  @include dots(70);
+  animation-duration: 33s;
+  animation-delay: -22s;
 }
 
-head::before { 
-  @include dots(70); animation-duration: 31s; animation-delay: -13s;
+head::before {
+  @include dots(70);
+  animation-duration: 31s;
+  animation-delay: -13s;
 }
 
-head::after { 
-  @include dots(70); animation-duration: 29s; animation-delay: -12s;
+head::after {
+  @include dots(70);
+  animation-duration: 29s;
+  animation-delay: -12s;
 }
 
 html::-webkit-scrollbar {
@@ -92,6 +114,6 @@ html::-webkit-scrollbar-thumb {
 
 @supports not selector(::-webkit-scrollbar) {
   html {
-      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }

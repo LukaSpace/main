@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
   key = 'lukaSpace';
 
-  constructor() { }
+  constructor() {}
 
   public saveData(key: string, value: any) {
-    let valueString = JSON.stringify(value);
+    const valueString = JSON.stringify(value);
     localStorage.setItem(key, this.encrypt(valueString));
   }
 
   public getData(key: string) {
-    let data = localStorage.getItem(key) || "";
-    let valueString = this.decrypt(data);
-    return data == "" ? null : JSON.parse(valueString);
+    const data = localStorage.getItem(key) || '';
+    const valueString = this.decrypt(data);
+    return data == '' ? null : JSON.parse(valueString);
   }
 
   public removeData(key: string) {
@@ -33,6 +33,8 @@ export class LocalStorageService {
   }
 
   private decrypt(txtToDecrypt: string) {
-    return CryptoJS.AES.decrypt(txtToDecrypt, this.key).toString(CryptoJS.enc.Utf8);
+    return CryptoJS.AES.decrypt(txtToDecrypt, this.key).toString(
+      CryptoJS.enc.Utf8
+    );
   }
 }

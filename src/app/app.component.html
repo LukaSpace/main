@@ -1,72 +1,99 @@
-  <div class="container">
+<div class="container">
+  <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+    <mat-sidenav
+      #sidenav
+      [mode]="'push'"
+      [fixedInViewport]="mobileQuery.matches">
+      <mat-nav-list>
+        <ng-container *ngTemplateOutlet="navigations"></ng-container>
+        <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
+      </mat-nav-list>
+    </mat-sidenav>
 
-    <mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
-      <mat-sidenav #sidenav [mode]="'push'" [fixedInViewport]="mobileQuery.matches">
-        <mat-nav-list>
-          <ng-container *ngTemplateOutlet="navigations"></ng-container>
-          <!-- <a mat-list-item (click)="changeSubLink(i)" *ngFor="let nav of mainNavigationLinks[currentMainLinkId].subLinks; index as i">{{nav.name}}</a> -->
-        </mat-nav-list>
-      </mat-sidenav>
+    <mat-sidenav-content class="main-content">
+      <div
+        *ngFor="let star of stars"
+        class="star-wrapper"
+        [ngStyle]="{ top: star.top, left: star.left }"
+        (mouseenter)="onStarHover(star)"
+        (mouseleave)="onStarLeave(star)">
+        <div
+          class="star"
+          [class.exploding]="star.isExploding"
+          [ngStyle]="{
+            width: star.size,
+            height: star.size,
+            'animation-delay': star.delay,
+            'animation-duration': star.duration,
+          }"></div>
+      </div>
 
-      <mat-sidenav-content class="main-content">
-        <div *ngFor="let star of stars" 
-          class="star-wrapper"
-          [ngStyle]="{'top': star.top, 'left': star.left}"
-          (mouseenter)="onStarHover(star)"
-          (mouseleave)="onStarLeave(star)">
-          <div class="star"
-              [class.exploding]="star.isExploding"
-              [ngStyle]="{
-                'width': star.size, 
-                'height': star.size, 
-                'animation-delay': star.delay, 
-                'animation-duration': star.duration
-              }">
+      <div class="toolbar-wrapper">
+        <mat-toolbar class="toolbar">
+          <div *ngIf="mobileQuery.matches">
+            <button mat-icon-button @openClose (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
           </div>
-        </div>
-
-        <div class="toolbar-wrapper">
-          <mat-toolbar class="toolbar">
-            <div *ngIf="mobileQuery.matches">
-              <button mat-icon-button @openClose (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-            </div>
-            <div *ngIf="!mobileQuery.matches">
-              <ng-container *ngTemplateOutlet="navigations"></ng-container>
-            </div>
-            <span class="spacer"></span>
-            <div class="links">
-              <a mat-icon-button href="https://github.com/LukaSpace" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/icons/github.svg" alt="GitHub" class="invert-color">
-              </a>
-              <a mat-icon-button href="https://www.linkedin.com/in/%C5%82ukasz-cwajna-7a5567180/" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="invert-color">
-              </a>
-              <button mat-icon-button ngxClipboard [cbContent]="'lukaspace.contact@gmail.com'" (click)="copyEmail()">
-                  <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
-              </button>
-            </div>
-          </mat-toolbar>
-        </div>
-        
-
-        <router-outlet class="router-outlet"></router-outlet>
-
-        <mat-toolbar class="footer-toolbar">
-          <span class="footer-text">© {{currentYear}} Luka Space. All rights reserved.</span>
+          <div *ngIf="!mobileQuery.matches">
+            <ng-container *ngTemplateOutlet="navigations"></ng-container>
+          </div>
+          <span class="spacer"></span>
+          <div class="links">
+            <a
+              mat-icon-button
+              href="https://github.com/LukaSpace"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="assets/icons/github.svg"
+                alt="GitHub"
+                class="invert-color" />
+            </a>
+            <a
+              mat-icon-button
+              href="https://www.linkedin.com/in/%C5%82ukasz-cwajna-7a5567180/"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                src="assets/icons/linkedin.svg"
+                alt="LinkedIn"
+                class="invert-color" />
+            </a>
+            <button
+              mat-icon-button
+              ngxClipboard
+              [cbContent]="'lukaspace.contact@gmail.com'"
+              (click)="copyEmail()">
+              <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
+            </button>
+          </div>
         </mat-toolbar>
-      </mat-sidenav-content>
+      </div>
 
-      
-    </mat-sidenav-container>
+      <router-outlet class="router-outlet"></router-outlet>
 
-    
+      <mat-toolbar class="footer-toolbar">
+        <span class="footer-text"
+          >© {{ currentYear }} Luka Space. All rights reserved.</span
+        >
+      </mat-toolbar>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
 
 <ng-template #navigations>
   <div class="navigations">
     <!-- <button mat-raised-button (click)="downloadResume()"><mat-icon class="material-symbols-outlined">download</mat-icon>Resume</button> -->
-    <ng-container *ngFor="let navigationLink of mainNavigationLinks; index as i">
-      <button mat-button (click)="changeMainLink(i)"><span class="navigation-name" [ngClass]="{'selectedNavigation': currentMainLinkId == i}">{{navigationLink.name}}</span></button>
+    <ng-container
+      *ngFor="let navigationLink of mainNavigationLinks; index as i">
+      <button mat-button (click)="changeMainLink(i)">
+        <span
+          class="navigation-name"
+          [ngClass]="{ selectedNavigation: currentMainLinkId == i }"
+          >{{ navigationLink.name }}</span
+        >
+      </button>
     </ng-container>
     <!-- <mat-slide-toggle #slideTheme [checked]="!lightTheme" (change)="toggleTheme()"><span *ngIf="mobileQuery.matches">Theme</span></mat-slide-toggle> -->
   </div>

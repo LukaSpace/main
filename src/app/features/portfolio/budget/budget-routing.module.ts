@@ -5,27 +5,26 @@ import { BudgetListComponent } from './budget-list/budget-list.component';
 import { BudgetOverviewComponent } from './budget-overview/budget-overview.component';
 
 const routes: Routes = [
-    {
-      path: '',
-      component: BudgetComponent,
-      children: [
-        {
-            path: 'list',
-            component: BudgetListComponent
-        },
-        {
-          path: 'overview',
-          component: BudgetOverviewComponent
-        }
-      ]
-    },
-    
-    { path: '**', redirectTo: '/overview' }
+  {
+    path: '',
+    component: BudgetComponent,
+    children: [
+      {
+        path: 'list',
+        component: BudgetListComponent,
+      },
+      {
+        path: 'overview',
+        component: BudgetOverviewComponent,
+      },
+    ],
+  },
+
+  { path: '**', redirectTo: '/overview' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class BudgetRoutingModule { }
-
+export class BudgetRoutingModule {}

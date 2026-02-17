@@ -1,34 +1,57 @@
 <div class="header">
-    <span class="title">Portfolio</span>
+  <span class="title">Portfolio</span>
 </div>
 <div class="portfolio">
-    <div>
-        <h2>My Projects</h2>
-        <div class="projects">
-            <ng-container *ngTemplateOutlet="projectCard; context: {projects: myProjects}"></ng-container>
-        </div>
+  <div>
+    <h2>My Projects</h2>
+    <div class="projects">
+      <ng-container
+        *ngTemplateOutlet="
+          projectCard;
+          context: { projects: myProjects }
+        "></ng-container>
     </div>
-    
-    <div>
-        <h2>Commercial Projects</h2>    
-        <div class="projects">
-            <ng-container *ngTemplateOutlet="projectCard; context: {projects: comercialProjects}"></ng-container>
-        </div>
+  </div>
+
+  <div>
+    <h2>Commercial Projects</h2>
+    <div class="projects">
+      <ng-container
+        *ngTemplateOutlet="
+          projectCard;
+          context: { projects: comercialProjects }
+        "></ng-container>
     </div>
+  </div>
 </div>
 
 <ng-template #projectCard let-projects="projects">
-    <mat-card class="project-card" *ngFor="let project of projects" >
-        <mat-card-title>{{ project.title }}</mat-card-title>
-        <mat-card-content>
-            <p>{{ project.description }}</p>
-            <div class="tech-tags">
-                <span *ngFor="let tech of project.technologies" class="tech-tag">{{ tech }}</span>
-            </div>
-        </mat-card-content>
-        <mat-card-actions *ngIf="project.demoLink || project.codeLink">
-            <button mat-raised-button *ngIf="project.demoLink" [routerLink]="project.demoLink" [target]="project.isInternal ? '_self' : '_blank'" (click)="onDemoRun(project.alert)"><mat-icon>play_circle_outline</mat-icon> Demo</button>
-            <button mat-raised-button *ngIf="project.codeLink" [routerLink]="project.codeLink" target="_blank"><mat-icon>code</mat-icon> Code</button>
-        </mat-card-actions>
-    </mat-card>
+  <mat-card class="project-card" *ngFor="let project of projects">
+    <mat-card-title>{{ project.title }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ project.description }}</p>
+      <div class="tech-tags">
+        <span *ngFor="let tech of project.technologies" class="tech-tag">{{
+          tech
+        }}</span>
+      </div>
+    </mat-card-content>
+    <mat-card-actions *ngIf="project.demoLink || project.codeLink">
+      <button
+        mat-raised-button
+        *ngIf="project.demoLink"
+        [routerLink]="project.demoLink"
+        [target]="project.isInternal ? '_self' : '_blank'"
+        (click)="onDemoRun(project.alert)">
+        <mat-icon>play_circle_outline</mat-icon> Demo
+      </button>
+      <button
+        mat-raised-button
+        *ngIf="project.codeLink"
+        [routerLink]="project.codeLink"
+        target="_blank">
+        <mat-icon>code</mat-icon> Code
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </ng-template>

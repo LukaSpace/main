@@ -1,112 +1,110 @@
 @import '../../../scss/main.scss';
 
 :host {
-    height: 100%;
-    display: block;
-    margin-top: 6rem;
-    
-    @include respond-to('phone') {
-        margin-top: 7rem;
-    }
+  height: 100%;
+  display: block;
+  margin-top: 6rem;
+
+  @include respond-to('phone') {
+    margin-top: 7rem;
+  }
 }
 
 .header {
-    flex: 0 0 auto;
-    text-align: center;
-    padding-bottom: 3rem;
+  flex: 0 0 auto;
+  text-align: center;
+  padding-bottom: 3rem;
 
-    @include respond-to('phone') {
-        padding-bottom: 1rem;
-    }
+  @include respond-to('phone') {
+    padding-bottom: 1rem;
+  }
 }
 
 .title {
-    font-size: 6rem;
-    font-weight: 600;
-    letter-spacing: 0.5rem;
-    background-image: linear-gradient(
-        to left,
-        $primary,
-        $accent,
-        $primary);
-        background-size: 200% auto;
-    background-clip: text;
-    color: transparent;
+  font-size: 6rem;
+  font-weight: 600;
+  letter-spacing: 0.5rem;
+  background-image: linear-gradient(to left, $primary, $accent, $primary);
+  background-size: 200% auto;
+  background-clip: text;
+  color: transparent;
 
-    animation: moveInLeft 1s ease-out 0.25s forwards, gradient-animation 7s linear infinite;
-    opacity: 0;
-    text-transform: uppercase;
+  animation:
+    moveInLeft 1s ease-out 0.25s forwards,
+    gradient-animation 7s linear infinite;
+  opacity: 0;
+  text-transform: uppercase;
 
-    @include respond-to('phone') {
-        font-size: 4rem;
-    }
+  @include respond-to('phone') {
+    font-size: 4rem;
+  }
 }
 
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .portfolio {
-    flex: 1 1 0; 
-    min-height: 0;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    padding: 0 1.5rem;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 0 1.5rem;
 }
 
 .projects {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 1.5rem;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 1.5rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-card {
-    height: fit-content;
-    width: 35rem;
-    background-color: rgba($accent, 0.15);
-    margin: 2rem;
-    border-radius: 2rem;
-    box-shadow: 0 4px 8px rgba($accent, 0.6);
-    color: $white;
-    word-wrap: break-word;
-    padding: 2rem;
+  height: fit-content;
+  width: 35rem;
+  background-color: rgba($accent, 0.15);
+  margin: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px rgba($accent, 0.6);
+  color: $white;
+  word-wrap: break-word;
+  padding: 2rem;
 
-    mat-card-title {
-        font-size: 3rem;
-        font-weight: 600;
-        margin-bottom: 2rem;
+  mat-card-title {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  mat-card-content {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-word;
+
+    .tech-tags {
+      padding-top: 4rem;
+      padding-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      .tech-tag {
+        background-color: rgba($primary, 0.9);
+        box-shadow: 0 2px 4px rgba($accent, 0.6);
+        padding: 0.3rem 0.6rem;
+        border-radius: 1rem;
+        font-size: 1.2rem;
+      }
     }
+  }
 
-    mat-card-content {
-        font-size: 1.5rem;
-        line-height: 1.5;
-        text-align: justify;
-        text-justify: inter-word;
-
-        .tech-tags {
-            padding-top: 4rem;
-            padding-bottom: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-
-            .tech-tag {
-                background-color: rgba($primary, 0.9);
-                box-shadow: 0 2px 4px rgba($accent, 0.6);
-                padding: 0.3rem 0.6rem;
-                border-radius: 1rem;
-                font-size: 1.2rem;
-            }
-        }
-    }
-
-    mat-card-actions {
-        gap: 2rem;
-        align-self: flex-end;
-    }
+  mat-card-actions {
+    gap: 2rem;
+    align-self: flex-end;
+  }
 }

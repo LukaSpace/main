@@ -1,6 +1,11 @@
 $breakpoints: (
-  'phone':  (max-width: 37.5em), // 600px
-  'tablet': (max-width: 68.75em), // 1100px
+  'phone': (
+    max-width: 37.5em,
+  ),
+  // 600px
+  'tablet': (
+      max-width: 68.75em,
+    ), // 1100px
 ) !default;
 
 @mixin respond-to($breakpoint) {
@@ -8,9 +13,7 @@ $breakpoints: (
     @media #{inspect(map-get($breakpoints, $breakpoint))} {
       @content;
     }
-  }
- 
-  @else {
+  } @else {
     @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
         + "Available breakpoints are: #{map-keys($breakpoints)}.";
   }
@@ -20,13 +23,11 @@ $breakpoints: (
   $text-shadow: ();
 
   @for $i from 0 through $count {
-    $x: (-.5 + random()) * $spread + em;
-    $y: (-.5 + random()) * $spread + em;
-    $text-shadow: $text-shadow,
-                 #{$x}
-                 #{$y}
-                 #{$blur}
-                 mix(white, $accent, 20%);
+    $x: (-0.5 + random()) * $spread + em;
+    $y: (-0.5 + random()) * $spread + em;
+    $text-shadow:
+      $text-shadow,
+      #{$x} #{$y} #{$blur} mix(white, $accent, 20%);
   }
 
   text-shadow: $text-shadow;

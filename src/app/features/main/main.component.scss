@@ -1,56 +1,54 @@
 @import '../../../scss/main.scss';
 
 :host {
-    height: 100%;
-    margin-top: 6rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    padding: 1rem;
-    align-items: center;
-    justify-items: center;
+  height: 100%;
+  margin-top: 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1rem;
+  align-items: center;
+  justify-items: center;
 
-    @include respond-to('phone') {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        margin-top: 7rem;
-    }
+  @include respond-to('phone') {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    margin-top: 7rem;
+  }
 }
 
 .introduction-text {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 1.5rem;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1.5rem;
+  align-items: center;
 }
 
 .hi {
   margin: 1rem;
-    font-size: 4rem;
-    @include respond-to('phone') {
-      font-size: 3rem;
-    }
+  font-size: 4rem;
+  @include respond-to('phone') {
+    font-size: 3rem;
+  }
 }
 
 .name {
-    margin: 1rem;
-    font-size: 6rem;
-    letter-spacing: 1rem;
-    background-image: linear-gradient(
-        to left,
-        $primary,
-        $accent,
-        $primary);
-        background-size: 200% auto;
-    background-clip: text;
-    color: transparent;
-    text-transform: uppercase;
+  margin: 1rem;
+  font-size: 6rem;
+  letter-spacing: 1rem;
+  background-image: linear-gradient(to left, $primary, $accent, $primary);
+  background-size: 200% auto;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
 
-    animation: moveInLeft 1s ease-out .25s forwards, gradient-animation 7s linear infinite;
-    opacity: 0;
+  animation:
+    moveInLeft 1s ease-out 0.25s forwards,
+    gradient-animation 7s linear infinite;
+  opacity: 0;
 
-    @include respond-to('phone') {
+  @include respond-to('phone') {
     font-size: 5rem;
   }
 }
@@ -70,7 +68,7 @@
   font-size: 4rem;
 
   @include respond-to('phone') {
-     font-size: 3rem;
+    font-size: 3rem;
   }
 
   .cursor {
@@ -93,32 +91,32 @@
 }
 
 .about-me {
-    margin-top: 2rem;
-    line-height: 1.5;
-    text-align: justify;
-    text-justify: inter-word;
+  margin-top: 2rem;
+  line-height: 1.5;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .tech-container {
-    background: rgba($primary, 0.1);
-    border: solid 0.1rem $accent;
-    border-radius: 2rem;
-    box-shadow: 0 4px 8px rgba($accent, 0.3);
-    padding: 2rem;
-    max-width: 70%;
+  background: rgba($primary, 0.1);
+  border: solid 0.1rem $accent;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px rgba($accent, 0.3);
+  padding: 2rem;
+  max-width: 70%;
 }
 
 .tech-cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 
-    @include respond-to('tablet') {
-        display: grid;
-        grid-template-columns: 1fr;
-        justify-items: center;
-    }
+  @include respond-to('tablet') {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 }
 
 .tech-card {
@@ -140,17 +138,15 @@
 }
 
 .tech-card-content {
-    margin-top: 1rem;
-    text-align: center;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .icons {
-    display: flex;
-    gap: 3rem;
-    margin-top: 3rem;
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
 }
-
-
 
 .sphere-container {
   width: 100%;
@@ -175,7 +171,7 @@
   height: min(60vmin, 480px);
   transform-style: preserve-3d;
   display: block;
-} 
+}
 
 .icon {
   position: absolute;
@@ -201,6 +197,6 @@
   }
 
   .img:hover {
-  filter: brightness(1.5) drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+    filter: brightness(1.5) drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
   }
 }

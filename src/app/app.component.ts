@@ -1,6 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
 import { filter } from 'rxjs';
@@ -26,11 +33,11 @@ interface Star {
     trigger('openClose', [
       transition(':enter', [
         style({ transform: 'translateX(-100%)' }),
-        animate(250, style({ transform: 'translateX(0)' }))
+        animate(250, style({ transform: 'translateX(0)' })),
       ]),
       transition(':leave', [
-        animate(250, style({ transform: 'translateX(-100%)' }))
-      ])
+        animate(250, style({ transform: 'translateX(-100%)' })),
+      ]),
     ]),
   ],
 })
@@ -42,14 +49,14 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav: MatSidenav = null as any;
 
   public subLinksExist: boolean;
-  lightTheme: boolean = true;
+  lightTheme = true;
   mobileQuery: MediaQueryList;
 
-  blogSubLinks: SubLink[]= [
-    { name: '123', link: ''},
-    { name: '123', link: ''},
-    { name: '123', link: ''},
-    { name: '123', link: ''},
+  blogSubLinks: SubLink[] = [
+    { name: '123', link: '' },
+    { name: '123', link: '' },
+    { name: '123', link: '' },
+    { name: '123', link: '' },
   ];
 
   mainNavigationLinks: Link[] = [
@@ -60,35 +67,45 @@ export class AppComponent implements OnInit, OnDestroy {
     { name: 'Contact', link: '/contact' },
   ];
 
-  currentMainLinkId: number = 0;
+  currentMainLinkId = 0;
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router: Router,
     private snackBar: MatSnackBar,
-    private storageService: LocalStorageService) {
+    private storageService: LocalStorageService
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-    this.mobileQuery.onchange = () => this.startsCount = this.mobileQuery.matches ? 100 : 200;
+    this.mobileQuery.onchange = () =>
+      (this.startsCount = this.mobileQuery.matches ? 100 : 200);
 
-    if(!storageService.getData('theme'))
-      this.setDefaultTheme();
+    if (!storageService.getData('theme')) this.setDefaultTheme();
 
-      this.lightTheme = this.storageService.getData('theme') == 'light';
-      this.lightTheme ? this.setTheme('light') : this.setTheme('dark');
+    this.lightTheme = this.storageService.getData('theme') == 'light';
+    this.lightTheme ? this.setTheme('light') : this.setTheme('dark');
 
     this.subLinksExist = false;
-    this.router.events.pipe(
-      filter((event: Event | RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
-      ).subscribe((event) => {
+    this.router.events
+      .pipe(
+        filter(
+          (event: Event | RouterEvent): event is NavigationEnd =>
+            event instanceof NavigationEnd
+        )
+      )
+      .subscribe(event => {
         this.sidenav.close();
-        let index = this.mainNavigationLinks.slice(1).findIndex(nl => event.url.includes(nl.link));
+        const index = this.mainNavigationLinks
+          .slice(1)
+          .findIndex(nl => event.url.includes(nl.link));
         this.currentMainLinkId = index + 1;
-        this.subLinksExist = this.mainNavigationLinks[this.currentMainLinkId].subLinks != null;
-    });
+        this.subLinksExist =
+          this.mainNavigationLinks[this.currentMainLinkId].subLinks != null;
+      });
   }
 
   ngOnInit() {
@@ -103,60 +120,60 @@ export class AppComponent implements OnInit, OnDestroy {
   generateStars() {
     this.stars = [];
     for (let i = 0; i < this.startsCount; i++) {
-      let star : Star = {
+      const star: Star = {
         top: Math.random() * 95 + '%',
         left: Math.random() * 95 + '%',
         delay: Math.random() * 7 + 's',
         duration: 4 + Math.random() * 6 + 's',
-        size: (Math.random() * 2 + 1) + 'px',
-        isExploding: false
+        size: Math.random() * 2 + 1 + 'px',
+        isExploding: false,
       };
-      let loopTime = (i + 1) * 15000;
+      const loopTime = (i + 1) * 15000;
       star.hoverTimer = setTimeout(() => {
-                      this.triggerBurst(star, loopTime);
-                    }, loopTime)
+        this.triggerBurst(star, loopTime);
+      }, loopTime);
       this.stars.push(star);
     }
   }
 
   onStarHover(star: Star) {
-  if (star.isExploding) return;
+    if (star.isExploding) return;
 
-  star.hoverTimer = setTimeout(() => {
-    this.triggerBurst(star);
-  }, 500);
-}
-
-onStarLeave(star: Star) {
-  if (star.hoverTimer) {
-    clearTimeout(star.hoverTimer);
-    star.hoverTimer = null;
-  }
-}
-
-private triggerBurst(star: Star, loopTime?: number) {
-  star.isExploding = true;
-  star.hoverTimer = null;
-
-  setTimeout(() => {
-    star.isExploding = false;
-  }, 1000);
-
-  if (loopTime) {
     star.hoverTimer = setTimeout(() => {
-                      this.triggerBurst(star, loopTime + 2000);
-                    }, loopTime + 2000)
+      this.triggerBurst(star);
+    }, 500);
   }
-}
+
+  onStarLeave(star: Star) {
+    if (star.hoverTimer) {
+      clearTimeout(star.hoverTimer);
+      star.hoverTimer = null;
+    }
+  }
+
+  private triggerBurst(star: Star, loopTime?: number) {
+    star.isExploding = true;
+    star.hoverTimer = null;
+
+    setTimeout(() => {
+      star.isExploding = false;
+    }, 1000);
+
+    if (loopTime) {
+      star.hoverTimer = setTimeout(() => {
+        this.triggerBurst(star, loopTime + 2000);
+      }, loopTime + 2000);
+    }
+  }
 
   changeMainLink(linkId: number) {
     this.router.navigate([this.mainNavigationLinks[linkId].link]);
   }
 
   changeSubLink(subLinkId: number) {
-    let currentLink = this.mainNavigationLinks[this.currentMainLinkId];
-    let subLinks = currentLink.subLinks;
-    let subLink = subLinks ? subLinks[subLinkId].link : '';
+    const currentLink = this.mainNavigationLinks[this.currentMainLinkId];
+    const subLinks = currentLink.subLinks;
+    const subLink = subLinks ? subLinks[subLinkId].link : '';
     this.router.navigate([currentLink.link + subLink]);
   }
 
@@ -187,7 +204,9 @@ private triggerBurst(star: Star, loopTime?: number) {
   }
 
   copyEmail() {
-    this.snackBar.open('Email copied to clipboard!', undefined, { duration: 2000 })
+    this.snackBar.open('Email copied to clipboard!', undefined, {
+      duration: 2000,
+    });
   }
 
   ngOnDestroy(): void {

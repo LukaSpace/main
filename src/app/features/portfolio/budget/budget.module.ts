@@ -56,7 +56,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatDialogModule,
     MatPaginatorModule,
     MatSortModule,
-    PlotlyModule
+    PlotlyModule,
   ],
   declarations: [
     BudgetComponent,
@@ -64,12 +64,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     BudgetListComponent,
     BudgetCreateComponent,
     GetCostByTypePipe,
-    GetIncomeByTypePipe
+    GetIncomeByTypePipe,
   ],
-  providers: [
-    MatDatepickerModule,
-    GetCostByTypePipe,
-    GetIncomeByTypePipe
-  ]
+  providers: [MatDatepickerModule, GetCostByTypePipe, GetIncomeByTypePipe],
 })
 export class BudgetModule {}

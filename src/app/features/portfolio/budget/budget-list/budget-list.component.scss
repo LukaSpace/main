@@ -1,19 +1,19 @@
 @import '../../../../../scss/main.scss';
 
 :host {
-    height: 100%;
+  height: 100%;
 }
 
 .actions {
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding: 2px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 2px;
 }
 
 .table-container {
-    height: calc(100% - 110px);
-    overflow: auto;
+  height: calc(100% - 110px);
+  overflow: auto;
 }
 
 tr.example-detail-row {
@@ -28,7 +28,7 @@ tr.example-element-row:not(.example-expanded-row):hover {
 }
 
 .paginator {
-    height: 60px;
+  height: 60px;
 }
 
 .example-element-detail {
