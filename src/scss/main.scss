@@ -12,22 +12,19 @@
 
 .mat-mdc-slide-toggle {
 
-    .mdc-switch {
-  
-      @include  mdc-switch-theme.theme((
-        // handle colors
-        unselected-handle-color: white,
-        unselected-focus-handle-color: white,
-        unselected-hover-handle-color: white,
-        unselected-pressed-handle-color: white,
-  
-        // icon colors
-        disabled-unselected-icon-color: $primary,
-        unselected-icon-color: $primary,
-      ));
-  
-    }
+  .mdc-switch {
+    @include  mdc-switch-theme.theme((
+      unselected-handle-color: white,
+      unselected-focus-handle-color: white,
+      unselected-hover-handle-color: white,
+      unselected-pressed-handle-color: white,
+
+      disabled-unselected-icon-color: $primary,
+      unselected-icon-color: $primary,
+    ));
+
   }
+}
 
 .material-symbols-outlined {
   vertical-align: baseline;
