@@ -6,6 +6,7 @@ import { NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
 import { filter } from 'rxjs';
 import { Link, SubLink } from './interfaces/app/model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LocalStorageService } from '../shared/services/local-storage/local-storage.service';
 
 interface Star {
   top: string;
@@ -66,16 +67,17 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router: Router,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private storageService: LocalStorageService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
     this.mobileQuery.onchange = () => this.startsCount = this.mobileQuery.matches ? 100 : 200;
 
-    if(!localStorage.getItem('theme'))
+    if(!storageService.getData('theme'))
       this.setDefaultTheme();
 
-      this.lightTheme = localStorage.getItem('theme') == 'light';
+      this.lightTheme = this.storageService.getData('theme') == 'light';
       this.lightTheme ? this.setTheme('light') : this.setTheme('dark');
 
     this.subLinksExist = false;
@@ -169,12 +171,12 @@ private triggerBurst(star: Star, loopTime?: number) {
 
   //TODO: use cache to store selected theme
   private setDefaultTheme() {
-    localStorage.setItem('theme', 'dark');
+    this.storageService.saveData('theme', 'dark');
   }
 
   private setTheme(themeName: string) {
     document.documentElement.setAttribute('theme', themeName);
-    localStorage.setItem('theme', themeName);
+    this.storageService.saveData('theme', themeName);
   }
 
   downloadResume() {

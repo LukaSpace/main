@@ -6,7 +6,6 @@ import {
   HttpInterceptor,
   HttpResponse
 } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
 import { LoadingService, LoadingOverlayRef } from './loading.service';
