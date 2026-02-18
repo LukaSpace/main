@@ -8,13 +8,7 @@ import { PortfolioRoutingModule } from './portfolio-routing.module';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    PortfolioRoutingModule,
-  ],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatCardModule, PortfolioRoutingModule],
   declarations: [PortfolioComponent],
 })
 export class PortfolioModule {}

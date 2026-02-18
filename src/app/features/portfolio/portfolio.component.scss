@@ -1,42 +1,12 @@
 @import '../../../scss/main.scss';
 
 :host {
-  height: 100%;
+  flex: 1 1 auto;
   display: block;
   margin-top: 6rem;
 
   @include respond-to('phone') {
     margin-top: 7rem;
-  }
-}
-
-.header {
-  flex: 0 0 auto;
-  text-align: center;
-  padding-bottom: 3rem;
-
-  @include respond-to('phone') {
-    padding-bottom: 1rem;
-  }
-}
-
-.title {
-  font-size: 6rem;
-  font-weight: 600;
-  letter-spacing: 0.5rem;
-  background-image: linear-gradient(to left, $primary, $accent, $primary);
-  background-size: 200% auto;
-  background-clip: text;
-  color: transparent;
-
-  animation:
-    moveInLeft 1s ease-out 0.25s forwards,
-    gradient-animation 7s linear infinite;
-  opacity: 0;
-  text-transform: uppercase;
-
-  @include respond-to('phone') {
-    font-size: 4rem;
   }
 }
 
@@ -81,30 +51,29 @@ h2 {
   }
 
   mat-card-content {
-    font-size: 1.5rem;
-    line-height: 1.5;
     text-align: justify;
     text-justify: inter-word;
 
     .tech-tags {
       padding-top: 4rem;
-      padding-bottom: 2rem;
+      padding-bottom: 3rem;
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-evenly;
       gap: 1rem;
 
       .tech-tag {
         background-color: rgba($primary, 0.9);
         box-shadow: 0 2px 4px rgba($accent, 0.6);
-        padding: 0.3rem 0.6rem;
+        padding: 0.4rem 0.8rem;
         border-radius: 1rem;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
       }
     }
   }
 
   mat-card-actions {
     gap: 2rem;
-    align-self: flex-end;
+    width: 100%;
   }
 }

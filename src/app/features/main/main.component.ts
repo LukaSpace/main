@@ -1,41 +1,12 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostListener,
-  NgZone,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  SimpleChanges,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
-interface IconPoint {
-  x: number;
-  y: number;
-  z: number;
-  tech: string;
-}
-const maxRotationSpeed = 0.008;
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 @Component({
   selector: 'main',
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
-  animations: [
-    trigger('openClose', [
-      transition(':enter', [
-        style({ transform: 'translateY(-100%)' }),
-        animate(250, style({ transform: 'translateY(0)' })),
-      ]),
-    ]),
-  ],
+  animations: [trigger('openClose', [transition(':enter', [style({ transform: 'translateY(-100%)' }), animate(250, style({ transform: 'translateY(0)' }))])])],
 })
 export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('iconElement') iconElements!: QueryList<ElementRef>;
@@ -59,11 +30,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     'githubactions',
     'githubcopilot',
   ];
-  phrases: string[] = [
-    'Full Stack Developer',
-    'Problem Solver',
-    'Concept Creator',
-  ];
+  phrases: string[] = ['Full Stack Developer', 'Problem Solver', 'Concept Creator'];
   displayText = '';
 
   rotationX = -10;
@@ -86,10 +53,10 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private charIndex = 0;
   private isDeleting = false;
   private typingTimer: any;
-  private readonly typeBase = 50;
-  private readonly typeJitter = 60;
-  private readonly eraseSpeed = 35;
-  private readonly waitTime = 1500;
+  private readonly typeBase = 60;
+  private readonly typeJitter = 80;
+  private readonly eraseSpeed = 45;
+  private readonly waitTime = 1800;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -127,15 +94,13 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     link.click();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
+  @HostListener('window:resize')
+  onResize() {
     this.rerunAnimation();
   }
 
   private rerunAnimation() {
-    this.radius =
-      (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ??
-        0) / 3.2;
+    this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3.2;
 
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
@@ -157,7 +122,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lastY = event.clientY;
   }
 
-  onMouseLeave(_event?: MouseEvent) {
+  onMouseLeave() {
     this.isHovering = false;
   }
 
@@ -173,14 +138,8 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     const targetY = dx * sensitivity;
     const targetX = -dy * sensitivity * 0.5;
 
-    this.velocityY = Math.max(
-      -this.maxSpeed,
-      Math.min(this.maxSpeed, this.velocityY * 0.8 + targetY * 0.2)
-    );
-    this.velocityX = Math.max(
-      -this.maxSpeed,
-      Math.min(this.maxSpeed, this.velocityX * 0.8 + targetX * 0.2)
-    );
+    this.velocityY = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityY * 0.8 + targetY * 0.2));
+    this.velocityX = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, this.velocityX * 0.8 + targetX * 0.2));
 
     this.lastX = event.clientX;
     this.lastY = event.clientY;
@@ -190,19 +149,11 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     const icons = this.iconElements ? this.iconElements.toArray() : [];
     const total = icons.length;
 
-    let combinedY =
-      this.baseRotationSpeedY * this.rotateDirection + this.velocityY;
-    let combinedX =
-      this.baseRotationSpeedX * this.rotateDirection + this.velocityX;
+    let combinedY = this.baseRotationSpeedY * this.rotateDirection + this.velocityY;
+    let combinedX = this.baseRotationSpeedX * this.rotateDirection + this.velocityX;
 
-    combinedY = Math.max(
-      -this.maxAngularSpeed,
-      Math.min(this.maxAngularSpeed, combinedY)
-    );
-    combinedX = Math.max(
-      -this.maxAngularSpeed,
-      Math.min(this.maxAngularSpeed, combinedX)
-    );
+    combinedY = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedY));
+    combinedX = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedX));
 
     this.rotationY += combinedY;
     this.rotationX += combinedX;
@@ -223,15 +174,11 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
       const x2 = x0 * Math.cos(ry) + z1 * Math.sin(ry);
       const z2 = -x0 * Math.sin(ry) + z1 * Math.cos(ry);
 
-      const scale =
-        ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
+      const scale = ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
 
       el.style.transform = `translate(-50%, -50%) translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
       el.style.zIndex = String(Math.round(z2 + this.radius));
-      el.style.opacity = (
-        0.3 +
-        ((z2 + this.radius) / (2 * this.radius)) * 0.7
-      ).toString();
+      el.style.opacity = (0.3 + ((z2 + this.radius) / (2 * this.radius)) * 0.7).toString();
     }
 
     if (!this.isHovering) {

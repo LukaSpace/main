@@ -28,8 +28,10 @@
 .hi {
   margin: 1rem;
   font-size: 4rem;
+
   @include respond-to('phone') {
     font-size: 3rem;
+    margin: 0.5rem;
   }
 }
 
@@ -50,25 +52,19 @@
 
   @include respond-to('phone') {
     font-size: 5rem;
-  }
-}
-
-.role-container {
-  position: relative;
-  height: 5rem;
-  width: 100%;
-  @include respond-to('phone') {
-    height: 4rem;
+    margin: 0.5rem;
   }
 }
 
 .typing-container {
+  margin: 1rem;
   display: flex;
   align-items: center;
   font-size: 4rem;
 
   @include respond-to('phone') {
     font-size: 3rem;
+    margin: 0.5rem;
   }
 
   .cursor {
@@ -87,65 +83,8 @@
 
   @include respond-to('phone') {
     gap: 2rem;
+    margin-top: 0.5rem;
   }
-}
-
-.about-me {
-  margin-top: 2rem;
-  line-height: 1.5;
-  text-align: justify;
-  text-justify: inter-word;
-}
-
-.tech-container {
-  background: rgba($primary, 0.1);
-  border: solid 0.1rem $accent;
-  border-radius: 2rem;
-  box-shadow: 0 4px 8px rgba($accent, 0.3);
-  padding: 2rem;
-  max-width: 70%;
-}
-
-.tech-cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-
-  @include respond-to('tablet') {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-}
-
-.tech-card {
-  background: rgba($accent, 0.6);
-  border-radius: 2rem;
-  box-shadow: 0 4px 8px rgba($accent, 0.9);
-  padding: 1rem;
-  max-width: 30%;
-  min-width: 150px;
-  word-wrap: break-word;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-
-  @include respond-to('tablet') {
-    width: 95%;
-    max-width: unset;
-  }
-}
-
-.tech-card-content {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.icons {
-  display: flex;
-  gap: 3rem;
-  margin-top: 3rem;
 }
 
 .sphere-container {

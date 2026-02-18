@@ -92,3 +92,34 @@
 .move-in-from-left {
   animation: moveInLeft 0.3s ease-out;
 }
+
+.header {
+  flex: 0 0 auto;
+  text-align: center;
+  padding-bottom: 3rem;
+
+  @include respond-to('phone') {
+    padding-bottom: 1rem;
+  }
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: 600;
+  letter-spacing: 0.5rem;
+  background-image: linear-gradient(to left, $primary, $accent, $primary);
+  background-size: 200% auto;
+  background-clip: text;
+  color: transparent;
+
+  animation:
+    moveInLeft 1s ease-out 0.25s forwards,
+    gradient-animation 7s linear infinite;
+  opacity: 0;
+  text-transform: uppercase;
+  text-align: center;
+
+  @include respond-to('phone') {
+    font-size: 4rem;
+  }
+}

@@ -17,10 +17,8 @@ body {
 
 html {
   font-size: 62.5%;
-  --sb-track-color: $background;
-  --sb-thumb-color: $accent;
-  --sb-size: 1rem;
-  --sb-border-radius: 1rem;
+  --sb-size: 1.5rem;
+  --sb-border-radius: 1.5rem;
 }
 
 body {
@@ -100,20 +98,22 @@ head::after {
   animation-delay: -12s;
 }
 
-html::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: var(--sb-size);
 }
-html::-webkit-scrollbar-track {
-  background: var(--sb-track-color);
+
+::-webkit-scrollbar-track {
+  background: transparent;
   border-radius: var(--sb-border-radius);
 }
-html::-webkit-scrollbar-thumb {
-  background: var(--sb-thumb-color);
+
+::-webkit-scrollbar-thumb {
+  background: rgba($accent, 0.2);
   border-radius: var(--sb-border-radius);
 }
 
 @supports not selector(::-webkit-scrollbar) {
   html {
-    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    scrollbar-color: rgba($accent, 0.2) transparent;
   }
 }

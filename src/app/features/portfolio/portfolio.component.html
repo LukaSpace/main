@@ -6,10 +6,8 @@
     <h2>My Projects</h2>
     <div class="projects">
       <ng-container
-        *ngTemplateOutlet="
-          projectCard;
-          context: { projects: myProjects }
-        "></ng-container>
+        *ngTemplateOutlet=" projectCard; context: { projects: myProjects }">
+      </ng-container>
     </div>
   </div>
 
@@ -17,10 +15,8 @@
     <h2>Commercial Projects</h2>
     <div class="projects">
       <ng-container
-        *ngTemplateOutlet="
-          projectCard;
-          context: { projects: comercialProjects }
-        "></ng-container>
+        *ngTemplateOutlet=" projectCard; context: { projects: comercialProjects }">
+      </ng-container>
     </div>
   </div>
 </div>
@@ -31,12 +27,12 @@
     <mat-card-content>
       <p>{{ project.description }}</p>
       <div class="tech-tags">
-        <span *ngFor="let tech of project.technologies" class="tech-tag">{{
-          tech
-        }}</span>
+        <span *ngFor="let tech of project.technologies" class="tech-tag">
+          {{ tech }}
+        </span>
       </div>
     </mat-card-content>
-    <mat-card-actions *ngIf="project.demoLink || project.codeLink">
+    <mat-card-actions *ngIf="project.demoLink || project.codeLink" align="end">
       <button
         mat-raised-button
         *ngIf="project.demoLink"
