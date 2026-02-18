@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.adjustTheme();
+    this.setDefaultTheme();
     this.generateStars();
   }
 
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.lightTheme = this.storageService.getData('theme') == 'light';
     if (this.lightTheme) {
-      this.setTheme('light');
+      this.setTheme('dark');
     } else {
       this.setTheme('dark');
     }
