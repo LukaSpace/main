@@ -1,0 +1,13 @@
+{
+  "root": true,
+  "plugins": ["unused-imports"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+      "rules": {
+        "unused-imports/no-unused-imports": "error"
+      }
+    }
+  ]
+}

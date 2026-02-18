@@ -1,0 +1,19 @@
+# Repository-level Prettier ignore - common patterns
+node_modules
+dist
+.vscode
+build
+.out
+logs
+*.log
+coverage
+docs/*
+.angular/*
+.vscode/*
+*.min.js
+**/*.html
+**/*.scss
+package-lock.json
+yarn.lock
+.cache
+/.serverless

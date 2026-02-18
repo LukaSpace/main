@@ -88,3 +88,7 @@
 :host ::ng-deep .mdc-text-field--filled {
   background-color: rgba($accent, 0.15) !important;
 }
+
+.move-in-from-left {
+  animation: moveInLeft 0.3s ease-out;
+}

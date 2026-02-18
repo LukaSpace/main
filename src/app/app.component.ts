@@ -1,75 +1,39 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
-import {
-  ChangeDetectorRef,
-  Component,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
 import { filter } from 'rxjs';
-import { Link, SubLink } from './interfaces/app/model';
+import { Link, Star } from './interfaces/app/model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalStorageService } from '../shared/services/local-storage/local-storage.service';
-
-interface Star {
-  top: string;
-  left: string;
-  delay: string;
-  duration: string;
-  size: string;
-  isExploding?: boolean;
-  hoverTimer?: any;
-}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  animations: [
-    trigger('openClose', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)' }),
-        animate(250, style({ transform: 'translateX(0)' })),
-      ]),
-      transition(':leave', [
-        animate(250, style({ transform: 'translateX(-100%)' })),
-      ]),
-    ]),
-  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  stars: Star[] = [];
-  currentYear: number = new Date().getFullYear();
-  private startsCount = 100; // Adjust for density
-
   @ViewChild('sidenav') sidenav: MatSidenav = null as any;
 
-  public subLinksExist: boolean;
+  @HostListener('window:resize')
+  onResize() {
+    this.generateStars();
+  }
+
+  private startsCount = 100;
+
+  stars: Star[] = [];
+  currentYear: number = new Date().getFullYear();
   lightTheme = true;
   mobileQuery: MediaQueryList;
-
-  blogSubLinks: SubLink[] = [
-    { name: '123', link: '' },
-    { name: '123', link: '' },
-    { name: '123', link: '' },
-    { name: '123', link: '' },
-  ];
+  currentMainLinkId = 0;
 
   mainNavigationLinks: Link[] = [
     { name: 'Home', link: '' },
-    //{ name: 'Blog', link: '/blog', subLinks: this.blogSubLinks },
     { name: 'Technologies', link: '/technologies' },
     { name: 'Portfolio', link: '/portfolio' },
     { name: 'Contact', link: '/contact' },
   ];
-
-  currentMainLinkId = 0;
-
-  private _mobileQueryListener: () => void;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -81,40 +45,29 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-    this.mobileQuery.onchange = () =>
-      (this.startsCount = this.mobileQuery.matches ? 100 : 200);
+    this.mobileQuery.onchange = () => (this.startsCount = this.mobileQuery.matches ? 100 : 200);
 
-    if (!storageService.getData('theme')) this.setDefaultTheme();
-
-    this.lightTheme = this.storageService.getData('theme') == 'light';
-    this.lightTheme ? this.setTheme('light') : this.setTheme('dark');
-
-    this.subLinksExist = false;
-    this.router.events
-      .pipe(
-        filter(
-          (event: Event | RouterEvent): event is NavigationEnd =>
-            event instanceof NavigationEnd
-        )
-      )
-      .subscribe(event => {
-        this.sidenav.close();
-        const index = this.mainNavigationLinks
-          .slice(1)
-          .findIndex(nl => event.url.includes(nl.link));
-        this.currentMainLinkId = index + 1;
-        this.subLinksExist =
-          this.mainNavigationLinks[this.currentMainLinkId].subLinks != null;
-      });
+    this.router.events.pipe(filter((event: Event | RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)).subscribe(event => {
+      this.sidenav.close();
+      const index = this.mainNavigationLinks.slice(1).findIndex(nl => event.url.includes(nl.link));
+      this.currentMainLinkId = index + 1;
+    });
   }
 
   ngOnInit() {
+    this.adjustTheme();
     this.generateStars();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.generateStars();
+  private adjustTheme() {
+    if (!this.storageService.getData('theme')) this.setDefaultTheme();
+
+    this.lightTheme = this.storageService.getData('theme') == 'light';
+    if (this.lightTheme) {
+      this.setTheme('light');
+    } else {
+      this.setTheme('dark');
+    }
   }
 
   generateStars() {
@@ -151,6 +104,41 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  changeMainLink(linkId: number) {
+    this.router.navigate([this.mainNavigationLinks[linkId].link]);
+  }
+
+  toggleTheme() {
+    this.lightTheme = !this.lightTheme;
+    if (this.lightTheme) {
+      this.setTheme('light');
+    } else {
+      this.setTheme('dark');
+    }
+  }
+
+  downloadResume() {
+    const link = document.createElement('a');
+    link.href = 'assets/CV.pdf';
+    link.download = 'Lukas_Cwajna_Resume.pdf';
+    link.click();
+  }
+
+  copyEmail() {
+    this.snackBar.open('Email copied to clipboard!', undefined, {
+      duration: 2000,
+    });
+  }
+
+  private setDefaultTheme() {
+    this.setTheme('dark');
+  }
+
+  private setTheme(themeName: string) {
+    document.documentElement.setAttribute('theme', themeName);
+    this.storageService.saveData('theme', themeName);
+  }
+
   private triggerBurst(star: Star, loopTime?: number) {
     star.isExploding = true;
     star.hoverTimer = null;
@@ -166,48 +154,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeMainLink(linkId: number) {
-    this.router.navigate([this.mainNavigationLinks[linkId].link]);
-  }
-
-  changeSubLink(subLinkId: number) {
-    const currentLink = this.mainNavigationLinks[this.currentMainLinkId];
-    const subLinks = currentLink.subLinks;
-    const subLink = subLinks ? subLinks[subLinkId].link : '';
-    this.router.navigate([currentLink.link + subLink]);
-  }
-
-  toggleTheme() {
-    this.lightTheme = !this.lightTheme;
-    if (this.lightTheme) {
-      this.setTheme('light');
-    } else {
-      this.setTheme('dark');
-    }
-  }
-
-  //TODO: use cache to store selected theme
-  private setDefaultTheme() {
-    this.storageService.saveData('theme', 'dark');
-  }
-
-  private setTheme(themeName: string) {
-    document.documentElement.setAttribute('theme', themeName);
-    this.storageService.saveData('theme', themeName);
-  }
-
-  downloadResume() {
-    const link = document.createElement('a');
-    link.href = 'assets/CV.pdf';
-    link.download = 'Lukas_Cwajna_Resume.pdf';
-    link.click();
-  }
-
-  copyEmail() {
-    this.snackBar.open('Email copied to clipboard!', undefined, {
-      duration: 2000,
-    });
-  }
+  private _mobileQueryListener: () => void;
 
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener('change', this._mobileQueryListener);

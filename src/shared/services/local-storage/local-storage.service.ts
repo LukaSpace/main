@@ -7,8 +7,6 @@ import * as CryptoJS from 'crypto-js';
 export class LocalStorageService {
   key = 'lukaSpace';
 
-  constructor() {}
-
   public saveData(key: string, value: any) {
     const valueString = JSON.stringify(value);
     localStorage.setItem(key, this.encrypt(valueString));
