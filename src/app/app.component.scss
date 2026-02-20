@@ -90,6 +90,7 @@ mat-sidenav {
   box-shadow: none;
   background: transparent;
   flex-shrink: 0;
+  backdrop-filter: blur(5px);
 }
 
 .contact-icons {
