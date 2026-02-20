@@ -8,8 +8,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [LoadingComponent],
   imports: [HttpClientModule, MatProgressSpinnerModule],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-  ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
 })
 export class SharedModule {}

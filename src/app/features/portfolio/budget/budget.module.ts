@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { BudgetComponent } from './budget.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -58,14 +57,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatSortModule,
     PlotlyModule,
   ],
-  declarations: [
-    BudgetComponent,
-    BudgetOverviewComponent,
-    BudgetListComponent,
-    BudgetCreateComponent,
-    GetCostByTypePipe,
-    GetIncomeByTypePipe,
-  ],
+  declarations: [BudgetComponent, BudgetOverviewComponent, BudgetListComponent, BudgetCreateComponent, GetCostByTypePipe, GetIncomeByTypePipe],
   providers: [MatDatepickerModule, GetCostByTypePipe, GetIncomeByTypePipe],
 })
 export class BudgetModule {}

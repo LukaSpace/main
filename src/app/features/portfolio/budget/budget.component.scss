@@ -1,5 +1,10 @@
 @import '../../../../scss/main.scss';
 
+:host {
+  flex: 1 1 auto;
+  display: block;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -40,7 +45,7 @@
 }
 
 .is-mobile .sidenav-container {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }
 
 .mat-icon {

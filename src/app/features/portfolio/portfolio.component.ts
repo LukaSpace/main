@@ -27,7 +27,7 @@ export class PortfolioComponent {
       technologies: ['Angular', 'Material Design', 'Animations', 'Responsive Design', 'Mailto Links'],
       demoLink: '/',
       isInternal: true,
-      codeLink: 'https://github.com/LukaSpace/main',
+      codeLink: 'https://github.com/LukaSpace/main/',
     },
     {
       title: 'Budget Tracker',

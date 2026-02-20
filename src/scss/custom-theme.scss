@@ -123,7 +123,7 @@ $darkTheme: mat.define-dark-theme(
       primary: mat.define-palette($m2-primary),
       accent: mat.define-palette($m2-accent, A200, A100, A400),
     ),
-    typography: mat.define-typography-config(),
+    typography: mat.define-typography-config($button: mat.define-typography-level($font-size: 2rem)),
     density: 0,
   )
 );

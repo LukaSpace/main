@@ -7,8 +7,6 @@ export class GetIncomeByTypePipe implements PipeTransform {
     if (!incomes || !Array.isArray(incomes)) {
       return 0;
     }
-    return incomes
-      .filter(income => income.incomeType === incomeType)
-      .reduce((sum, income) => sum + income.value, 0);
+    return incomes.filter(income => income.incomeType === incomeType).reduce((sum, income) => sum + income.value, 0);
   }
 }

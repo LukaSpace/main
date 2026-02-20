@@ -20,6 +20,7 @@
       Name cannot exceed 50 characters
     </mat-error>
   </mat-form-field>
+
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Contact Email</mat-label>
     <input matInput formControlName="email" required email />
@@ -30,6 +31,7 @@
       Please enter a valid email address
     </mat-error>
   </mat-form-field>
+
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Subject</mat-label>
     <input matInput formControlName="subject" required />
@@ -40,6 +42,7 @@
       Subject cannot exceed 100 characters
     </mat-error>
   </mat-form-field>
+
   <mat-form-field appearance="fill" class="full-width message-field">
     <mat-label>Message (max 500 characters)</mat-label>
     <textarea matInput formControlName="message" required></textarea>
@@ -50,6 +53,7 @@
       Message cannot exceed 500 characters
     </mat-error>
   </mat-form-field>
+
   <button
     mat-raised-button
     type="submit"

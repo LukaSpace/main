@@ -10,16 +10,7 @@ import { MatDivider } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild([{ path: '', component: MainComponent }]),
-    MatButton,
-    MatCardModule,
-    MatGridListModule,
-    MatDivider,
-    MatIconModule,
-    MatIconButton,
-  ],
+  imports: [CommonModule, RouterModule.forChild([{ path: '', component: MainComponent }]), MatButton, MatCardModule, MatGridListModule, MatDivider, MatIconModule, MatIconButton],
   declarations: [MainComponent],
 })
 export class MainModule {}

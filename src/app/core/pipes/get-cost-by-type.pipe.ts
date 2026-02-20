@@ -7,8 +7,6 @@ export class GetCostByTypePipe implements PipeTransform {
     if (!costs || !Array.isArray(costs)) {
       return 0;
     }
-    return costs
-      .filter(cost => cost.costType === costType)
-      .reduce((sum, cost) => sum + cost.value, 0);
+    return costs.filter(cost => cost.costType === costType).reduce((sum, cost) => sum + cost.value, 0);
   }
 }

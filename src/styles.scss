@@ -67,35 +67,62 @@ body::after {
   mix-blend-mode: screen;
   animation: 35s -17s moveRotate infinite ease-in-out alternate;
   z-index: -1;
-
-  @include respond-to('tablet') {
-    width: 3em;
-    height: 3em;
-  }
 }
 
 body::before {
   @include dots(70);
   animation-duration: 35s;
   animation-delay: -17s;
+
+  @include respond-to('tablet') {
+    @include dots(55, 4px, 20);
+  }
+
+  @include respond-to('phone') {
+    @include dots(40, 3px, 7);
+  }
 }
 
 body::after {
   @include dots(70);
   animation-duration: 33s;
   animation-delay: -22s;
+
+  @include respond-to('tablet') {
+    @include dots(55, 4px, 20);
+  }
+
+  @include respond-to('phone') {
+    @include dots(40, 3px, 7);
+  }
 }
 
 head::before {
   @include dots(70);
   animation-duration: 31s;
   animation-delay: -13s;
+
+  @include respond-to('tablet') {
+    @include dots(55, 4px, 20);
+  }
+
+  @include respond-to('phone') {
+    @include dots(40, 3px, 7);
+  }
 }
 
 head::after {
   @include dots(70);
   animation-duration: 29s;
   animation-delay: -12s;
+
+  @include respond-to('tablet') {
+    @include dots(55, 4px, 20);
+  }
+  
+  @include respond-to('phone') {
+    @include dots(40, 3px, 7);
+  }
 }
 
 ::-webkit-scrollbar {

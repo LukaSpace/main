@@ -15,8 +15,6 @@ export class BudgetComponent implements OnDestroy {
   mainNavigationLinks: Link[] = [
     { name: 'Overview', link: 'portfolio/budget/overview' },
     { name: 'List', link: 'portfolio/budget/list' },
-    // { name: 'Edit', link: 'portfolio/budget/edit' },
-    // { name: 'Graphs', link: 'portfolio/budget/graphs' },
   ];
 
   currentMainLinkId = 0;
@@ -32,19 +30,10 @@ export class BudgetComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
 
-    this.router.events
-      .pipe(
-        filter(
-          (event: Event | RouterEvent): event is NavigationEnd =>
-            event instanceof NavigationEnd
-        )
-      )
-      .subscribe(event => {
-        const index = this.mainNavigationLinks
-          .slice(1)
-          .findIndex(nl => event.url.includes(nl.link));
-        this.currentMainLinkId = index + 1;
-      });
+    this.router.events.pipe(filter((event: Event | RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)).subscribe(event => {
+      const index = this.mainNavigationLinks.slice(1).findIndex(nl => event.url.includes(nl.link));
+      this.currentMainLinkId = index + 1;
+    });
   }
 
   changeMainLink(linkId: number) {

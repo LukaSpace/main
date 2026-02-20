@@ -1,26 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BudgetService } from '../../../../services/portfolio/budget/budget.service';
-import {
-  BudgetValue,
-  Cost,
-  CostType,
-  CostTypeDisplay,
-  Income,
-  IncomeTypeDisplay,
-  MonthSummary,
-} from '../../../../interfaces/portfolio/budget/model';
+import { BudgetValue, Cost, CostTypeDisplay, Income, IncomeTypeDisplay, MonthSummary } from '../../../../interfaces/portfolio/budget/model';
 import { MatDialog } from '@angular/material/dialog';
 import { BudgetCreateComponent } from '../budget-create/budget-create.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, MatSortable } from '@angular/material/sort';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'budget-list',
@@ -30,17 +15,17 @@ import {
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class BudgetListComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   dataSource = new MatTableDataSource<MonthSummary>();
   costDataSource = new MatTableDataSource<Cost>();
   incomeDataSource = new MatTableDataSource<Income>();
+
   costTypeDisplay = CostTypeDisplay;
   incomeTypeDisplay = IncomeTypeDisplay;
   costTypeDisplayKeys = Object.keys(CostTypeDisplay)
@@ -49,25 +34,16 @@ export class BudgetListComponent implements AfterViewInit {
   incomeTypeDisplayKeys = Object.keys(IncomeTypeDisplay)
     .filter(item => !isNaN(Number(item)))
     .map(k => Number(k));
-  displayedColumns: string[] = [
-    'year',
-    'month',
-    'income',
-    'outcome',
-    'actions',
-  ];
+
+  displayedColumns: string[] = ['year', 'month', 'income', 'outcome', 'actions'];
   expandedElement: MonthSummary | null;
   monthArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(x => new Date(0, x));
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private budgetService: BudgetService,
     private dialog: MatDialog
   ) {
-    this.budgetService
-      .getAllMonthSummaries()
-      .subscribe(monthSummaries => this.updateTableDataSet(monthSummaries));
+    this.budgetService.getAllMonthSummaries().subscribe(monthSummaries => this.updateTableDataSet(monthSummaries));
   }
 
   ngAfterViewInit() {
@@ -79,17 +55,13 @@ export class BudgetListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        this.budgetService
-          .addMonthSummary(data)
-          .subscribe(monthSummaries => this.updateTableDataSet(monthSummaries));
+        this.budgetService.addMonthSummary(data).subscribe(monthSummaries => this.updateTableDataSet(monthSummaries));
       }
     });
   }
 
   deleteMonthSummary(monthSummaryId: number) {
-    this.budgetService
-      .deleteMonthSummary(monthSummaryId)
-      .subscribe(monthSummaries => this.updateTableDataSet(monthSummaries));
+    this.budgetService.deleteMonthSummary(monthSummaryId).subscribe(monthSummaries => this.updateTableDataSet(monthSummaries));
   }
 
   getSumOf(bugets: BudgetValue[]) {

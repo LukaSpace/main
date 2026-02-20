@@ -24,17 +24,13 @@ export class LoadingService {
   open(): LoadingOverlayRef {
     const overlayRef = this.createOverlay();
     const dialogRef = new LoadingOverlayRef(overlayRef);
-    const overlayComponent = this.attachDialogContainer(overlayRef, dialogRef);
+    this.attachDialogContainer(overlayRef, dialogRef);
 
     return dialogRef;
   }
 
   private createOverlay(): OverlayRef {
-    const positionStrategy = this.overlay
-      .position()
-      .global()
-      .centerHorizontally()
-      .centerVertically();
+    const positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically();
     const overlayConfig = new OverlayConfig({
       hasBackdrop: true,
       scrollStrategy: this.overlay.scrollStrategies.block(),
@@ -44,18 +40,10 @@ export class LoadingService {
     return this.overlay.create(overlayConfig);
   }
 
-  private attachDialogContainer(
-    overlayRef: OverlayRef,
-    dialogRef: LoadingOverlayRef
-  ): LoadingComponent {
+  private attachDialogContainer(overlayRef: OverlayRef, dialogRef: LoadingOverlayRef): LoadingComponent {
     const injector = this.createInjector(dialogRef);
-    const containerPortal = new ComponentPortal(
-      LoadingComponent,
-      null,
-      injector
-    );
-    const containerRef: ComponentRef<LoadingComponent> =
-      overlayRef.attach(containerPortal);
+    const containerPortal = new ComponentPortal(LoadingComponent, null, injector);
+    const containerRef: ComponentRef<LoadingComponent> = overlayRef.attach(containerPortal);
 
     return containerRef.instance;
   }

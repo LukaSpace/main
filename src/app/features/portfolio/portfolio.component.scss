@@ -75,5 +75,15 @@ h2 {
   mat-card-actions {
     gap: 2rem;
     width: 100%;
+
+    a {
+      font-size: 1.5rem;
+
+      mat-icon {
+        height: 1.5rem;
+        width: 1.5rem;
+        font-size: 1.5rem;
+      }
+    }
   }
 }

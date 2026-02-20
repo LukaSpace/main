@@ -21,19 +21,9 @@ export class TechnologiesComponent {
           description: 'Business logic, calculations, and data processing.',
         },
         {
-          name: 'Entity Framework Core',
-          icon: 'database',
-          description: 'ORM for .NET applications.',
-        },
-        {
           name: 'AutoMapper',
           icon: 'transform',
           description: 'Object-object mapping for .NET.',
-        },
-        {
-          name: 'SignalR',
-          icon: 'sync',
-          description: 'Real-time web functionality.',
         },
         {
           name: 'Hangfire',
@@ -61,19 +51,29 @@ export class TechnologiesComponent {
           description: 'Frontend applications.',
         },
         {
+          name: 'Material Design',
+          icon: 'design_services',
+          description: 'UI component library for Angular.',
+        },
+        {
+          name: 'NgRx',
+          icon: 'sync',
+          description: 'State management for Angular applications.',
+        },
+        {
           name: 'Tailwind',
           icon: 'palette',
           description: 'Utility-first CSS for fast UI development.',
         },
         {
-          name: 'Material Design',
-          icon: 'style',
-          description: 'UI component library for Angular.',
-        },
-        {
           name: 'RxJS',
           icon: 'sync_alt',
           description: 'Reactive programming for asynchronous data streams.',
+        },
+        {
+          name: 'SignalR',
+          icon: 'wifi',
+          description: 'Real-time web functionality.',
         },
       ],
     },
@@ -82,13 +82,18 @@ export class TechnologiesComponent {
       items: [
         {
           name: 'Microsoft SQL',
-          icon: 'storage',
+          icon: 'folder_shared',
           description: 'Database design and data management.',
         },
         {
           name: 'Redis',
           icon: 'memory',
           description: 'In-memory data structure store for caching and messaging.',
+        },
+        {
+          name: 'EF Core',
+          icon: 'storage',
+          description: 'ORM for .NET applications.',
         },
       ],
     },
@@ -123,7 +128,7 @@ export class TechnologiesComponent {
       ],
     },
     {
-      type: 'Testing & Documentation',
+      type: 'Testing, Documentation & AI Assistance ',
       items: [
         {
           name: 'xUnit / NUnit',
@@ -135,11 +140,6 @@ export class TechnologiesComponent {
           icon: 'description',
           description: 'API documentation and testing.',
         },
-      ],
-    },
-    {
-      type: 'AI Assistance',
-      items: [
         {
           name: 'Github Copilot',
           icon: 'smart_toy',

@@ -1,21 +1,7 @@
 import { Component } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import {
-  Cost,
-  CostType,
-  CostTypeDisplay,
-  Income,
-  IncomeType,
-  IncomeTypeDisplay,
-  MonthSummary,
-} from '../../../../interfaces/portfolio/budget/model';
+import { Cost, CostType, CostTypeDisplay, Income, IncomeType, IncomeTypeDisplay, MonthSummary } from '../../../../interfaces/portfolio/budget/model';
 
 @Component({
   selector: 'budget-create',
@@ -27,15 +13,17 @@ export class BudgetCreateComponent {
   costTypeDisplay = CostTypeDisplay;
   incomeType = IncomeType;
   incomeTypeDisplay = IncomeTypeDisplay;
+
+  costTypes: CostType[] = Object.values(CostType)
+    .filter(f => !isNaN(Number(f)))
+    .map(v => v as CostType);
+  incomeTypes: IncomeType[] = Object.values(IncomeType)
+    .filter(f => !isNaN(Number(f)))
+    .map(v => v as IncomeType);
+
   form: FormGroup = this.fb.group({
-    year: [
-      new Date().getFullYear(),
-      [Validators.required, Validators.min(2000), Validators.max(2100)],
-    ],
-    month: [
-      new Date().getMonth() + 1,
-      [Validators.required, Validators.min(1), Validators.max(12)],
-    ],
+    year: [new Date().getFullYear(), [Validators.required, Validators.min(2000), Validators.max(2100)]],
+    month: [new Date().getMonth() + 1, [Validators.required, Validators.min(1), Validators.max(12)]],
     incomes: this.fb.array([
       this.fb.group({
         value: ['', Validators.required],
@@ -51,12 +39,6 @@ export class BudgetCreateComponent {
       }),
     ]),
   });
-  costTypes: CostType[] = Object.values(CostType)
-    .filter(f => !isNaN(Number(f)))
-    .map(v => v as CostType);
-  incomeTypes: IncomeType[] = Object.values(IncomeType)
-    .filter(f => !isNaN(Number(f)))
-    .map(v => v as IncomeType);
 
   constructor(
     private fb: FormBuilder,
@@ -131,8 +113,6 @@ export class BudgetCreateComponent {
   }
 
   getCostType(costName: string): CostType {
-    return Object.values(CostType)[
-      Object.keys(CostType).indexOf(costName)
-    ] as CostType;
+    return Object.values(CostType)[Object.keys(CostType).indexOf(costName)] as CostType;
   }
 }

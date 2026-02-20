@@ -12,6 +12,12 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('iconElement') iconElements!: QueryList<ElementRef>;
   @ViewChild('sphereContainer') sphereContainer!: ElementRef;
 
+  @HostListener('window:resize')
+  onResize() {
+    this.rerunAnimationOfSphere();
+  }
+
+  //sphere related
   icons: string[] = [
     'javascript',
     'typescript',
@@ -30,25 +36,24 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     'githubactions',
     'githubcopilot',
   ];
-  phrases: string[] = ['Full Stack Developer', 'Problem Solver', 'Concept Creator'];
   displayText = '';
-
-  rotationX = -10;
-  rotationY = 0;
-  velocityX = 0;
-  velocityY = 0;
-  maxSpeed = 0.8;
-  rotateDirection = 1; // 1 or -1
-  baseRotationSpeedY = 2; // degrees per frame (tweak to taste)
-  baseRotationSpeedX = 1; // small tilt if desired, e.g. 0.02
-  maxAngularSpeed = 15; // degrees/frame, hard cap for combined rotation
-
+  private rotationX = -10;
+  private rotationY = 0;
+  private velocityX = 0;
+  private velocityY = 0;
+  private maxSpeed = 0.8;
+  private rotateDirection = 1;
+  private baseRotationSpeedY = 2;
+  private baseRotationSpeedX = 1;
+  private maxAngularSpeed = 15;
+  private radius = 150;
   private isHovering = false;
   private lastX = 0;
   private lastY = 0;
-  private radius = 150;
   private animationId?: number;
 
+  //roles typing related
+  roles: string[] = ['Full Stack Developer', 'Problem Solver', 'Concept Creator'];
   private phraseIndex = 0;
   private charIndex = 0;
   private isDeleting = false;
@@ -76,7 +81,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.rerunAnimation();
+    this.rerunAnimationOfSphere();
   }
 
   ngOnDestroy() {
@@ -94,12 +99,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     link.click();
   }
 
-  @HostListener('window:resize')
-  onResize() {
-    this.rerunAnimation();
-  }
-
-  private rerunAnimation() {
+  private rerunAnimationOfSphere() {
     this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3.2;
 
     if (this.animationId) {
@@ -107,7 +107,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.ngZone.runOutsideAngular(() => {
-      this.animate();
+      this.animateSphere();
     });
   }
 
@@ -145,7 +145,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lastY = event.clientY;
   }
 
-  animate() {
+  animateSphere() {
     const icons = this.iconElements ? this.iconElements.toArray() : [];
     const total = icons.length;
 
@@ -189,7 +189,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
       this.velocityY *= 0.96;
     }
 
-    this.animationId = requestAnimationFrame(() => this.animate());
+    this.animationId = requestAnimationFrame(() => this.animateSphere());
   }
 
   calculatePosition(i: number, total: number) {
@@ -206,7 +206,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   handleTyping() {
-    const currentPhrase = this.phrases[this.phraseIndex];
+    const currentPhrase = this.roles[this.phraseIndex];
 
     if (!this.isDeleting) {
       this.displayText = currentPhrase.substring(0, this.charIndex + 1);
@@ -229,7 +229,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isDeleting = true;
     } else if (this.isDeleting && this.charIndex === 0) {
       this.isDeleting = false;
-      this.phraseIndex = (this.phraseIndex + 1) % this.phrases.length;
+      this.phraseIndex = (this.phraseIndex + 1) % this.roles.length;
       nextStepDelay = 300;
     }
 
