@@ -38,7 +38,7 @@ export class PortfolioComponent {
       demoLink: 'budget/overview',
       isInternal: true,
       alert: 'Onine version of project use mocked data, so some functionalities can not work as expected. To test full functionality please visit the repository and run application locally.',
-      codeLink: 'https://github.com/LukaSpace?tab=repositories',
+      codeLink: 'https://dev.azure.com/lukaSpace/BudgetAPI/_git/BudgetAPI',
     },
   ];
 
