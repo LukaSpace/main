@@ -67,6 +67,7 @@ mat-sidenav {
   background: transparent;
   padding: 0 3vw;
   height: 6rem;
+  backdrop-filter: blur(5px);
 
   @include respond-to('phone') {
     position: relative;
@@ -74,7 +75,6 @@ mat-sidenav {
     padding: 1rem;
     border-radius: 4rem;
     background: rgba($white, 0.1);
-    backdrop-filter: blur(5px);
     border: 1px solid rgba($white, 0.3);
   }
 }
