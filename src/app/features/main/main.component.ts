@@ -114,6 +114,8 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
       } else if (result === ConfirmDialogResult.Right) {
         href = 'assets/CV - ENG.pdf';
         fileName = 'Lukas_Cwajna_Resume_ENG.pdf';
+      } else {
+        return;
       }
 
       const link = document.createElement('a');
