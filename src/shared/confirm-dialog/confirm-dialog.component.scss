@@ -1,0 +1,24 @@
+@import '../../scss/main.scss';
+
+::ng-deep .mat-mdc-dialog-container {
+  --mdc-dialog-container-color: rgba(78, 0, 98, 0.7);
+}
+
+.confirm-dialog {
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+
+  .message {
+    text-align: center;
+    color: $white;
+    padding: 1rem 0 2rem 0;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}

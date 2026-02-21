@@ -1,6 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent, ConfirmDialogResult } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'main',
@@ -68,6 +70,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private ngZone: NgZone,
+    private dialog: MatDialog,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) {
@@ -93,10 +96,27 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   downloadResume() {
-    const link = document.createElement('a');
-    link.href = 'assets/CV.pdf';
-    link.download = 'Lukas_Cwajna_Resume.pdf';
-    link.click();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        message: 'Select language',
+        leftText: 'PL',
+        rightText: 'ENG',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === ConfirmDialogResult.Left) {
+        const link = document.createElement('a');
+        link.href = 'assets/CV.pdf';
+        link.download = 'Lukas_Cwajna_Resume_PL.pdf';
+        link.click();
+      } else if (result === ConfirmDialogResult.Right) {
+        const link = document.createElement('a');
+        link.href = 'assets/CV - ENG.pdf';
+        link.download = 'Lukas_Cwajna_Resume_ENG.pdf';
+        link.click();
+      }
+    });
   }
 
   private rerunAnimationOfSphere() {

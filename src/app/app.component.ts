@@ -117,13 +117,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  downloadResume() {
-    const link = document.createElement('a');
-    link.href = 'assets/CV.pdf';
-    link.download = 'Lukas_Cwajna_Resume.pdf';
-    link.click();
-  }
-
   copyEmail() {
     this.snackBar.open('Email copied to clipboard!', undefined, {
       duration: 2000,
