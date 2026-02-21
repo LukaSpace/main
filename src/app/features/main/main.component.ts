@@ -98,24 +98,28 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   downloadResume() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        message: 'Select language',
+        message: 'Select language:',
         leftText: 'PL',
         rightText: 'ENG',
       },
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      let href = '';
+      let fileName = '';
+
       if (result === ConfirmDialogResult.Left) {
-        const link = document.createElement('a');
-        link.href = 'assets/CV.pdf';
-        link.download = 'Lukas_Cwajna_Resume_PL.pdf';
-        link.click();
+        href = 'assets/CV.pdf';
+        fileName = 'Lukas_Cwajna_Resume_PL.pdf';
       } else if (result === ConfirmDialogResult.Right) {
-        const link = document.createElement('a');
-        link.href = 'assets/CV - ENG.pdf';
-        link.download = 'Lukas_Cwajna_Resume_ENG.pdf';
-        link.click();
+        href = 'assets/CV - ENG.pdf';
+        fileName = 'Lukas_Cwajna_Resume_ENG.pdf';
       }
+
+      const link = document.createElement('a');
+      link.href = href;
+      link.download = fileName;
+      link.click();
     });
   }
 
