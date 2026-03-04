@@ -19,7 +19,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     this.rerunAnimationOfSphere();
   }
 
-  //sphere related
+  // sphere related
   icons: string[] = [
     'javascript',
     'typescript',
@@ -45,16 +45,19 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   private velocityY = 0;
   private maxSpeed = 0.8;
   private rotateDirection = 1;
-  private baseRotationSpeedY = 2;
-  private baseRotationSpeedX = 1;
-  private maxAngularSpeed = 15;
+  private baseRotationSpeedY = 1;
+  private baseRotationSpeedX = 0.5;
+  private maxAngularSpeed = 2;
   private radius = 150;
   private isHovering = false;
   private lastX = 0;
   private lastY = 0;
   private animationId?: number;
+  private iconElementsArray: HTMLElement[] = [];
+  private basePositions: { x: number; y: number; z: number }[] = [];
+  private lastTimestamp?: number;
 
-  //roles typing related
+  // roles typing related
   roles: string[] = ['Full Stack Developer', 'Problem Solver', 'Concept Creator'];
   private phraseIndex = 0;
   private charIndex = 0;
@@ -84,6 +87,8 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.iconElementsArray = this.iconElements.map(el => el.nativeElement);
+    this.computeBasePositions();
     this.rerunAnimationOfSphere();
   }
 
@@ -127,14 +132,28 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private rerunAnimationOfSphere() {
     this.radius = (this.sphereContainer?.nativeElement?.getBoundingClientRect().width ?? 0) / 3.2;
+    this.computeBasePositions();
 
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
     }
 
     this.ngZone.runOutsideAngular(() => {
-      this.animateSphere();
+      this.animationId = requestAnimationFrame(t => this.animateSphere(t));
     });
+  }
+
+  private computeBasePositions(): void {
+    const total = this.icons.length;
+    this.basePositions = [];
+    for (let i = 0; i < total; i++) {
+      const phi = Math.acos(-1 + (2 * i) / total);
+      const theta = Math.sqrt(total * Math.PI) * phi;
+      const x = this.radius * Math.cos(theta) * Math.sin(phi);
+      const y = this.radius * Math.sin(theta) * Math.sin(phi);
+      const z = this.radius * Math.cos(phi);
+      this.basePositions.push({ x, y, z });
+    }
   }
 
   onMouseDownInside(event: MouseEvent) {
@@ -171,64 +190,61 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lastY = event.clientY;
   }
 
-  animateSphere() {
-    const icons = this.iconElements ? this.iconElements.toArray() : [];
-    const total = icons.length;
+  private animateSphere(timestamp: number): void {
+    if (!this.lastTimestamp) {
+      this.lastTimestamp = timestamp;
+      this.animationId = requestAnimationFrame(t => this.animateSphere(t));
+      return;
+    }
 
-    let combinedY = this.baseRotationSpeedY * this.rotateDirection + this.velocityY;
-    let combinedX = this.baseRotationSpeedX * this.rotateDirection + this.velocityX;
+    const delta = Math.min(60, timestamp - this.lastTimestamp);
+    const deltaFactor = delta / 16;
+
+    const baseY = this.isHovering ? 0 : this.baseRotationSpeedY * this.rotateDirection;
+    const baseX = this.isHovering ? 0 : this.baseRotationSpeedX * this.rotateDirection;
+
+    let combinedY = baseY + this.velocityY;
+    let combinedX = baseX + this.velocityX;
 
     combinedY = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedY));
     combinedX = Math.max(-this.maxAngularSpeed, Math.min(this.maxAngularSpeed, combinedX));
 
-    this.rotationY += combinedY;
-    this.rotationX += combinedX;
+    this.rotationY += combinedY * deltaFactor;
+    this.rotationX += combinedX * deltaFactor;
 
+    this.updateIconPositions();
+
+    const damping = this.isHovering ? 0.96 : 0.9;
+    this.velocityX *= Math.pow(damping, deltaFactor);
+    this.velocityY *= Math.pow(damping, deltaFactor);
+
+    this.lastTimestamp = timestamp;
+    this.animationId = requestAnimationFrame(t => this.animateSphere(t));
+  }
+
+  private updateIconPositions(): void {
     const rx = (this.rotationX * Math.PI) / 180;
     const ry = (this.rotationY * Math.PI) / 180;
+    const sinRx = Math.sin(rx);
+    const cosRx = Math.cos(rx);
+    const sinRy = Math.sin(ry);
+    const cosRy = Math.cos(ry);
 
-    for (let i = 0; i < total; i++) {
-      const el = icons[i].nativeElement as HTMLElement;
-      const phi = Math.acos(-1 + (2 * i) / total);
-      const theta = Math.sqrt(total * Math.PI) * phi;
-      const x0 = this.radius * Math.cos(theta) * Math.sin(phi);
-      const y0 = this.radius * Math.sin(theta) * Math.sin(phi);
-      const z0 = this.radius * Math.cos(phi);
+    for (let i = 0; i < this.iconElementsArray.length; i++) {
+      const el = this.iconElementsArray[i];
+      const { x: x0, y: y0, z: z0 } = this.basePositions[i];
 
-      const y1 = y0 * Math.cos(rx) - z0 * Math.sin(rx);
-      const z1 = y0 * Math.sin(rx) + z0 * Math.cos(rx);
-      const x2 = x0 * Math.cos(ry) + z1 * Math.sin(ry);
-      const z2 = -x0 * Math.sin(ry) + z1 * Math.cos(ry);
+      const y1 = y0 * cosRx - z0 * sinRx;
+      const z1 = y0 * sinRx + z0 * cosRx;
 
-      const scale = ((z2 + this.radius) / (2 * this.radius)) * (1.2 - 0.6) + 0.6;
+      const x2 = x0 * cosRy + z1 * sinRy;
+      const z2 = -x0 * sinRy + z1 * cosRy;
 
+      const scale = ((z2 + this.radius) / (2 * this.radius)) * 0.6 + 0.6;
       el.style.transform = `translate(-50%, -50%) translate3d(${x2}px, ${y1}px, ${z2}px) scale(${scale})`;
       el.style.zIndex = String(Math.round(z2 + this.radius));
       el.style.opacity = (0.3 + ((z2 + this.radius) / (2 * this.radius)) * 0.7).toString();
     }
-
-    if (!this.isHovering) {
-      this.velocityX *= 0.9;
-      this.velocityY *= 0.9;
-    } else {
-      this.velocityX *= 0.96;
-      this.velocityY *= 0.96;
-    }
-
-    this.animationId = requestAnimationFrame(() => this.animateSphere());
-  }
-
-  calculatePosition(i: number, total: number) {
-    const phi = Math.acos(-1 + (2 * i) / total);
-    const theta = Math.sqrt(total * Math.PI) * phi;
-
-    const x = this.radius * Math.cos(theta) * Math.sin(phi);
-    const y = this.radius * Math.sin(theta) * Math.sin(phi);
-    const z = this.radius * Math.cos(phi);
-
-    return {
-      transform: `translate3d(${x}px, ${y}px, ${z}px)`,
-    };
   }
 
   handleTyping() {
