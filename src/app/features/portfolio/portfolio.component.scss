@@ -35,7 +35,7 @@ h2 {
 
 .project-card {
   height: fit-content;
-  width: 35rem;
+  width: 25%;
   background-color: rgba($accent, 0.15);
   margin: 2rem;
   border-radius: 2rem;
@@ -44,22 +44,30 @@ h2 {
   word-wrap: break-word;
   padding: 2rem;
 
+  @include respond-to('tablet') {
+    width: 45rem;
+  }
+
+  @include respond-to('phone') {
+    width: 35rem;
+  }
+
   mat-card-title {
     font-size: 3rem;
     font-weight: 600;
     margin-bottom: 2rem;
+    text-wrap: wrap;
   }
 
   mat-card-content {
     text-align: justify;
-    text-justify: inter-word;
 
     .tech-tags {
       padding-top: 4rem;
       padding-bottom: 3rem;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-evenly;
+      justify-content: center;
       gap: 1rem;
 
       .tech-tag {
@@ -77,12 +85,13 @@ h2 {
     width: 100%;
 
     a {
-      font-size: 1.5rem;
+      font-size: 2rem;
+      padding: 2rem;
 
       mat-icon {
-        height: 1.5rem;
-        width: 1.5rem;
-        font-size: 1.5rem;
+        height: 2rem;
+        width: 2rem;
+        font-size: 2rem;
       }
     }
   }

@@ -80,6 +80,7 @@
   gap: 4rem;
   justify-content: center;
   margin-top: 1rem;
+  font-size: 2rem;
 
   @include respond-to('phone') {
     gap: 2rem;
