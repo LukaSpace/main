@@ -31,4 +31,5 @@ $breakpoints: (
   }
 
   text-shadow: $text-shadow;
+  filter: drop-shadow(0 0 2px rgba($accent, 0.15));
 }

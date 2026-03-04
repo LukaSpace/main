@@ -57,36 +57,23 @@
 @keyframes moveRotate {
   0% {
     transform: rotate(0deg) scale(4) translateX(-3em);
+    opacity: 0.5;
   }
-  10% {
-    transform: rotate(36deg) scale(6) translateX(-2.7em);
-  }
-  20% {
-    transform: rotate(72deg) scale(8) translateX(-2.4em);
-  }
-  30% {
-    transform: rotate(108deg) scale(12) translateX(-1.8em);
-  }
-  40% {
-    transform: rotate(144deg) scale(16) translateX(-1.2em);
+  25% {
+    transform: rotate(90deg) scale(8) translateX(-2.1em);
+    opacity: 0.8;
   }
   50% {
-    transform: rotate(144deg) scale(32);
+    transform: rotate(180deg) scale(16) translateX(0);
+    opacity: 1;
   }
-  60% {
-    transform: rotate(216deg) scale(24) translateX(1.2em);
-  }
-  70% {
-    transform: rotate(252deg) scale(22) translateX(1.8em);
-  }
-  80% {
-    transform: rotate(288deg) scale(18) translateX(2.4em);
-  }
-  90% {
-    transform: rotate(324deg) scale(14) translateX(2.7em);
+  75% {
+    transform: rotate(270deg) scale(8) translateX(2.1em);
+    opacity: 0.8;
   }
   100% {
-    transform: rotate(360deg) scale(12) translateX(3em);
+    transform: rotate(360deg) scale(4) translateX(3em);
+    opacity: 0.5;
   }
 }
 
