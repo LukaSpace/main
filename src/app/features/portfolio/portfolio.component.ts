@@ -11,9 +11,10 @@ interface Project {
   codeLink?: string;
 }
 @Component({
-  selector: 'portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrl: './portfolio.component.scss',
+    selector: 'portfolio',
+    templateUrl: './portfolio.component.html',
+    styleUrl: './portfolio.component.scss',
+    standalone: false
 })
 export class PortfolioComponent {
   constructor(private snackBar: MatSnackBar) {}

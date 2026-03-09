@@ -4,11 +4,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-technologies',
-  templateUrl: './technologies.component.html',
-  styleUrl: './technologies.component.scss',
-  standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule],
+    selector: 'app-technologies',
+    templateUrl: './technologies.component.html',
+    styleUrl: './technologies.component.scss',
+    imports: [CommonModule, MatCardModule, MatIconModule]
 })
 export class TechnologiesComponent {
   technologies = [

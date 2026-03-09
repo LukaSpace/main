@@ -8,9 +8,10 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'budget-overview',
-  templateUrl: './budget-overview.component.html',
-  styleUrl: './budget-overview.component.scss',
+    selector: 'budget-overview',
+    templateUrl: './budget-overview.component.html',
+    styleUrl: './budget-overview.component.scss',
+    standalone: false
 })
 export class BudgetOverviewComponent implements OnInit {
   public incomesVsCostsGraph: any;

@@ -5,10 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent, ConfirmDialogResult } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'main',
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss',
-  animations: [trigger('openClose', [transition(':enter', [style({ transform: 'translateY(-100%)' }), animate(250, style({ transform: 'translateY(0)' }))])])],
+    selector: 'main',
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.scss',
+    animations: [trigger('openClose', [transition(':enter', [style({ transform: 'translateY(-100%)' }), animate(250, style({ transform: 'translateY(0)' }))])])],
+    standalone: false
 })
 export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('iconElement') iconElements!: QueryList<ElementRef>;

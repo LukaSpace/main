@@ -1,7 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Cost, CostType } from '../../interfaces/portfolio/budget/model';
 
-@Pipe({ name: 'getCostByType' })
+@Pipe({
+    name: 'getCostByType',
+    standalone: false
+})
 export class GetCostByTypePipe implements PipeTransform {
   transform(costs: Cost[], costType: CostType): number {
     if (!costs || !Array.isArray(costs)) {

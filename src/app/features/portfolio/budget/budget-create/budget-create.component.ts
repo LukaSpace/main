@@ -4,9 +4,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Cost, CostType, CostTypeDisplay, Income, IncomeType, IncomeTypeDisplay, MonthSummary } from '../../../../interfaces/portfolio/budget/model';
 
 @Component({
-  selector: 'budget-create',
-  templateUrl: './budget-create.component.html',
-  styleUrl: './budget-create.component.scss',
+    selector: 'budget-create',
+    templateUrl: './budget-create.component.html',
+    styleUrl: './budget-create.component.scss',
+    standalone: false
 })
 export class BudgetCreateComponent {
   costType = CostType;

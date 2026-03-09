@@ -5,9 +5,10 @@ import { NavigationEnd, Router, RouterEvent, Event } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
-  selector: 'budget',
-  templateUrl: './budget.component.html',
-  styleUrl: './budget.component.scss',
+    selector: 'budget',
+    templateUrl: './budget.component.html',
+    styleUrl: './budget.component.scss',
+    standalone: false
 })
 export class BudgetComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
