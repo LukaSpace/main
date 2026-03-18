@@ -1,0 +1,1 @@
+import{N as t,pa as n,zc as i}from"./chunk-TIXJWIAN.js";var E=(()=>{class e{static \u0275fac=function(r){return new(r||e)};static \u0275mod=n({type:e});static \u0275inj=t({imports:[i]})}return e})();export{E as a};
