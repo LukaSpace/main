@@ -1,8 +1,8 @@
 @import '../../scss/main.scss';
 
 ::ng-deep .mat-mdc-dialog-container {
-  --mdc-dialog-container-color: rgba(128, 128, 128, 0.4);
-  --mdc-dialog-container-shape: 2rem;
+  --mat-dialog-container-color: rgba(128, 128, 128, 0.4);
+  --mat-dialog-container-shape: 2rem;
   backdrop-filter: blur(5px);
 }
 
