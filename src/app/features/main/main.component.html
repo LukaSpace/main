@@ -19,11 +19,13 @@
     (mousemove)="onMouseMoveInside($event)"
     (mouseenter)="onMouseEnter($event)"
     (mouseleave)="onMouseLeave()">
-    <div
-      #iconElement
-      class="icon"
-      *ngFor="let icon of icons; let i = index">
-      <img [src]="'https://cdn.simpleicons.org/' + icon" [alt]="icon" routerLink="/technologies" />
-    </div>
+    @for (icon of icons; track icon; let i = $index) {
+      <div
+        #iconElement
+        class="icon"
+        >
+        <img [src]="'https://cdn.simpleicons.org/' + icon" [alt]="icon" routerLink="/technologies" />
+      </div>
+    }
   </div>
 </div>

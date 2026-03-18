@@ -1,23 +1,22 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar class="toolbar">
-    <ng-container
-      *ngFor="let navigationLink of mainNavigationLinks; index as i">
+    @for (navigationLink of mainNavigationLinks; track navigationLink; let i = $index) {
       <button mat-button (click)="changeMainLink(i)">
         <span
           class="navigation-name"
           [ngClass]="{ selectedNavigation: currentMainLinkId == i }"
           >{{ navigationLink.name }}</span
-        >
-      </button>
-    </ng-container>
-  </mat-toolbar>
+          >
+        </button>
+      }
+    </mat-toolbar>
 
-  <mat-sidenav-container
-    class="sidenav-container"
-    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
-    [hasBackdrop]="true">
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+    <mat-sidenav-container
+      class="sidenav-container"
+      [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+      [hasBackdrop]="true">
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

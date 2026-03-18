@@ -10,33 +10,38 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="main-content">
-      <div
-        *ngFor="let star of stars"
-        class="star-wrapper"
-        [ngStyle]="{ top: star.top, left: star.left }"
-        (mouseenter)="onStarHover(star)"
-        (mouseleave)="onStarLeave(star)">
+      @for (star of stars; track $index) {
         <div
-          class="star"
-          [ngClass]="{ 'exploding': star.isExploding }"
+          class="star-wrapper"
+          [ngStyle]="{ top: star.top, left: star.left }"
+          (mouseenter)="onStarHover(star)"
+          (mouseleave)="onStarLeave(star)">
+          <div
+            class="star"
+            [ngClass]="{ 'exploding': star.isExploding }"
           [ngStyle]="{
             width: star.size,
             height: star.size,
             'animation-delay': star.delay,
             'animation-duration': star.duration,
           }"></div>
-      </div>
+        </div>
+      }
 
       <div class="toolbar-wrapper">
         <mat-toolbar class="toolbar">
-          <div *ngIf="mobileQuery.matches">
-            <button mat-icon-button class="move-in-from-left" (click)="sidenav.toggle()">
-              <mat-icon>menu</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="!mobileQuery.matches">
-            <ng-container *ngTemplateOutlet="navigations"></ng-container>
-          </div>
+          @if (mobileQuery.matches) {
+            <div>
+              <button mat-icon-button class="move-in-from-left" (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+              </button>
+            </div>
+          }
+          @if (!mobileQuery.matches) {
+            <div>
+              <ng-container *ngTemplateOutlet="navigations"></ng-container>
+            </div>
+          }
           <span class="spacer"></span>
           <div class="contact-icons">
             <a
@@ -48,50 +53,49 @@
                 src="assets/icons/github.svg"
                 alt="GitHub"
                 class="invert-color" />
-            </a>
-            <a
-              mat-icon-button
-              href="https://www.linkedin.com/in/lukasz-cwajna/"
-              target="_blank"
-              rel="noopener noreferrer">
-              <img
-                src="assets/icons/linkedin.svg"
-                alt="LinkedIn"
-                class="invert-color" />
-            </a>
-            <button
-              mat-icon-button
-              ngxClipboard
-              [cbContent]="'lukaspace.contact@gmail.com'"
-              (click)="copyEmail()">
-              <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
-            </button>
+              </a>
+              <a
+                mat-icon-button
+                href="https://www.linkedin.com/in/lukasz-cwajna/"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  src="assets/icons/linkedin.svg"
+                  alt="LinkedIn"
+                  class="invert-color" />
+                </a>
+                <button
+                  mat-icon-button
+                  ngxClipboard
+                  [cbContent]="'lukaspace.contact@gmail.com'"
+                  (click)="copyEmail()">
+                  <mat-icon class="material-symbols-outlined icon1">mail</mat-icon>
+                </button>
+              </div>
+            </mat-toolbar>
           </div>
-        </mat-toolbar>
+
+          <router-outlet class="router-outlet"></router-outlet>
+
+          <mat-toolbar class="footer-toolbar">
+            <span class="footer-text"
+              >© {{ currentYear }} Luka Space. All rights reserved.</span
+              >
+            </mat-toolbar>
+          </mat-sidenav-content>
+        </mat-sidenav-container>
       </div>
 
-      <router-outlet class="router-outlet"></router-outlet>
-
-      <mat-toolbar class="footer-toolbar">
-        <span class="footer-text"
-          >© {{ currentYear }} Luka Space. All rights reserved.</span
-        >
-      </mat-toolbar>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
-
-<ng-template #navigations>
-  <div class="navigations">
-    <ng-container
-      *ngFor="let navigationLink of mainNavigationLinks; index as i">
-      <button mat-button (click)="changeMainLink(i)">
-        <span
-          class="navigation-name"
-          [ngClass]="{ selectedNavigation: currentMainLinkId == i }"
-          >{{ navigationLink.name }}</span
-        >
-      </button>
-    </ng-container>
-  </div>
-</ng-template>
+      <ng-template #navigations>
+        <div class="navigations">
+          @for (navigationLink of mainNavigationLinks; track $index; let i = $index) {
+            <button mat-button (click)="changeMainLink(i)">
+              <span
+                class="navigation-name"
+                [ngClass]="{ selectedNavigation: currentMainLinkId == i }"
+                >{{ navigationLink.name }}</span
+                >
+              </button>
+            }
+          </div>
+        </ng-template>

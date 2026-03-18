@@ -7,7 +7,7 @@
     </mat-date-range-input>
     <mat-datepicker-toggle
       matIconSuffix
-      [for]="rangePicker"></mat-datepicker-toggle>
+    [for]="rangePicker"></mat-datepicker-toggle>
     <mat-date-range-picker #rangePicker>
       <mat-date-range-picker-actions>
         <button
@@ -28,13 +28,14 @@
     </mat-date-range-picker>
   </mat-form-field>
 
-  <div class="plots" *ngIf="incomesVsCostsGraph; else noGraphAvailable">
-    <plotly-plot
-      class="plot"
-      [data]="incomesVsCostsGraph.data"
+  @if (incomesVsCostsGraph) {
+    <div class="plots">
+      <plotly-plot
+        class="plot"
+        [data]="incomesVsCostsGraph.data"
       [layout]="incomesVsCostsGraph.layout"></plotly-plot>
-  </div>
-  <ng-template #noGraphAvailable
-    >No data available for selected range</ng-template
-  >
+    </div>
+  } @else {
+    No data available for selected range
+  }
 </div>

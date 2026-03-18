@@ -22,33 +22,41 @@
 </div>
 
 <ng-template #projectCard let-projects="projects">
-  <mat-card class="project-card" *ngFor="let project of projects">
-    <mat-card-title>{{ project.title }}</mat-card-title>
-    <mat-card-content>
-      <p>{{ project.description }}</p>
-      <div class="tech-tags">
-        <span *ngFor="let tech of project.technologies" class="tech-tag">
-          {{ tech }}
-        </span>
-      </div>
-    </mat-card-content>
-    <mat-card-actions *ngIf="project.demoLink || project.codeLink" align="end">
-      <a
-        mat-raised-button
-        *ngIf="project.demoLink"
-        [routerLink]="project.demoLink"
-        [target]="project.isInternal ? '_self' : '_blank'"
-        (click)="onDemoRun(project.alert)">
-        <mat-icon>play_circle_outline</mat-icon> Demo
-      </a>
-      <a
-        mat-raised-button
-        *ngIf="project.codeLink"
-        href="{{ project.codeLink }}"
-        target="_blank"
-        rel="noopener noreferrer">
-        <mat-icon>code</mat-icon> Code
-      </a>
-    </mat-card-actions>
-  </mat-card>
+  @for (project of projects; track project) {
+    <mat-card class="project-card">
+      <mat-card-title>{{ project.title }}</mat-card-title>
+      <mat-card-content>
+        <p>{{ project.description }}</p>
+        <div class="tech-tags">
+          @for (tech of project.technologies; track tech) {
+            <span class="tech-tag">
+              {{ tech }}
+            </span>
+          }
+        </div>
+      </mat-card-content>
+      @if (project.demoLink || project.codeLink) {
+        <mat-card-actions align="end">
+          @if (project.demoLink) {
+            <a
+              mat-raised-button
+              [routerLink]="project.demoLink"
+              [target]="project.isInternal ? '_self' : '_blank'"
+              (click)="onDemoRun(project.alert)">
+              <mat-icon>play_circle_outline</mat-icon> Demo
+            </a>
+          }
+          @if (project.codeLink) {
+            <a
+              mat-raised-button
+              href="{{ project.codeLink }}"
+              target="_blank"
+              rel="noopener noreferrer">
+              <mat-icon>code</mat-icon> Code
+            </a>
+          }
+        </mat-card-actions>
+      }
+    </mat-card>
+  }
 </ng-template>

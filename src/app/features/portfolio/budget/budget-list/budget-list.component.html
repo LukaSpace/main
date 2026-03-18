@@ -53,10 +53,12 @@
                 <th>Type</th>
                 <th>Amount</th>
               </tr>
-              <tr *ngFor="let incomeType of incomeTypeDisplayKeys">
-                <td>{{ incomeTypeDisplay[incomeType] }}</td>
-                <td>{{ element.incomes | getIncomeByType: incomeType }}</td>
-              </tr>
+              @for (incomeType of incomeTypeDisplayKeys; track incomeType) {
+                <tr>
+                  <td>{{ incomeTypeDisplay[incomeType] }}</td>
+                  <td>{{ element.incomes | getIncomeByType: incomeType }}</td>
+                </tr>
+              }
             </table>
           </div>
           <div class="detail-section">
@@ -66,10 +68,12 @@
                 <th>Type</th>
                 <th>Amount</th>
               </tr>
-              <tr *ngFor="let costType of costTypeDisplayKeys">
-                <td>{{ costTypeDisplay[costType] }}</td>
-                <td>{{ element.costs | getCostByType: costType }}</td>
-              </tr>
+              @for (costType of costTypeDisplayKeys; track costType) {
+                <tr>
+                  <td>{{ costTypeDisplay[costType] }}</td>
+                  <td>{{ element.costs | getCostByType: costType }}</td>
+                </tr>
+              }
             </table>
           </div>
         </div>
@@ -82,16 +86,16 @@
       *matRowDef="let element; columns: displayedColumns"
       class="example-element-row"
       [class.example-expanded-row]="expandedElement === element"
-      (click)="adjustExpandedElement(element)"></tr>
+    (click)="adjustExpandedElement(element)"></tr>
     <tr
       mat-row
       *matRowDef="let row; columns: ['expandedDetail']"
-      class="example-detail-row"></tr>
+    class="example-detail-row"></tr>
   </table>
   <div class="paginator">
     <mat-paginator
       [pageSizeOptions]="[5, 10, 25, 100]"
       [pageSize]="25"
-      aria-label="Select page"></mat-paginator>
+    aria-label="Select page"></mat-paginator>
   </div>
 </div>

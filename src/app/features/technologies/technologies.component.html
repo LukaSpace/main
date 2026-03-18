@@ -2,18 +2,22 @@
   <span class="title">My Technologies</span>
 </div>
 <div class="tech-container">
-  <div *ngFor="let group of technologies" class="tech-group">
-    <h3 class="group-title">{{ group.type }}</h3>
-    <div class="tech-cards">
-      <mat-card *ngFor="let tech of group.items" class="tech-card">
-        <mat-card-title>
-          <mat-icon [fontIcon]="tech.icon">{{ tech.icon }}</mat-icon>
-          {{ tech.name }}
-        </mat-card-title>
-        <mat-card-content class="tech-card-content">
-          {{ tech.description }}
-        </mat-card-content>
-      </mat-card>
+  @for (group of technologies; track group) {
+    <div class="tech-group">
+      <h3 class="group-title">{{ group.type }}</h3>
+      <div class="tech-cards">
+        @for (tech of group.items; track tech) {
+          <mat-card class="tech-card">
+            <mat-card-title>
+              <mat-icon [fontIcon]="tech.icon">{{ tech.icon }}</mat-icon>
+              {{ tech.name }}
+            </mat-card-title>
+            <mat-card-content class="tech-card-content">
+              {{ tech.description }}
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
     </div>
-  </div>
+  }
 </div>
