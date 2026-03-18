@@ -4,7 +4,7 @@ fs.copySync('docs/browser', 'docs', { overwrite: true }, err => {
     return console.error(err);
   }
 });
-fs.removveSync('docs/browser', err => {
+fs.removeSync('docs/browser', err => {
   if (err) {
     return console.error(err);
   }
