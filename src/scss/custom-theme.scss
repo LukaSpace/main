@@ -1,11 +1,12 @@
 @use '@angular/material' as mat;
-@include mat.elevation-classes();
-@include mat.app-background();
 
 // Fonts
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 @import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined';
 @import 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap';
+
+@include mat.elevation-classes();
+@include mat.app-background();
 
 /* These palettes are generated using https://themes.angular-material.dev/ */
 $m2-primary: (

@@ -1,7 +1,12 @@
-@import 'colors.scss';
-@import 'custom-theme.scss';
-@import 'mixins.scss';
-@import 'animations.scss';
+@use 'colors.scss' as *;
+@use 'custom-theme.scss' as *;
+@use 'mixins.scss' as *;
+@use 'animations.scss' as *;
+
+@forward 'colors.scss';
+@forward 'custom-theme.scss';
+@forward 'mixins.scss';
+@forward 'animations.scss';
 
 .text-white {
   color: white;
