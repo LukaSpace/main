@@ -48,30 +48,51 @@ export class BudgetService {
 
   private generateMockMonthSummaries(): MonthSummary[] {
     const summaries: MonthSummary[] = [];
-    const incomeTypes = [IncomeType.Salary, IncomeType.WifeSalary, IncomeType.Sale, IncomeType.Other];
+    const incomeTypes = [IncomeType.Sales, IncomeType.Services, IncomeType.Taxes, IncomeType.Investment, IncomeType.Grants, IncomeType.Other];
     for (let y = 2024; y <= 2026; y++) {
       const startDate = new Date(y, 0, 1);
       for (let m = 0; m < 12; m++) {
         const date = new Date(startDate);
         date.setMonth(date.getMonth() + m);
+        const incomeType1 = incomeTypes[Math.floor(Math.random() * incomeTypes.length)];
+        const incomeType2 = incomeTypes[Math.floor(Math.random() * incomeTypes.length)];
+        const incomeType3 = incomeTypes[Math.floor(Math.random() * incomeTypes.length)];
+
+        const incomeValueForType = (type: IncomeType) => {
+          switch (type) {
+            case IncomeType.Sales:
+              return Math.floor(Math.random() * 80000) + 20000; // 20k - 100k
+            case IncomeType.Services:
+              return Math.floor(Math.random() * 40000) + 5000; // 5k - 45k
+            case IncomeType.Taxes:
+              return Math.floor(Math.random() * 4000) + 2000; // 2000 - 6000
+            case IncomeType.Investment:
+              return Math.floor(Math.random() * 15000) + 500; // 500 - 15500
+            case IncomeType.Grants:
+              return Math.floor(Math.random() * 10000) + 1000; // 1k - 11k
+            default:
+              return Math.floor(Math.random() * 5000) + 500; // 500 - 5500
+          }
+        };
+
         const summary: MonthSummary = {
           month: date.getMonth(),
           year: date.getFullYear(),
           incomes: [
             {
-              value: Math.floor(Math.random() * 5000) + 2000,
+              value: incomeValueForType(incomeType1),
               date: new Date(date),
-              incomeType: incomeTypes[Math.floor(Math.random() * incomeTypes.length)],
+              incomeType: incomeType1,
             },
             {
-              value: Math.floor(Math.random() * 2000) + 2000,
+              value: incomeValueForType(incomeType2),
               date: new Date(date),
-              incomeType: incomeTypes[Math.floor(Math.random() * incomeTypes.length)],
+              incomeType: incomeType2,
             },
             {
-              value: Math.floor(Math.random() * 2000) + 2000,
+              value: incomeValueForType(incomeType3),
               date: new Date(date),
-              incomeType: incomeTypes[Math.floor(Math.random() * incomeTypes.length)],
+              incomeType: incomeType3,
             },
           ],
           costs: this.generateMockCosts(date),
@@ -85,17 +106,43 @@ export class BudgetService {
 
   private generateMockCosts(startDate?: Date): Cost[] {
     const costs: Cost[] = [];
-    const costTypes = [CostType.Cars, CostType.Credit, CostType.Food, CostType.Fun, CostType.General, CostType.House];
+    const costTypes = [CostType.Operating, CostType.Rent, CostType.Salaries, CostType.Marketing, CostType.Utilities, CostType.Taxes, CostType.Other];
     const startDateToUse = startDate ? startDate : new Date(2026, 0, 1);
 
     for (let i = 0; i < 30; i++) {
       const date = new Date(startDateToUse);
-      date.setDate(date.getDate() + Math.floor(Math.random() * 20));
+      date.setDate(date.getDate() + Math.floor(Math.random() * 28));
+
+      const chosenCostType = costTypes[Math.floor(Math.random() * costTypes.length)];
+      let value = 0;
+      switch (chosenCostType) {
+        case CostType.Salaries:
+          value = Math.floor(Math.random() * 45000) + 5000; // 5k - 50k
+          break;
+        case CostType.Rent:
+          value = Math.floor(Math.random() * 9000) + 1000; // 1k - 10k
+          break;
+        case CostType.Marketing:
+          value = Math.floor(Math.random() * 15000) + 500; // 500 - 15.5k
+          break;
+        case CostType.Operating:
+          value = Math.floor(Math.random() * 10000) + 500; // 500 - 10.5k
+          break;
+        case CostType.Utilities:
+          value = Math.floor(Math.random() * 3000) + 200; // 200 - 3.2k
+          break;
+        case CostType.Taxes:
+          value = Math.floor(Math.random() * 20000) + 1000; // 1k - 21k
+          break;
+        default:
+          value = Math.floor(Math.random() * 5000) + 100; // 100 - 5.1k
+          break;
+      }
 
       costs.push({
-        value: Math.floor(Math.random() * 500) + 10,
+        value,
         date: date,
-        costType: costTypes[Math.floor(Math.random() * costTypes.length)],
+        costType: chosenCostType,
       });
     }
 

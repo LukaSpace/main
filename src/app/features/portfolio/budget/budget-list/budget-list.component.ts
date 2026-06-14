@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BudgetService } from '../../../../services/portfolio/budget/budget.service';
-import { BudgetValue, Cost, CostTypeDisplay, Income, IncomeTypeDisplay, MonthSummary } from '../../../../interfaces/portfolio/budget/model';
+import { BudgetValue, Cost, CostType, CostTypeDisplay, Income, IncomeType, IncomeTypeDisplay, MonthSummary } from '../../../../interfaces/portfolio/budget/model';
 import { MatDialog } from '@angular/material/dialog';
 import { BudgetCreateComponent } from '../budget-create/budget-create.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,17 +8,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
-    selector: 'budget-list',
-    templateUrl: './budget-list.component.html',
-    styleUrl: './budget-list.component.scss',
-    animations: [
-        trigger('detailExpand', [
-            state('collapsed', style({ height: '0px', minHeight: '0' })),
-            state('expanded', style({ height: '*' })),
-            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-        ]),
-    ],
-    standalone: false
+  selector: 'budget-list',
+  templateUrl: './budget-list.component.html',
+  styleUrl: './budget-list.component.scss',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
+  standalone: false,
 })
 export class BudgetListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,11 +30,11 @@ export class BudgetListComponent implements AfterViewInit {
   costTypeDisplay = CostTypeDisplay;
   incomeTypeDisplay = IncomeTypeDisplay;
   costTypeDisplayKeys = Object.keys(CostTypeDisplay)
-    .filter(item => !isNaN(Number(item)))
-    .map(k => Number(k));
+    .map(k => Number(k))
+    .filter(item => !isNaN(item) && item !== CostType.None);
   incomeTypeDisplayKeys = Object.keys(IncomeTypeDisplay)
-    .filter(item => !isNaN(Number(item)))
-    .map(k => Number(k));
+    .map(k => Number(k))
+    .filter(item => !isNaN(item) && item !== IncomeType.None);
 
   displayedColumns: string[] = ['year', 'month', 'income', 'outcome', 'actions'];
   expandedElement: MonthSummary | null;

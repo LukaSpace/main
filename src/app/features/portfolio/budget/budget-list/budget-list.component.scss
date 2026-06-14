@@ -38,16 +38,30 @@ tr.example-element-row:not(.example-expanded-row):hover {
 
 .example-element-detail {
   display: grid;
-  grid-template-columns: repeat(2, 200px);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+
+  @include respond-to('phone') {
+    grid-template-columns: 1fr;
+  }
 
   .detail-section {
     display: flex;
     flex-direction: column;
 
-    h2 {
-      text-align: center;
-      font-size: 2rem;
+    .inner-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .inner-table {
+      width: 100%;
+      min-width: 300px;
+      table-layout: fixed;
+
+      .mat-mdc-header-cell {
+        background-color: rgba($accent, 0.3);
+      }
     }
   }
 }
