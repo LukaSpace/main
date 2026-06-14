@@ -22,6 +22,7 @@ module.exports = tseslint.config(
     ],
     processor: angular.processInlineTemplates,
     rules: {
+      'linebreak-style': 'off',
       'no-unused-vars': 'off',
       '@angular-eslint/prefer-inject': 'off',
       '@typescript-eslint/no-explicit-any': 'off',

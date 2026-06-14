@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../../../../services/portfolio/budget/budget.service';
-import {
-  Cost,
-  Income,
-  MonthSummary,
-} from '../../../../interfaces/portfolio/budget/model';
+import { Cost, Income, MonthSummary } from '../../../../interfaces/portfolio/budget/model';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-    selector: 'budget-overview',
-    templateUrl: './budget-overview.component.html',
-    styleUrl: './budget-overview.component.scss',
-    standalone: false
+  selector: 'budget-overview',
+  templateUrl: './budget-overview.component.html',
+  styleUrl: './budget-overview.component.scss',
+  standalone: false,
 })
 export class BudgetOverviewComponent implements OnInit {
   public incomesVsCostsGraph: any;
@@ -31,11 +27,9 @@ export class BudgetOverviewComponent implements OnInit {
     const end = this.range.controls.end.value;
 
     if (start && end) {
-      this.budgetService
-        .getMonthSummariesByDate(start, end)
-        .subscribe(monthSumaries => {
-          this.updateIncomesVsCostsGraphData(monthSumaries);
-        });
+      this.budgetService.getMonthSummariesByDate(start, end).subscribe(monthSumaries => {
+        this.updateIncomesVsCostsGraphData(monthSumaries);
+      });
     }
   }
 
@@ -52,9 +46,7 @@ export class BudgetOverviewComponent implements OnInit {
       const costsStartSorted = monthSummariesSorted[0].costs.sort((a, b) => {
         return b.date.getTime() - a.date.getTime();
       });
-      const costsEndSorted = monthSummariesSorted[
-        monthSumaries.length - 1
-      ].costs.sort((a, b) => {
+      const costsEndSorted = monthSummariesSorted[monthSumaries.length - 1].costs.sort((a, b) => {
         return b.date.getTime() - a.date.getTime();
       });
       this.range.controls.start.setValue(costsStartSorted[0].date);
@@ -69,16 +61,8 @@ export class BudgetOverviewComponent implements OnInit {
     }
 
     const months = monthSumaries.map(m => `${m.month + 1}/${m.year}`);
-    const incomes = monthSumaries.map(m =>
-      m.incomes
-        .map((income: Income) => income.value)
-        .reduce((a: number, b: number) => a + b, 0)
-    );
-    const costs = monthSumaries.map(m =>
-      m.costs
-        .map((cost: Cost) => cost.value)
-        .reduce((a: number, b: number) => a + b, 0)
-    );
+    const incomes = monthSumaries.map(m => m.incomes.map((income: Income) => income.value).reduce((a: number, b: number) => a + b, 0));
+    const costs = monthSumaries.map(m => m.costs.map((cost: Cost) => cost.value).reduce((a: number, b: number) => a + b, 0));
 
     this.incomesVsCostsGraph = {
       data: [

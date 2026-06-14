@@ -6,8 +6,12 @@
       "files": ["*.ts"],
       "extends": ["eslint:recommended", "plugin:prettier/recommended"],
       "rules": {
-        "unused-imports/no-unused-imports": "error"
+        "unused-imports/no-unused-imports": "error",
+        "linebreak-style": "off"
       }
     }
-  ]
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  }
 }

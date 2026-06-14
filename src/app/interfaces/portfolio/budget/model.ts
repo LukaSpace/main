@@ -9,26 +9,26 @@ export interface Cost extends BudgetValue {
 
 export enum CostType {
   None = 0,
-  General = 1,
-  House = 2,
-  Credit = 3,
-  Food = 4,
-  Cars = 5,
-  Fun = 6,
-  Pets = 7,
-  Special = 8,
+  Operating = 1,
+  Rent = 2,
+  Salaries = 3,
+  Marketing = 4,
+  RnD = 5,
+  Utilities = 6,
+  Taxes = 7,
+  Other = 8,
 }
 
 export const CostTypeDisplay: Record<CostType | number, string> = {
   [CostType.None]: 'None',
-  [CostType.General]: 'General',
-  [CostType.House]: 'House',
-  [CostType.Credit]: 'Credit',
-  [CostType.Food]: 'Food',
-  [CostType.Cars]: 'Cars',
-  [CostType.Fun]: 'Fun',
-  [CostType.Pets]: 'Pets',
-  [CostType.Special]: 'Special',
+  [CostType.Operating]: 'Operating',
+  [CostType.Rent]: 'Rent',
+  [CostType.Salaries]: 'Salaries & Wages',
+  [CostType.Marketing]: 'Marketing',
+  [CostType.RnD]: 'R&D',
+  [CostType.Utilities]: 'Utilities',
+  [CostType.Taxes]: 'Taxes',
+  [CostType.Other]: 'Other',
 };
 
 export interface Income extends BudgetValue {
@@ -37,21 +37,21 @@ export interface Income extends BudgetValue {
 
 export enum IncomeType {
   None = 0,
-  Salary = 1,
-  WifeSalary = 2,
-  Extra = 3,
-  Gift = 4,
-  Sale = 5,
+  Sales = 1,
+  Services = 2,
+  Taxes = 3,
+  Investment = 4,
+  Grants = 5,
   Other = 6,
 }
 
 export const IncomeTypeDisplay: Record<IncomeType | number, string> = {
   [IncomeType.None]: 'None',
-  [IncomeType.Salary]: 'My Salary',
-  [IncomeType.WifeSalary]: 'Wife Salary',
-  [IncomeType.Extra]: 'Extra',
-  [IncomeType.Gift]: 'Gift',
-  [IncomeType.Sale]: 'Sale',
+  [IncomeType.Sales]: 'Product Sales',
+  [IncomeType.Services]: 'Service Revenue',
+  [IncomeType.Taxes]: 'Taxes Collected',
+  [IncomeType.Investment]: 'Investment',
+  [IncomeType.Grants]: 'Grants/Subsidies',
   [IncomeType.Other]: 'Other',
 };
 
